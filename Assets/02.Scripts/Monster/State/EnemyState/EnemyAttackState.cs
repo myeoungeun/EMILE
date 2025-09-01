@@ -16,11 +16,11 @@ public class EnemyAttackState : EnemyBaseState
 
     public override void Enter()
     {
-        Debug.Log("Enter Attack");
         if(stateMachine.Enemy is Monster.IAttackable)
         {
             attacker = stateMachine.Enemy as Monster.IAttackable;
         }
+        curAttackCoolTime = 1f / stateMachine.Enemy.EnemyData.AttackSpeed;
     }
 
     public override void Update()

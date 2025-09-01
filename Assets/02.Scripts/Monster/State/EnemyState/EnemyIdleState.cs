@@ -16,7 +16,6 @@ public class EnemyIdleState : EnemyBaseState
 
     public override void Enter()
     {
-        Debug.Log("Enter Idle");
         stateMachine.Enemy.ResetTarget();
     }
 

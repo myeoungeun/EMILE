@@ -178,6 +178,7 @@ MonoBehaviour:
   rb: {fileID: 0}
   col: {fileID: 0}
   bulletPos: {fileID: 357447995}
+  bullet: {fileID: 835716248325961153, guid: f6e78a979b8c60c4891a0b91b2347aea, type: 3}
 --- !u!61 &21847984
 BoxCollider2D:
   m_ObjectHideFlags: 0

@@ -19,7 +19,6 @@ public class EnemyDetectState : EnemyBaseState
 
     public override void Enter()
     {
-        Debug.Log("Enter Detect");
         canMove = stateMachine.Enemy.EnemyData.MoveSpeed > 0 ? true : false;
         if (stateMachine.Enemy is IMovable)
             movable = stateMachine.Enemy as IMovable;
@@ -30,6 +29,7 @@ public class EnemyDetectState : EnemyBaseState
         // 공격 범위에 들어오면 공격 상태로 전환
         if(stateMachine.Enemy.GetDistanceToTarget() <= stateMachine.Enemy.EnemyData.AttackRange)
         {
+            // Todo: 레이캐스트로 보이는 위치인지 체크
             stateMachine.ChangeState(Monster.EnemyStateType.Attack);
         }
         // 탐지 범위를 벗어 나면 기본 상태로 전환

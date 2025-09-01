@@ -23,5 +23,5 @@ MonoBehaviour:
   dropItemKey: 0
   moveSpeed: 0
   detectRange: 8
-  attackRange: 4
+  attackRange: 8
   enemyBulletId: f7010000
