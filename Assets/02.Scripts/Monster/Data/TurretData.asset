@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ee38684669942d044808fb7350071f5a, type: 3}
+  m_Name: TurretData
+  m_EditorClassIdentifier: 
+  id: 301
+  enemyName: "\uD130\uB81B"
+  monsterImageId: 301
+  maxHp: 10
+  attackPower: 10
+  defence: 0
+  attackSpeed: 2
+  attackType: 1
+  dropItemKey: 0
+  moveSpeed: 0
+  detectRange: 8
+  attackRange: 4
+  enemyBulletId: f7010000

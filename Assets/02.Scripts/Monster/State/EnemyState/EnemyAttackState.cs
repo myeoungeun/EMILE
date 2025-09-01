@@ -4,10 +4,44 @@ using UnityEngine;
 
 public class EnemyAttackState : EnemyBaseState
 {
-    // ¿©±â¼­ ÇØ¾ßÇÏ´Â°Å
-    // ÇÃ·¹ÀÌ¾î¿¡°Ô °ø°Ý ½ÇÇà
-    // ÇÃ·¹ÀÌ¾î°¡ °ø°Ý ¹üÀ§ ¹ÛÀ¸·Î ³ª°¡¸é °¨Áö »óÅÂ·Î º¯°æ
+    private float curAttackCoolTime;
+    private Monster.IAttackable attacker;
+
+    // ì—¬ê¸°ì„œ í•´ì•¼í•˜ëŠ”ê±°
+    // í”Œë ˆì´ì–´ì—ê²Œ ê³µê²© ì‹¤í–‰
+    // í”Œë ˆì´ì–´ê°€ ê³µê²© ë²”ìœ„ ë°–ìœ¼ë¡œ ë‚˜ê°€ë©´ ê°ì§€ ìƒíƒœë¡œ ë³€ê²½
     public EnemyAttackState(EnemyStateMachine owner) : base(owner)
     {
+    }
+
+    public override void Enter()
+    {
+        Debug.Log("Enter Attack");
+        if(stateMachine.Enemy is Monster.IAttackable)
+        {
+            attacker = stateMachine.Enemy as Monster.IAttackable;
+        }
+    }
+
+    public override void Update()
+    {
+        // ê³µê²© ë²”ìœ„ ë°–ìœ¼ë¡œ ë‚˜ê°€ë©´ 'ì¸ì‹ ìƒíƒœ'ë¡œ ì „í™˜
+        if(stateMachine.Enemy.GetDistanceToTarget() > stateMachine.Enemy.EnemyData.AttackRange)
+        {
+            stateMachine.ChangeState(Monster.EnemyStateType.Detect);
+        }
+
+        // ê³µê²© ì¿¨íƒ€ìž„ì´ ì§€ë‚˜ë©´ ê³µê²©
+        if(curAttackCoolTime >= 1f / stateMachine.Enemy.EnemyData.AttackSpeed)
+        {
+            attacker.Attack();
+            curAttackCoolTime = 0f;
+        }
+        curAttackCoolTime += Time.deltaTime;
+    }
+
+    public override void Exit()
+    {
+        attacker = null;
     }
 }

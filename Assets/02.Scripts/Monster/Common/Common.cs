@@ -10,6 +10,13 @@ namespace Monster
         Ranged
     }
 
+    public enum EnemyStateType
+    {
+        Idle,
+        Detect,
+        Attack
+    }
+
     public static class Common
     {
         

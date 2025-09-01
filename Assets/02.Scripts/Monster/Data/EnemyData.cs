@@ -2,26 +2,27 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[System.Serializable]
 [CreateAssetMenu(fileName = "New Enemy Data", menuName ="Data/Enemy Data")]
 public class EnemyData : ScriptableObject
 {
-    private int id;
-    private string enemyName;
-    private int monsterImageId;
-    // »óÅÂ
-    private int maxHp;
-    // ÇöÀç Ã¼·Â
-    private int attackPower;
-    private int defence;
-    private float attackSpeed;
-    private Monster.AttackType attackType;
-    private int dropItemKey;
-    // »óÅÂ ÀÌ»ó ¸®½ºÆ®
-    private float moveSpeed;
-    private float detectRange;
-    private float attackRange;
-    private List<int> enemyBulletId;
-    // ¿ÀºêÁ§Æ® ÅÂ±×
+    [SerializeField] private int id;
+    [SerializeField] private string enemyName;
+    [SerializeField] private int monsterImageId;
+    // ìƒíƒœ
+    [SerializeField] private int maxHp;
+    // í˜„ì¬ ì²´ë ¥
+    [SerializeField] private int attackPower;
+    [SerializeField] private int defence;
+    [SerializeField] private float attackSpeed;
+    [SerializeField] private Monster.AttackType attackType;
+    [SerializeField] private int dropItemKey;
+    // ìƒíƒœ ì´ìƒ ë¦¬ìŠ¤íŠ¸
+    [SerializeField] private float moveSpeed;
+    [SerializeField] private float detectRange;
+    [SerializeField] private float attackRange;
+    [SerializeField] private List<int> enemyBulletId;
+    // ì˜¤ë¸Œì íŠ¸ íƒœê·¸
 
     public int Id {  get { return id; } }
     public string Name { get { return enemyName; } }
