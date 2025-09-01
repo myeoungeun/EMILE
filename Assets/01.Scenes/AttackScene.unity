@@ -1695,7 +1695,7 @@ GameObject:
   - component: {fileID: 551891275}
   - component: {fileID: 551891274}
   m_Layer: 0
-  m_Name: BulletPoint
+  m_Name: BulletStart
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2804,6 +2804,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 54b5a1c23f29c3e46b754d36f0a49a6f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  lookDirectionRight: 0
   moveSpeed: 10
   jumpForce: 16
   maxJumptime: 0.3
@@ -2828,8 +2829,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ccf8048ef6b57f4dbad22f9002b9a23, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  damage: 0
+  shotScale: 0
   baseDamage: 10
-  baseShotAngle: 0
+  baseShotScale: 0
+  playerMovement: {fileID: 1699633469}
   bullet: {fileID: 7804673486609611539, guid: f61d7346ac4a5e14f8e7a89929037bfa, type: 3}
   bulletStart: {fileID: 551891275}
   currentBulletType: 0
