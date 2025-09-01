@@ -16,7 +16,7 @@ public class MapManager : MonoBehaviour
     [SerializeField]
     private int preloadSectors = 1; // 현재 섹터 전 후로 몇 개 섹터를 미리 로드할 지 설정
     [SerializeField] 
-    private int maxSectors = 10; // 실제 존재하는 섹터 개수
+    private int maxSectors = 11; // 실제 존재하는 섹터 개수
 
     [SerializeField]
     private Transform gridParent;
@@ -85,7 +85,7 @@ public class MapManager : MonoBehaviour
                 string key = $"Sector_{sectorIndex}";
                 AsyncOperationHandle<GameObject> handle = Addressables.InstantiateAsync(
                     key,
-                    new Vector3(sectorIndex * sectorWidth, 0, 0),
+                    new Vector3(sectorIndex * sectorWidth, -2f, 0),
                     Quaternion.identity,
                     gridParent);
 
