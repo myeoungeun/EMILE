@@ -4,13 +4,31 @@ using UnityEngine;
 
 public abstract class Enemy : MonoBehaviour
 {
-    // 몬스터 스탯 데이터 SO
-    /*
-     * 몬스터 데이터가 가져야 하는 것
-     * 체력, 공격력, 공격 속도, 이름, 사용 프리팹?, 총알 프리팹 리스트, 이동속도, 고유 ID, 방어력, 공격 방식
-     */
+    [SerializeField] protected EnemyData _enemyData;
+
+    private EnemyStateMachine stateMachine;
+    public EnemyStateMachine StateMachine { get { return stateMachine; } private set { stateMachine = value; } }
+
     protected int curHp;
 
-    
+    private void Update()
+    {
+        stateMachine.Update();
+    }
 
+    private void FixedUpdate()
+    {
+        stateMachine.FixedUpdate();
+    }
+
+    public void TakeDamage(int damage)
+    {
+        curHp -= damage;
+        Die();
+    }
+    
+    private void Die()
+    {
+        // 아마 풀로 돌아갈 듯
+    }
 }

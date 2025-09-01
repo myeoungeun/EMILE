@@ -2,17 +2,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyBaseState : MonoBehaviour
+public abstract class EnemyBaseState : Monster.IState
 {
-    // Start is called before the first frame update
-    void Start()
+    protected EnemyStateMachine stateMachine;
+
+    public EnemyBaseState(EnemyStateMachine owner)
     {
-        
+        stateMachine = owner;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    public virtual void Enter() { }
+    public virtual void Exit() { }
+    public virtual void Update() { }
+    public virtual void FixedUpdate() { }
 }
