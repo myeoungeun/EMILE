@@ -11,6 +11,7 @@ TagManager:
   - DeadZone
   - TriggerObject
   - Ground
+  - Background
   layers:
   - Default
   - TransparentFX
