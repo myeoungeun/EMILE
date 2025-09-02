@@ -1,4 +1,8 @@
-﻿using UnityEngine;
-internal class GameOverUI
+using UnityEngine;
+public class GameOverUI : MonoBehaviour
 {
+    public void Initialize()
+    {
+
+    }
 }

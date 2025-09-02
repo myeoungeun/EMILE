@@ -1,6 +1,9 @@
-﻿using UnityEngine;
+using UnityEngine;
 
-internal class InGameUI
+public class InGameUI : MonoBehaviour
 {
+    public void Initialize()
+    {
 
+    }
 }

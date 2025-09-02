@@ -531,7 +531,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &4473976771850189443
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1254,7 +1254,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1116911795975128506}
   m_Layer: 5
-  m_Name: PopUp_BossStatus
+  m_Name: UI_BossHUD
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1522,7 +1522,7 @@ GameObject:
   - component: {fileID: 5934597698345719446}
   - component: {fileID: 5656809203846798633}
   m_Layer: 5
-  m_Name: UI_PlayerInfo
+  m_Name: UI_PlayerHUD
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1733,7 +1733,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: -1967991967, guid: e11b852091ce79549b0e09bfe1307ada, type: 3}
+  m_Sprite: {fileID: -1131641073, guid: 08b8657ec4823ca4c809bb122f968344, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
