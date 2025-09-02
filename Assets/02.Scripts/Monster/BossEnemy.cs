@@ -73,4 +73,14 @@ public class BossEnemy : Enemy, Monster.IAttackable, Monster.IDamageable
     {
         isAttacking = true;
     }
+
+    public void StartAttack()
+    {
+        throw new System.NotImplementedException();
+    }
+
+    public void StopAttack()
+    {
+        throw new System.NotImplementedException();
+    }
 }

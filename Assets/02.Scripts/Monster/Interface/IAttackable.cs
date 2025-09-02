@@ -6,6 +6,7 @@ namespace Monster
 {
     public interface IAttackable
     {
-        public bool Attack();
+        public void StartAttack();
+        public void StopAttack();
     }
 }

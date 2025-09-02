@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class EnemyAttackState : EnemyBaseState
 {
-    private float curAttackCoolTime;
     private Monster.IAttackable attacker;
 
     // 여기서 해야하는거
@@ -20,8 +19,9 @@ public class EnemyAttackState : EnemyBaseState
         {
             attacker = stateMachine.Enemy as Monster.IAttackable;
         }
-        curAttackCoolTime = 1f / stateMachine.Enemy.EnemyData.AttackSpeed;
+        
         stateMachine.Enemy.Anim?.SetBool("InAttackRange", true);
+        attacker.StartAttack();
     }
 
     public override void Update()
@@ -32,21 +32,11 @@ public class EnemyAttackState : EnemyBaseState
         {
             stateMachine.ChangeState(Monster.EnemyStateType.Detect);
         }
-
-        // 공격 쿨타임이 지나면 공격
-        if(curAttackCoolTime >= 1f / stateMachine.Enemy.EnemyData.AttackSpeed)
-        {
-            bool isAttacked = attacker.Attack();
-
-            // 공격을 정상적으로 수행했을 때만 쿨타임 초기화
-            if(isAttacked)
-                curAttackCoolTime = 0f;
-        }
-        curAttackCoolTime += Time.deltaTime;
     }
 
     public override void Exit()
     {
+        attacker.StopAttack();
         attacker = null;
         stateMachine.Enemy.Anim?.SetBool("InAttackRange", false);
     }

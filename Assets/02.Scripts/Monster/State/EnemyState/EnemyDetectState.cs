@@ -6,7 +6,7 @@ using UnityEngine;
 public class EnemyDetectState : EnemyBaseState
 {
     // 여기서 해야하는 거
-    // 기본적으로 대상을 추적하여 이동
+    // 이동 가능한 적이라면 기본적으로 대상을 추적하여 이동
     // 플레이어가 공격범위 내로 들어오면 공격 상태로 변경
     // 플레이어가 추적 범위 밖으로 나가면 대기 상태로 변경
 
@@ -31,7 +31,6 @@ public class EnemyDetectState : EnemyBaseState
         // 공격 범위에 들어오면 공격 상태로 전환
         if (stateMachine.Enemy.GetDistanceToTarget() <= stateMachine.Enemy.EnemyData.AttackRange)
         {
-            // Todo: 레이캐스트로 보이는 위치인지 체크
             stateMachine.ChangeState(Monster.EnemyStateType.Attack);
         }
         // 탐지 범위를 벗어 나면 기본 상태로 전환

@@ -46,6 +46,7 @@ public abstract class Enemy : MonoBehaviour
     protected void Die()
     {
         // Todo: 오브젝트 풀로 리턴
+        Destroy(gameObject);
     }
 
     public void SetTarget(Transform target)
