@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 93d25389fbcb071428510409e2562b8e
+guid: ccc2d817447a319419cea141da5dd26e
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -123,12 +123,12 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Booster_0
+      name: Booster2_0
       rect:
         serializedVersion: 2
-        x: 0
+        x: 3
         y: 0
-        width: 59
+        width: 58
         height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -137,19 +137,19 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ec816e592cb45af468a5da08867fa233
-      internalID: -1303357614
+      spriteID: 6437ebe4f5ee2c343a9f0e769aa47bdd
+      internalID: -266878961
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Booster_1
+      name: Booster2_1
       rect:
         serializedVersion: 2
-        x: 65
+        x: 63
         y: 0
-        width: 63
+        width: 60
         height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -158,19 +158,19 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 85936897b3b47da47a83370d86ce99f1
-      internalID: 2076246056
+      spriteID: f0b66a98545e46c418afa33d2fc08022
+      internalID: -1182388239
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Booster_2
+      name: Booster2_2
       rect:
         serializedVersion: 2
         x: 129
         y: 0
-        width: 62
+        width: 64
         height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -179,19 +179,19 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 2b1b76c59aa1f6c4f9ed27b8e2b66a8d
-      internalID: 1680421462
+      spriteID: 142969c9866931b4d8656dc87926582e
+      internalID: 1360312043
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Booster_3
+      name: Booster2_3
       rect:
         serializedVersion: 2
         x: 198
         y: 0
-        width: 63
+        width: 66
         height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -200,8 +200,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e1a4e360569522b4fad0c4235b2e27da
-      internalID: -1348534723
+      spriteID: 66213e3183aa22b428c1d95bc727d20a
+      internalID: -1476672624
       vertices: []
       indices: 
       edges: []
@@ -217,10 +217,10 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Booster_0: -1303357614
-      Booster_1: 2076246056
-      Booster_2: 1680421462
-      Booster_3: -1348534723
+      Booster2_0: -266878961
+      Booster2_1: -1182388239
+      Booster2_2: 1360312043
+      Booster2_3: -1476672624
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
