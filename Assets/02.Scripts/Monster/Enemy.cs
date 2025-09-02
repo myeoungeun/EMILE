@@ -5,10 +5,10 @@ using UnityEngine;
 public abstract class Enemy : MonoBehaviour
 {
     [SerializeField] protected EnemyData _enemyData;
-    public EnemyData EnemyData {  get { return _enemyData; } private set { _enemyData = value; } }
+    public EnemyData EnemyData {  get { return _enemyData; } }
 
     [SerializeField] private EnemyStateMachine stateMachine;
-    public EnemyStateMachine StateMachine { get { return stateMachine; } private set { stateMachine = value; } }
+    public EnemyStateMachine StateMachine { get { return stateMachine; } }
 
     protected int curHp;
     private Vector3 originPos;
@@ -17,12 +17,15 @@ public abstract class Enemy : MonoBehaviour
 
     [SerializeField] private Rigidbody2D rb;
     [SerializeField] private Collider2D col;
+    [SerializeField] private Animator anim;
+    public Animator Anim { get { return anim; } }
 
     private void Awake()
     {
-        stateMachine = new EnemyStateMachine(this);
         rb = GetComponent<Rigidbody2D>();
-        col = GetComponent<Collider2D>();
+        col = GetComponentInChildren<Collider2D>();
+        anim = GetComponentInChildren<Animator>();
+        stateMachine = new EnemyStateMachine(this);
     }
 
     private void Start()
@@ -60,6 +63,12 @@ public abstract class Enemy : MonoBehaviour
     public void ResetTarget()
     {
         this.target = null;
+    }
+
+    public void LookTarget()
+    {
+        float d = target.position.x < transform.position.x ? Mathf.Abs(transform.localScale.x) : -Mathf.Abs(transform.localScale.x);
+        transform.localScale = new Vector3(d, transform.localScale.y, transform.localScale.z);
     }
 
     /// <summary>

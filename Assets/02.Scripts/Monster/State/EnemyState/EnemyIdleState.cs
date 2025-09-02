@@ -17,6 +17,7 @@ public class EnemyIdleState : EnemyBaseState
     public override void Enter()
     {
         stateMachine.Enemy.ResetTarget();
+        stateMachine.Enemy.Anim?.SetBool("InDetectRange", false);
     }
 
     public override void Update()

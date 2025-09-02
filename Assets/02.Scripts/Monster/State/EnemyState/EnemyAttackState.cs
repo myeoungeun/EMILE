@@ -21,12 +21,14 @@ public class EnemyAttackState : EnemyBaseState
             attacker = stateMachine.Enemy as Monster.IAttackable;
         }
         curAttackCoolTime = 1f / stateMachine.Enemy.EnemyData.AttackSpeed;
+        stateMachine.Enemy.Anim?.SetBool("InAttackRange", true);
     }
 
     public override void Update()
     {
+        stateMachine.Enemy.LookTarget();
         // 공격 범위 밖으로 나가면 '인식 상태'로 전환
-        if(stateMachine.Enemy.GetDistanceToTarget() > stateMachine.Enemy.EnemyData.AttackRange)
+        if (stateMachine.Enemy.GetDistanceToTarget() > stateMachine.Enemy.EnemyData.AttackRange)
         {
             stateMachine.ChangeState(Monster.EnemyStateType.Detect);
         }
@@ -46,5 +48,6 @@ public class EnemyAttackState : EnemyBaseState
     public override void Exit()
     {
         attacker = null;
+        stateMachine.Enemy.Anim?.SetBool("InAttackRange", false);
     }
 }

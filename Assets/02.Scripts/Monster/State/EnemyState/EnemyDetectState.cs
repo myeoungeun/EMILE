@@ -22,12 +22,14 @@ public class EnemyDetectState : EnemyBaseState
         canMove = stateMachine.Enemy.EnemyData.MoveSpeed > 0 ? true : false;
         if (stateMachine.Enemy is IMovable)
             movable = stateMachine.Enemy as IMovable;
+        stateMachine.Enemy.Anim?.SetBool("InDetectRange", true);
     }
 
     public override void Update()
     {
+        stateMachine.Enemy.LookTarget();
         // 공격 범위에 들어오면 공격 상태로 전환
-        if(stateMachine.Enemy.GetDistanceToTarget() <= stateMachine.Enemy.EnemyData.AttackRange)
+        if (stateMachine.Enemy.GetDistanceToTarget() <= stateMachine.Enemy.EnemyData.AttackRange)
         {
             // Todo: 레이캐스트로 보이는 위치인지 체크
             stateMachine.ChangeState(Monster.EnemyStateType.Attack);
