@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.AddressableAssets;
 using UnityEngine.UI;
 
-public class UIManager : SingleTon<UIManager>
+public class UIManager : MonoSingleton<UIManager>
 {
 
 }
