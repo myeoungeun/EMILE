@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: a83a9255d3a570348ba43736dfe43247
+guid: ccc2d817447a319419cea141da5dd26e
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -107,19 +107,6 @@ TextureImporter:
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
-    buildTarget: Android
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    ignorePlatformSupport: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 3
     buildTarget: Server
     maxTextureSize: 2048
     resizeAlgorithm: 0
@@ -136,106 +123,85 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: PierceShot_0
+      name: Booster2_0
       rect:
         serializedVersion: 2
-        x: 1
-        y: 6
+        x: 3
+        y: 0
         width: 58
-        height: 18
+        height: 32
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ef42f7e9d2e1abd4d9bbc0e7ce2deb5e
-      internalID: 591430598
+      spriteID: 6437ebe4f5ee2c343a9f0e769aa47bdd
+      internalID: -266878961
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: PierceShot_1
+      name: Booster2_1
       rect:
         serializedVersion: 2
-        x: 64
-        y: 9
-        width: 58
-        height: 12
+        x: 63
+        y: 0
+        width: 60
+        height: 32
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4214705b34232344cbb5f21d2d9fa94c
-      internalID: -1041483527
+      spriteID: f0b66a98545e46c418afa33d2fc08022
+      internalID: -1182388239
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: PierceShot_2
+      name: Booster2_2
       rect:
         serializedVersion: 2
-        x: 141
-        y: 5
-        width: 44
-        height: 19
+        x: 129
+        y: 0
+        width: 64
+        height: 32
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ddfec42aa4537d8488f352492117e5ce
-      internalID: 1755542337
+      spriteID: 142969c9866931b4d8656dc87926582e
+      internalID: 1360312043
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: PierceShot_3
+      name: Booster2_3
       rect:
         serializedVersion: 2
-        x: 190
-        y: 5
-        width: 58
-        height: 19
+        x: 198
+        y: 0
+        width: 66
+        height: 32
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 57eecf285f1443b49b401f79d8e380dd
-      internalID: -500995932
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: PierceShot_4
-      rect:
-        serializedVersion: 2
-        x: 258
-        y: 5
-        width: 54
-        height: 19
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: ec2432966c89c144f90b2030adfdddba
-      internalID: 841067257
+      spriteID: 66213e3183aa22b428c1d95bc727d20a
+      internalID: -1476672624
       vertices: []
       indices: 
       edges: []
@@ -251,11 +217,10 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      PierceShot_0: 591430598
-      PierceShot_1: -1041483527
-      PierceShot_2: 1755542337
-      PierceShot_3: -500995932
-      PierceShot_4: 841067257
+      Booster2_0: -266878961
+      Booster2_1: -1182388239
+      Booster2_2: 1360312043
+      Booster2_3: -1476672624
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: e11b852091ce79549b0e09bfe1307ada
+guid: 2e92cf4139a26ac4aaddb7c169f57fbd
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -48,7 +48,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 18
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -132,17 +132,30 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: iPhone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: NomalShot_0
+      name: shoot_0
       rect:
         serializedVersion: 2
-        x: 2
-        y: 5
-        width: 46
-        height: 24
+        x: 20
+        y: 0
+        width: 30
+        height: 53
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -150,71 +163,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 41cae433784f5cb48abc3aea2ada0c6a
-      internalID: -1967991967
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: NomalShot_1
-      rect:
-        serializedVersion: 2
-        x: 51
-        y: 4
-        width: 45
-        height: 26
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 2d30d3b65e9cafd468c907ce74e41821
-      internalID: -125408122
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: NomalShot_2
-      rect:
-        serializedVersion: 2
-        x: 99
-        y: 8
-        width: 38
-        height: 21
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: ce4420d6dce8a0b448f6e937575b1ab8
-      internalID: -1049136
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: NomalShot_3
-      rect:
-        serializedVersion: 2
-        x: 142
-        y: 8
-        width: 50
-        height: 18
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 0f99ae59fc6b9164197627603dab1154
-      internalID: 1227606441
+      spriteID: 19086f38824c82b479b907146f88b4a9
+      internalID: 1574005464
       vertices: []
       indices: 
       edges: []
@@ -230,11 +180,7 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      NomalShot_0: -1967991967
-      NomalShot_1: -125408122
-      NomalShot_2: -1049136
-      NomalShot_3: 1227606441
-      spritesheet_4: -829192904
+      shoot_0: 1574005464
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
