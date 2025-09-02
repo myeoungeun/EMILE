@@ -129,7 +129,7 @@ public class Attack : MonoSingleton<Attack>, IAttackHandler
                 currentSprite = hollowBulletSprite;
                 damage = baseDamage * 2;
                 shotSpeed = baseShotSpeed;
-                shotInterval = baseShotInterval;
+                shotInterval = baseShotInterval * 2;
                 shotCount = 5;
                 break;
             case 504 :

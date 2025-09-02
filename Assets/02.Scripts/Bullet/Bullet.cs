@@ -24,6 +24,12 @@ public class Bullet : MonoBehaviour
       Interval = sInterval; //딜레이로 수정 필요
       Count = sCount; //총알 개수
       MoveDirection = lookDirectionRight ? Vector3.right : Vector3.left; //오른쪽 보면 오른쪽 발사, 왼쪽 보고있으면 왼쪽 발사
+      
+      SpriteRenderer sr = GetComponent<SpriteRenderer>();
+      if (sr != null)
+      {
+          sr.flipX = !lookDirectionRight; //플레이어 왼쪽이면 이미지도 뒤집음
+      }
    }
    
    void Update()
