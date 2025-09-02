@@ -8,19 +8,16 @@ public class BulletChange : MonoBehaviour
     [SerializeField] private int[] bulletIDs = { 501, 502, 503 }; //순서대로 바뀔 탄창 ID
     private int currentBulletIndex = 0;
     
-    public void OnChangeBullet(InputAction.CallbackContext context)
+    public void OnBulletChange(InputAction.CallbackContext context)
     {
         if (context.phase == InputActionPhase.Performed) //v키 눌렀을 때
         {
-            currentBulletIndex++; //인덱스 증가(탄창 변경)
-            if (currentBulletIndex >= bulletIDs.Length)
+            currentBulletIndex++;
+            if (currentBulletIndex >= bulletIDs.Length) //숫자 커지면 0으로 초기화(반복)
             {
                 currentBulletIndex = 0;
             }
-
-            // 실제 탄창 교체
-            Attack.SetBulletByID(bulletIDs[currentBulletIndex]);
-            Debug.Log($"탄창 교체! 현재 ID: {bulletIDs[currentBulletIndex]}");
+            Attack.Instance.SetBulletByID(bulletIDs[currentBulletIndex]); //실제 탄창 교체
         }
     }
 }

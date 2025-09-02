@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class Attack : MonoBehaviour, IAttackHandler
+public class Attack : MonoSingleton<Attack>, IAttackHandler
 {
     [Header("총알 기본 정보")]
     public int baseDamage = 5;
