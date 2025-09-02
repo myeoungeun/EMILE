@@ -9,11 +9,13 @@ using UnityEngine.ResourceManagement.AsyncOperations;
 
 public class ResourceManager : SingleTon<ResourceManager>//ALL : (250707)싱글톤 기반의 비동기 로딩 스크립트 가능하면 제가 캐싱해둔걸 사용하겠지만 알아두면 작업에 수월 할 것 같아 추가합니다
 {
-    private bool isLoadAble<T>(T instance) { return instance != null; }
+    private Dictionary<string, object> preloaded;
+    public Dictionary<string,object> GetPreLoad { get { return preloaded; } }
     //메니저 인스턴스 생성시 실행되는 함수
     protected override void Init()
     {
         base.Init();
+        preloaded = new Dictionary<string, object>();
     }
     /// <summary>
     /// 
@@ -35,8 +37,6 @@ public class ResourceManager : SingleTon<ResourceManager>//ALL : (250707)싱글톤 
             if (isCaching) Addressables.Release(infoAsyncOP);
         };
     }
-
-
     /// <summary>
     /// 
     /// </summary>
@@ -68,9 +68,50 @@ public class ResourceManager : SingleTon<ResourceManager>//ALL : (250707)싱글톤 
                 if (doneCount == labelKeys.Result.Count)
                 {
                     callback?.Invoke(tempT);
-                    if (isCaching) Addressables.Release(labelKeys);
                 }
             }, isCaching);
+        }
+    }    
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <typeparam name="T">대상의 타입</typeparam>
+    /// <param name="label">대상 라벨 이름</param>
+    /// <param name="callback"> 다시</param>
+    public void PreLoadAsyncAll(string label, Action<int, int> callback)
+    {
+        var oper = Addressables.LoadResourceLocationsAsync(label, typeof(object));
+        //label의 T타입인 오브젝트들의 키값을 가져온다
+        oper.WaitForCompletion();
+        //resource를 전부 load할때까지 대기
+        if (oper.Result.Count == 0) { Debug.LogError($"{label}라벨이 비어있습니다."); callback.Invoke(0,0); }//해당하는 키가 없을경우 null을 리턴
+
+        int curr = 1;
+        for (int i = 0; i < oper.Result.Count; i++)
+        {
+            string key = oper.Result[i].PrimaryKey;//클로저이슈 방지
+            int max = oper.Result.Count;
+
+            if (preloaded.ContainsKey(key))
+            {
+                callback?.Invoke(max, curr);
+                curr++;
+                continue;
+            }
+
+            LoadAsync<object>(key, (result) =>
+            {
+                callback?.Invoke(max, curr);
+                curr++;
+                if (result == null)
+                {
+                    Debug.Log("타입이 올바르지 않음");
+                }
+                else
+                {
+                    preloaded.Add(key, result);
+                }
+            },true);
         }
     }
     #region Json
