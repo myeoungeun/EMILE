@@ -49,6 +49,7 @@ GameObject:
   - component: {fileID: 395117704489828367}
   - component: {fileID: 626482169693419526}
   - component: {fileID: 1655535417324522392}
+  - component: {fileID: 1660433967839550834}
   m_Layer: 0
   m_Name: SectorObjects
   m_TagString: Untagged
@@ -234,6 +235,51 @@ TilemapRenderer:
   m_Mode: 0
   m_DetectChunkCullingBounds: 0
   m_MaskInteraction: 0
+--- !u!61 &1660433967839550834
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 981284216283935087}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -6.52, y: -1.5}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 1.45, y: 5.03}
+  m_EdgeRadius: 0
 --- !u!1 &1520066310261864280
 GameObject:
   m_ObjectHideFlags: 0
@@ -246,9 +292,9 @@ GameObject:
   - component: {fileID: 3818050548898023886}
   - component: {fileID: 7456680365593326141}
   - component: {fileID: 6737114946986568449}
-  m_Layer: 6
-  m_Name: Collider_Ground
-  m_TagString: Ground
+  m_Layer: 8
+  m_Name: Collider_Platform
+  m_TagString: Platform
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -591,7 +637,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5176276926817852118}
   - component: {fileID: 8643645394299265170}
-  m_Layer: 6
+  m_Layer: 8
   m_Name: Sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -653,7 +699,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: -792425534, guid: 2f581167a04f3ef4c83f9dc6705a2c4d, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -675,7 +721,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7211636628001082566}
   - component: {fileID: 6171215991109173581}
-  m_Layer: 6
+  m_Layer: 8
   m_Name: Sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -737,7 +783,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: -792425534, guid: 2f581167a04f3ef4c83f9dc6705a2c4d, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -1171,8 +1217,8 @@ GameObject:
   - component: {fileID: 3791955273184246061}
   - component: {fileID: 7934414664933650757}
   - component: {fileID: 4499904388199284421}
-  m_Layer: 6
-  m_Name: Platform (1)
+  m_Layer: 8
+  m_Name: PassablePlatform
   m_TagString: PassablePlatform
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1269,8 +1315,8 @@ GameObject:
   - component: {fileID: 6825884487882794910}
   - component: {fileID: 3596348046545727837}
   - component: {fileID: 7032260592603584874}
-  m_Layer: 6
-  m_Name: Platform
+  m_Layer: 8
+  m_Name: PassablePlatform
   m_TagString: PassablePlatform
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1367,9 +1413,9 @@ GameObject:
   - component: {fileID: 2854195807584876843}
   - component: {fileID: 4183806381504379258}
   - component: {fileID: 8994179171062962397}
-  m_Layer: 6
-  m_Name: Ground
-  m_TagString: Ground
+  m_Layer: 8
+  m_Name: Platform
+  m_TagString: Platform
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

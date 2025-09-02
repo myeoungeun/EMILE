@@ -2828,9 +2828,9 @@ GameObject:
   - component: {fileID: 5939810231115387841}
   - component: {fileID: 6540623002926874990}
   - component: {fileID: 789393197013218666}
-  m_Layer: 6
-  m_Name: Collider_Ground
-  m_TagString: Ground
+  m_Layer: 8
+  m_Name: Collider_Platform
+  m_TagString: Platform
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3284,9 +3284,9 @@ GameObject:
   - component: {fileID: 4561493032245336289}
   - component: {fileID: 8690026214755840966}
   - component: {fileID: 2389388636300276890}
-  m_Layer: 6
-  m_Name: Ground
-  m_TagString: Ground
+  m_Layer: 8
+  m_Name: Platform
+  m_TagString: Platform
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
