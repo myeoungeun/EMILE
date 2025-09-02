@@ -132,6 +132,19 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: iPhone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 2
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
@@ -139,10 +152,10 @@ TextureImporter:
       name: back-jump_0
       rect:
         serializedVersion: 2
-        x: 0
+        x: 24
         y: 0
-        width: 71
-        height: 67
+        width: 24
+        height: 27
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -160,10 +173,10 @@ TextureImporter:
       name: back-jump_1
       rect:
         serializedVersion: 2
-        x: 71
+        x: 86
         y: 0
-        width: 71
-        height: 67
+        width: 35
+        height: 42
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -181,10 +194,10 @@ TextureImporter:
       name: back-jump_2
       rect:
         serializedVersion: 2
-        x: 142
-        y: 0
-        width: 71
-        height: 67
+        x: 157
+        y: 9
+        width: 35
+        height: 38
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -202,10 +215,10 @@ TextureImporter:
       name: back-jump_3
       rect:
         serializedVersion: 2
-        x: 213
-        y: 0
-        width: 71
-        height: 67
+        x: 225
+        y: 11
+        width: 44
+        height: 40
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -223,10 +236,10 @@ TextureImporter:
       name: back-jump_4
       rect:
         serializedVersion: 2
-        x: 284
-        y: 0
-        width: 71
-        height: 67
+        x: 301
+        y: 2
+        width: 31
+        height: 47
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -244,10 +257,10 @@ TextureImporter:
       name: back-jump_5
       rect:
         serializedVersion: 2
-        x: 355
+        x: 379
         y: 0
-        width: 71
-        height: 67
+        width: 28
+        height: 39
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -265,10 +278,10 @@ TextureImporter:
       name: back-jump_6
       rect:
         serializedVersion: 2
-        x: 426
+        x: 445
         y: 0
-        width: 71
-        height: 67
+        width: 35
+        height: 27
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
