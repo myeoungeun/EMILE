@@ -2,45 +2,50 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BossEnemy : Enemy, Monster.IAttackable, Monster.IMovable
+public class BossEnemy : Enemy, Monster.IAttackable, Monster.IDamageable
 {
     [SerializeField] Transform bulletPos;
     [SerializeField] Transform missilePos;
 
-    private List<System.Action> patterns;
-
     private bool isAttacking;
-    private int patternIndex;
+
+    private bool canRushAttack;
 
     private void Start()
     {
-        patterns = new List<System.Action>();
-        patterns.Add(AttackPattern1);
-        patterns.Add(AttackPattern2);
-        patterns.Add(AttackPattern3);
-
-        patternIndex = 0;
         isAttacking = false;
+        canRushAttack = false;
     }
 
     /// <summary>
-    /// 현재는 어택인덱스와 스위치-케이스 구문으로 다음 패턴을 실행
-    /// 함수 리스트 같은 느낌으로 실행이 가능하지 않을까?
+    /// 1. 체력 > 90% 총알 발사 패턴만 사용
+    /// 2. 체력 <= 90% 총알 발사와 미사일 발사를 같이 사용
+    /// 3. 체력이 60%, 30% 이하로 떨어질때 마다 돌진 공격 <= 우선순위 가장 높게
     /// </summary>
     public bool Attack()
     {
         if (isAttacking)
             return false;
 
-        patterns[patternIndex]?.Invoke();
-        patternIndex = (patternIndex + 1) % patterns.Count;
+        if(canRushAttack)
+        {
+            RushAttack();
+        }
+        if(curHp / (EnemyData.MaxHp * 1.0f) > 0.9)
+        {
+
+        }
 
         return true;
     }
 
-    public void Move()
+    public void TakeDamage(int damage)
     {
-        // 보스는 딱히 안 쓸듯
+        curHp -= (EnemyData.Defence - damage);
+        if (curHp <= 0)
+        {
+            Die();
+        }
     }
 
     private void AttackPattern1()
@@ -62,5 +67,10 @@ public class BossEnemy : Enemy, Monster.IAttackable, Monster.IMovable
         isAttacking = true;
         // Todo: 돌진 공격
         isAttacking = false;
+    }
+
+    private void RushAttack()
+    {
+        isAttacking = true;
     }
 }

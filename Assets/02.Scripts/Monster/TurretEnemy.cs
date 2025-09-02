@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TurretEnemy : Enemy, Monster.IAttackable
+public class TurretEnemy : Enemy, Monster.IAttackable, Monster.IDamageable
 {
     [SerializeField] private Transform bulletPos;
 
@@ -16,5 +16,14 @@ public class TurretEnemy : Enemy, Monster.IAttackable
         Instantiate(bullet, bulletPos.position, Quaternion.identity).GetComponent<TestBullet>().Init(5f, EnemyData.AttackPower, dir);
         Debug.Log("공격!");
         return true;
+    }
+
+    public void TakeDamage(int damage)
+    {
+        curHp -= (EnemyData.Defence - damage);
+        if(curHp <= 0)
+        {
+            Die();
+        }
     }
 }

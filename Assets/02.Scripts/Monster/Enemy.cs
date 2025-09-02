@@ -43,14 +43,7 @@ public abstract class Enemy : MonoBehaviour
         stateMachine.FixedUpdate();
     }
 
-    public void TakeDamage(int damage)
-    {
-        curHp -= damage;
-        if(curHp <= 0)
-            Die();
-    }
-    
-    private void Die()
+    protected void Die()
     {
         // Todo: 오브젝트 풀로 리턴
     }
