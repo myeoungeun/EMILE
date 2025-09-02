@@ -1,9 +1,5 @@
-using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.AddressableAssets;
-using UnityEngine.UI;
 
 public enum UIType
 {
@@ -35,11 +31,18 @@ public class UIManager : MonoSingleton<UIManager>
     protected override void Awake()
     {
         base.Awake();
-        UIManagerInitialize();
+        InitUIManager();
+
+        ShowUI(UIType.Title); // 타이틀UI만 활성화
+
+        foreach (var popup in popupDictionary.Values)
+        {
+            popup.Close(); // 팝업UI 비활성화
+        }
     }
 
     #region 초기화
-    private void UIManagerInitialize()
+    private void InitUIManager()
     {
         //일반 UI 딕셔너리 초기화
         uiDictionary = new Dictionary<UIType, UIBase>
