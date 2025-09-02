@@ -1,6 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
-public class TitleUI : MonoBehaviour
+public class TitleUI : UIBase
 {
     [Header("버튼")]
     [SerializeField] Button gameStart;

@@ -1,8 +1,8 @@
 using UnityEngine;
 
-public class InGameUI : MonoBehaviour
+public class InGameUI : UIBase
 {
-    public void Initialize()
+    public override void Initialize()
     {
 
     }

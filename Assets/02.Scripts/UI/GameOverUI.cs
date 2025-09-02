@@ -1,7 +1,7 @@
 using UnityEngine;
-public class GameOverUI : MonoBehaviour
+public class GameOverUI : UIBase
 {
-    public void Initialize()
+    public override void Initialize()
     {
 
     }
