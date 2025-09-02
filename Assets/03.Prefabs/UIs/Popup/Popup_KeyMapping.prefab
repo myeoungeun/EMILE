@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 5897499188330427045}
   - component: {fileID: 473195244758546933}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: JumpKeyText (TMP)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -267,7 +267,7 @@ GameObject:
   - component: {fileID: 4905469626186363259}
   - component: {fileID: 5619767705750033948}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: LeftKeyText (TMP)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -535,7 +535,7 @@ GameObject:
   - component: {fileID: 4762873326835614710}
   - component: {fileID: 578814793820443500}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: SaveText (TMP)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -921,6 +921,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2358717489588699344}
+  - component: {fileID: 8235915434665318490}
   m_Layer: 5
   m_Name: Popup_KeyMapping
   m_TagString: Untagged
@@ -935,7 +936,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4166797859506263669}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -949,6 +950,30 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: -70}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &8235915434665318490
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4166797859506263669}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 033be21ee37c98c40b8a6ec2eb9a219a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  saveButton: {fileID: 3915944763207399400}
+  exitButton: {fileID: 5181947479673507781}
+  leftKeyButton: {fileID: 7050646307525689807}
+  rightKeyButton: {fileID: 677356280330700828}
+  jumpKeyButton: {fileID: 5083636131461710598}
+  dashKeyButton: {fileID: 2458671340488225357}
+  attackKeyButton: {fileID: 7332568526393314350}
+  leftKeyText: {fileID: 5619767705750033948}
+  rightKeyText: {fileID: 7602969712969811129}
+  jumpKeyText: {fileID: 473195244758546933}
+  dashKeyText: {fileID: 5233979084576645913}
+  attackKeyText: {fileID: 3029312905843130395}
 --- !u!1 &4966970911306898933
 GameObject:
   m_ObjectHideFlags: 0
@@ -1293,7 +1318,7 @@ GameObject:
   - component: {fileID: 4509292523891644490}
   - component: {fileID: 5083636131461710598}
   m_Layer: 5
-  m_Name: ZumpKeyBtn
+  m_Name: JumpKeyBtn
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1413,7 +1438,7 @@ GameObject:
   - component: {fileID: 5657544002317718315}
   - component: {fileID: 3029312905843130395}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: AttacKeyText (TMP)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1547,7 +1572,7 @@ GameObject:
   - component: {fileID: 2200495602729697211}
   - component: {fileID: 7627983667656851969}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: ExitText (TMP)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2057,7 +2082,7 @@ GameObject:
   - component: {fileID: 5467055087444346342}
   - component: {fileID: 7602969712969811129}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: RightKeyText (TMP)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2546,7 +2571,7 @@ GameObject:
   - component: {fileID: 7269468475184872921}
   - component: {fileID: 5233979084576645913}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: DashKeyText (TMP)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
