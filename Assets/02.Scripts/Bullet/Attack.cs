@@ -24,7 +24,7 @@ public class Attack : MonoBehaviour, IAttackHandler
     private string name;
     private int damage;
     private float shotSpeed; //총알 속도
-    private int shotInterval; //발사 간격.. 이었는데 딜레이로 수정함
+    private int shotInterval; //발사 간격이었는데 딜레이로 수정함
     private int shotCount; //사용 가능한 총알 개수
     private bool isShooting = false;
     private float lastShotTime = 0f;
@@ -37,14 +37,6 @@ public class Attack : MonoBehaviour, IAttackHandler
     [SerializeField] private AttackType currentAttackType; //공격자
     [SerializeField] private BulletType currentBulletType; //현재 장착한 탄창 종류
     
-    
-    //이거 아래쪽은 따로 총알 세부 기능 구현에서 하면 될듯
-    private int maxPierce; //최대 관통 횟수
-    private float turnRatemaxPir; //유도 회전 속도
-    private float explosionRadius; //폭발 반경
-    //상태이상 부여
-    //사용 이펙트
-
     public void OnAttack(InputAction.CallbackContext context)
     {
         if (context.phase == InputActionPhase.Started) //버튼 누르고 있는 동안에
@@ -100,7 +92,7 @@ public class Attack : MonoBehaviour, IAttackHandler
         }
     }
     
-    public void SetBulletByID(int sID) //TODO : 외부에서 탄창 변경할 때 쓰는 함수
+    public void SetBulletByID(int sID) //외부에서 탄창 변경할 때 쓰는 함수
     {
         id = sID;
         OnShot(id);
@@ -112,8 +104,8 @@ public class Attack : MonoBehaviour, IAttackHandler
         {
             case 501 :
                 currentBulletType = BulletType.Normal;
-                name = "보통 투사체";
                 currentAttackType = AttackType.Player;
+                name = "보통 투사체";
                 currentSprite = normalBulletSprite; //이미지 바꾸는 부분. 애니메이션 이쪽에다 넣으시면 됩니다.
                 damage = baseDamage;
                 shotSpeed = baseShotSpeed;
@@ -124,7 +116,6 @@ public class Attack : MonoBehaviour, IAttackHandler
                 currentBulletType = BulletType.Pierce;
                 currentAttackType = AttackType.Player;
                 name = "관통 투사체";
-                currentAttackType = AttackType.Player;
                 currentSprite = pierceBulletSprite;
                 damage = baseDamage * 2;
                 shotSpeed = baseShotSpeed + 10f;
@@ -133,8 +124,8 @@ public class Attack : MonoBehaviour, IAttackHandler
                 break;
             case 503 :
                 currentBulletType = BulletType.Hollow;
-                name = "파열 투사체";
                 currentAttackType = AttackType.Player;
+                name = "파열 투사체";
                 currentSprite = hollowBulletSprite;
                 damage = baseDamage * 2;
                 shotSpeed = baseShotSpeed;
@@ -143,8 +134,8 @@ public class Attack : MonoBehaviour, IAttackHandler
                 break;
             case 504 :
                 currentBulletType = BulletType.Hollow;
-                name = "적 보통 투사체";
                 currentAttackType = AttackType.Enemy;
+                name = "적 보통 투사체";
                 currentSprite = enemyNormalBulletSprite;
                 damage = baseDamage * 2;
                 shotSpeed = baseShotSpeed;
@@ -153,18 +144,18 @@ public class Attack : MonoBehaviour, IAttackHandler
                 break;
             case 505 :
                 currentBulletType = BulletType.Homing;
-                name = "보스 미사일 투사체";
                 currentAttackType = AttackType.Enemy;
+                name = "보스 미사일 투사체";
                 currentSprite = homingBulletSprite;
                 damage = baseDamage * 5;
                 shotSpeed = baseShotSpeed;
-                shotInterval = baseShotInterval;
+                shotInterval = baseShotInterval * 2;
                 shotCount = baseShotCount;
                 break;
             default:
                 currentBulletType = BulletType.Normal;
-                name = "보통 투사체";
                 currentAttackType = AttackType.Player;
+                name = "보통 투사체";
                 currentSprite = normalBulletSprite; //이미지 바꾸는 부분. 애니메이션 이쪽에다 넣으시면 됩니다.
                 damage = baseDamage;
                 shotSpeed = baseShotSpeed;
