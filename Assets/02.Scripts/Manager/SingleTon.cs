@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class SingleTon <T> where T : SingleTon<T> ,new()
 {
-    private T instance;
-    public T GetInstance
+    private static T instance;
+    public static T GetInstance
     {
         get 
         {
@@ -13,11 +13,16 @@ public class SingleTon <T> where T : SingleTon<T> ,new()
             {
                 instance = new T();
                 instance.Init();
+                AsyncSceneManager.GetInstance.OnSceneChange += instance.OnSceneChange;
             }
             return instance;
         }
     }
     protected virtual void Init()
+    {
+
+    }
+    protected virtual void OnSceneChange()
     {
 
     }

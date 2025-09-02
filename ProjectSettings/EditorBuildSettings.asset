@@ -8,5 +8,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/01.Scenes/MainScene.unity
     guid: 8c9cfa26abfee488c85f1582747f6a02
+  - enabled: 1
+    path: Assets/01.Scenes/AsyncLoadDemo.unity
+    guid: b5dc5eede37fb994d9ae03ea981d21c1
   m_configObjects:
-    com.unity.addressableassets: {fileID: 11400000, guid: 6fabf746644a25144ae682cb402d32fa, type: 2}
+    com.unity.addressableassets: {fileID: 11400000, guid: f4847807132625947a52834659a4008a, type: 2}
+    com.unity.input.settings: {fileID: 11400000, guid: 8cbaefaf8c87edd4889a8ad49a37ac7c, type: 2}

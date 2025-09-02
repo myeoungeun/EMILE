@@ -15,17 +15,11 @@ MonoBehaviour:
   m_GroupName: Default Local Group
   m_Data:
     m_SerializedData: []
-  m_GUID: 48b74bef85ed2484288f97ec8dccfa8a
-  m_SerializeEntries:
-  - m_GUID: 7e84885a94764d1438aec83fc4bec25b
-    m_Address: EnemyBullet
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - PreLoad
-    FlaggedDuringContentUpdateRestriction: 0
+  m_GUID: 33eebb9aa96f4cd4c9cfeac7adcdb399
+  m_SerializeEntries: []
   m_ReadOnly: 0
-  m_Settings: {fileID: 11400000, guid: 146e1421b3497b84aa62a299fe2959d5, type: 2}
+  m_Settings: {fileID: 11400000, guid: 8ad4f6527651a9f41a24ba403c3d155e, type: 2}
   m_SchemaSet:
     m_Schemas:
-    - {fileID: 11400000, guid: 6f5943f741cad124a8402ec444c3dc2b, type: 2}
-    - {fileID: 11400000, guid: b376585faaaa10a42899cea7e1e4bf7e, type: 2}
+    - {fileID: 11400000, guid: 7e3c27ee4a2874c4e91273fe07d615e9, type: 2}
+    - {fileID: 11400000, guid: bb52da7a6cd5e854d9f8df9a69e84a48, type: 2}

@@ -2966,8 +2966,8 @@ MonoBehaviour:
   normalBulletSprite: {fileID: -1967991967, guid: e11b852091ce79549b0e09bfe1307ada, type: 3}
   pierceBulletSprite: {fileID: 591430598, guid: a83a9255d3a570348ba43736dfe43247, type: 3}
   hollowBulletSprite: {fileID: 1330653701, guid: 57ccef87c15b0c249b9435a59415aff4, type: 3}
-  enemyNormalBulletSprite: {fileID: -1049136, guid: e11b852091ce79549b0e09bfe1307ada, type: 3}
-  homingBulletSprite: {fileID: 1227606441, guid: e11b852091ce79549b0e09bfe1307ada, type: 3}
+  enemyNormalBulletSprite: {fileID: -1174746809, guid: f0edce9db231127428007678f3354a73, type: 3}
+  homingBulletSprite: {fileID: 21300000, guid: 3c88c99dbda30fe44968a5501d6ba4a6, type: 3}
   id: 0
   playerMovement: {fileID: 1699633469}
   bullet: {fileID: 7804673486609611539, guid: f61d7346ac4a5e14f8e7a89929037bfa, type: 3}
