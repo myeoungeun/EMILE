@@ -1,18 +1,14 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class PopupBase : MonoBehaviour
+public abstract class PopupBase : UIBase
 {
-    // Start is called before the first frame update
-    void Start()
+    protected virtual void OnEnable()
     {
-        
+        // 팝업 열릴 때 필요한 추가 로직
     }
 
-    // Update is called once per frame
-    void Update()
+    protected virtual void OnDisable()
     {
-        
+        // 팝업 닫힐 때 필요한 추가 로직
     }
 }
