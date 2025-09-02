@@ -3,15 +3,16 @@ using UnityEngine.UI;
 public class TitleUI : UIBase
 {
     [Header("시작화면 오브젝트")]
-    [SerializeField] GameObject titleText;
-    [SerializeField] GameObject menuPanel;
+    [SerializeField] private GameObject title;
+    [SerializeField] private GameObject menuPanel;
 
     [Header("버튼")]
-    [SerializeField] Button startButton;
-    [SerializeField] Button optionButton;
-    [SerializeField] Button exitButton;
+    [SerializeField] private Button startButton;
+    [SerializeField] private Button optionButton;
+    [SerializeField] private Button exitButton;
     public override void Initialize()
     {
+        // 버튼 이벤트 추가
         startButton.onClick.AddListener(OnStartButton);
         optionButton.onClick.AddListener(OnOptionButton);
         exitButton.onClick.AddListener(OnExitButton);
@@ -26,7 +27,7 @@ public class TitleUI : UIBase
 
     public void OnOptionButton() // 옵션창 열기
     {
-        titleText.SetActive(false);
+        title.SetActive(false);
         menuPanel.SetActive(false);
         UIManager.Instance.ShowPopup(PopupType.Option);
     }
