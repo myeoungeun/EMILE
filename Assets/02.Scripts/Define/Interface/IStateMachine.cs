@@ -30,11 +30,13 @@ public interface IState
             case StateType.run:
                 return new Run(state);
             case StateType.attack:
-                return new Attack(state);
+                return new PlayerStates.Attack(state);
             case StateType.die:
                 return new Die(state);
             case StateType.grab:
                 return new Grab(state);
+            case StateType.fall:
+                return new Fall(state);
             default:
                 break;
         }

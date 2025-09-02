@@ -26,7 +26,16 @@ public class Player : MonoBehaviour
     private readonly float maxJumpTime = 0.3f;
     [SerializeField]private float currJumpTime;
 
+    List<PlatformTimer> platformEffectors = new List<PlatformTimer>();
+    private readonly float platformRestoreGoal = 0.3f;
+
     bool isGround;
+
+    class PlatformTimer
+    {
+        public PlatformEffector2D effector;
+        public float timer;
+    }
 
     void Start()
     {
@@ -43,6 +52,7 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        SetPlatformTimer();
         OnMove();
         OnJump();
     }
@@ -66,8 +76,10 @@ public class Player : MonoBehaviour
 
                 if (Physics2D.Raycast(transform.position, dir, coll.bounds.extents.x + 0.1f, 1 << 7))
                 {
+
                     if (stateMachine.GetCurrType != StateType.grab)
                     {
+                        transform.localScale = new Vector3(inputHandle.moveDir.x > 0 ? 1 : -1, 1, 1);
                         currJumpTime = 0f;
                         rb.velocity = Vector3.zero;
                         inputHandle.isPressingJump = false;
@@ -98,21 +110,62 @@ public class Player : MonoBehaviour
     {
         if (inputHandle.isPressingJump && jumpHandle.CheckCondition(currJumpTime,maxJumpTime))
         {
-            Debug.Log("누름");
-            currJumpTime += Time.deltaTime;
-            jumpHandle.OnJump(inputHandle.moveDir, stat.JumpForce);
-            stateMachine.Change(StateType.jump);
-            if (jumpHandle.type == JumpTypes.wall)
+            if (inputHandle.moveDir.y >= 0)
             {
-                jumpHandle = IJumpHandler.Factory(JumpTypes.linear, rb);
-                inputHandle.moveDir = Vector2.zero;
-                inputHandle.isPressingJump = false;
+                currJumpTime += Time.deltaTime;
+                jumpHandle.OnJump(inputHandle.moveDir, stat.JumpForce);
+                stateMachine.Change(StateType.jump);
+                if (jumpHandle.type == JumpTypes.wall)
+                {
+                    jumpHandle = IJumpHandler.Factory(JumpTypes.linear, rb);
+                    inputHandle.moveDir = Vector2.zero;
+                    inputHandle.isPressingJump = false;
+                }
+                return;
             }
-            return;
+            else
+            {
+                if (isGround)
+                {
+                    //플레이어가 바닥 인식에서 벗어남
+                    RaycastHit2D ray = Physics2D.Raycast(transform.position, Vector3.down, coll.bounds.extents.y + 0.3f, 1<<8);
+                    if (ray)
+                    {
+                        Debug.Log(ray.collider.excludeLayers);
+                        ray.collider.excludeLayers = 1 << 9;
+                        ray.transform.gameObject.layer = 0;
+                        if (ray.collider.usedByEffector)
+                        {
+                            ray.transform.TryGetComponent<PlatformEffector2D>(out PlatformEffector2D effector2D);
+                            effector2D.colliderMask -= 1 << 9;
+                            platformEffectors.Add(new PlatformTimer() { effector = effector2D, timer = 0f });
+                        }
+                    }
+                }
+            }
+
         }
         JumpReset();
-
     }
+
+    private void SetPlatformTimer()
+    {
+        if (platformEffectors.Count <= 0) return;
+
+        for (int i = 0; i < platformEffectors.Count; i++)
+        {
+            platformEffectors[i].timer += Time.deltaTime;
+            if (platformRestoreGoal <= platformEffectors[i].timer)
+            {
+                platformEffectors[i].effector.colliderMask += 1<<9;
+                platformEffectors[i].effector.gameObject.layer = 8;
+                platformEffectors[i] = null;
+                platformEffectors.RemoveAt(i);
+                i--;
+            }
+        }
+    }
+
     private void JumpReset()
     {
         Debug.DrawRay(transform.position, Vector3.down * coll.bounds.extents.y);
@@ -125,9 +178,19 @@ public class Player : MonoBehaviour
                 jumpHandle = IJumpHandler.Factory(JumpTypes.linear, rb);
                 currJumpTime = 0f;
             }
-            if(stateMachine.GetCurrType == StateType.jump || stateMachine.GetCurrType == StateType.fall)
+
+            if(rb.velocity == Vector2.zero)
             {
                 stateMachine.Change(StateType.idle);
+            }
+
+
+        }
+        else
+        {
+            if (rb.velocity.y < 0)
+            {
+                stateMachine.Change(StateType.fall);
             }
         }
     }
