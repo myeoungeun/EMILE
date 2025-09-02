@@ -9,6 +9,7 @@ TagManager:
   - Ground
   - Monster
   - DeadZone
+  - Bullet
   layers:
   - Default
   - TransparentFX

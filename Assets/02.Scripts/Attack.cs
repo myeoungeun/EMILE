@@ -5,20 +5,45 @@ using UnityEngine.InputSystem;
 
 public class Attack : MonoBehaviour, IAttackHandler
 {
+    [Header("총알 기본 정보")]
     public int baseDamage = 5;
     public float baseShotSpeed = 30f;
     public int baseShotInterval = 5;
+    public int baseShotCount = 99999;
     
+    [Header("총알 이미지")]
+    private Sprite currentSprite; //현재 이미지
+    public Sprite normalBulletSprite;
+    public Sprite pierceBulletSprite;
+    public Sprite hollowBulletSprite;
+    public Sprite enemyNormalBulletSprite; //적 총알 이미지
+    public Sprite homingBulletSprite; //보스 미사일 이미지
+
+    [Header("총알 변수들")]
+    [SerializeField] private int id;
+    private string name;
     private int damage;
     private float shotSpeed; //총알 속도
-    private int shotInterval; //발사 간격
+    private int shotInterval; //발사 간격.. 이었는데 딜레이로 수정함
     private int shotCount; //사용 가능한 총알 개수
     private bool isShooting = false;
+    private float lastShotTime = 0f;
+    public float shotCooldown => shotInterval * 0.05f; // shotInterval을 초 단위로 변환
     
+    [Header("총알 발사 위치 등")]
     public PlayerMovement playerMovement;
     public GameObject bullet;
     public Transform bulletStart; //총알이 발사되는 위치
+    [SerializeField] private AttackType currentAttackType; //공격자
     [SerializeField] private BulletType currentBulletType; //현재 장착한 탄창 종류
+    
+    
+    //이거 아래쪽은 따로 총알 세부 기능 구현에서 하면 될듯
+    private int maxPierce; //최대 관통 횟수
+    private float turnRatemaxPir; //유도 회전 속도
+    private float explosionRadius; //폭발 반경
+    //상태이상 부여
+    //사용 이펙트
 
     public void OnAttack(InputAction.CallbackContext context)
     {
@@ -34,18 +59,25 @@ public class Attack : MonoBehaviour, IAttackHandler
 
     public void Shoot()
     {
-        OnShot(currentBulletType);
+        OnShot(id);
         Debug.Log("총알 발사");
         GameObject bulletObj = Instantiate(bullet, bulletStart.position, bulletStart.rotation); //총알 생성
-        bulletObj.GetComponent<Bullet>().Initialize(damage, shotSpeed, shotInterval, shotCount, playerMovement.lookDirectionRight); //데미지, 총알 크기, 방향을 Bullet에게 전달
+        
+        SpriteRenderer sr = bulletObj.GetComponent<SpriteRenderer>(); //총알 외형 변경
+        if (sr != null && currentSprite != null)
+        {
+            sr.sprite = currentSprite;
+        }
+        
+        bulletObj.GetComponent<Bullet>().Initialize(id, damage, shotSpeed, shotInterval, shotCount, currentAttackType, currentBulletType, playerMovement.lookDirectionRight); //데미지, 총알 크기, 방향을 Bullet에게 전달
     }
     
     public void StartShooting()
     {
         if (!isShooting)
         {
+            isShooting = true;
             StartCoroutine(ShootingRoutine());
-            
         }
     }
 
@@ -56,39 +88,88 @@ public class Attack : MonoBehaviour, IAttackHandler
 
     private IEnumerator ShootingRoutine()
     {
-        isShooting = true;
-
         while (isShooting)
         {
-            Shoot(); // 총알 발사
-            yield return new WaitForSeconds(shotInterval * 0.05f); //shotInterval을 1초 단위로 변환
+            if (Time.time - lastShotTime >= shotCooldown) //쿨타임 체크
+            {
+                Shoot();
+                lastShotTime = Time.time;
+            }
+
+            yield return null; //매 프레임 체크
         }
     }
-
-    public void OnShot(BulletType bulletType) //총알(탄창) 정보
+    
+    public void SetBulletByID(int sID) //TODO : 외부에서 탄창 변경할 때 쓰는 함수
     {
-        switch(bulletType)
+        id = sID;
+        OnShot(id);
+    }
+
+    public void OnShot(int sid) //총알(탄창) 정보
+    {
+        switch(sid)
         {
-            case BulletType.Normal:
+            case 501 :
+                currentBulletType = BulletType.Normal;
+                name = "보통 투사체";
+                currentAttackType = AttackType.Player;
+                currentSprite = normalBulletSprite; //이미지 바꾸는 부분. 애니메이션 이쪽에다 넣으시면 됩니다.
                 damage = baseDamage;
                 shotSpeed = baseShotSpeed;
                 shotInterval = baseShotInterval * 2;
+                shotCount = baseShotCount;
                 break;
-            case BulletType.Pierce:
-                //총알 이미지 변경
+            case 502 :
+                currentBulletType = BulletType.Pierce;
+                currentAttackType = AttackType.Player;
+                name = "관통 투사체";
+                currentAttackType = AttackType.Player;
+                currentSprite = pierceBulletSprite;
                 damage = baseDamage * 2;
                 shotSpeed = baseShotSpeed + 10f;
                 shotInterval = baseShotInterval;
+                shotCount = 10;
                 break;
-            case BulletType.Hollow:
-                //총알 이미지 변경
+            case 503 :
+                currentBulletType = BulletType.Hollow;
+                name = "파열 투사체";
+                currentAttackType = AttackType.Player;
+                currentSprite = hollowBulletSprite;
                 damage = baseDamage * 2;
                 shotSpeed = baseShotSpeed;
-                shotInterval = (int)(baseShotInterval * 1.5);
+                shotInterval = baseShotInterval;
+                shotCount = 5;
+                break;
+            case 504 :
+                currentBulletType = BulletType.Hollow;
+                name = "적 보통 투사체";
+                currentAttackType = AttackType.Enemy;
+                currentSprite = enemyNormalBulletSprite;
+                damage = baseDamage * 2;
+                shotSpeed = baseShotSpeed;
+                shotInterval = baseShotInterval;
+                shotCount = baseShotCount;
+                break;
+            case 505 :
+                currentBulletType = BulletType.Homing;
+                name = "보스 미사일 투사체";
+                currentAttackType = AttackType.Enemy;
+                currentSprite = homingBulletSprite;
+                damage = baseDamage * 5;
+                shotSpeed = baseShotSpeed;
+                shotInterval = baseShotInterval;
+                shotCount = baseShotCount;
                 break;
             default:
+                currentBulletType = BulletType.Normal;
+                name = "보통 투사체";
+                currentAttackType = AttackType.Player;
+                currentSprite = normalBulletSprite; //이미지 바꾸는 부분. 애니메이션 이쪽에다 넣으시면 됩니다.
                 damage = baseDamage;
                 shotSpeed = baseShotSpeed;
+                shotInterval = baseShotInterval * 2;
+                shotCount = baseShotCount;
                 break;
         }
     }
