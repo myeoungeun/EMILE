@@ -5,9 +5,9 @@ using Monster;
 using UnityEngine;
 
 public class Bullet : MonoBehaviour
-{
-   private AttackType attacker;
-   private BulletType bulletType;
+{ 
+    protected AttackType attacker;
+   protected BulletType bulletType;
    protected int Id;
    protected int Damage;
    protected float Speed;
@@ -33,9 +33,9 @@ public class Bullet : MonoBehaviour
       }
    }
    
-   void Update()
+   protected virtual void Update()
    {
-      transform.Translate(MoveDirection * Speed * Time.deltaTime, Space.World);
+       transform.Translate(MoveDirection * Speed * Time.deltaTime, Space.World);
    }
    
    private void OnTriggerEnter2D(Collider2D other)
@@ -70,7 +70,7 @@ public class Bullet : MonoBehaviour
       }
    }
    
-   private void DealDamage(IDamageable target)
+   protected void DealDamage(IDamageable target)
    {
        if (target != null)
        {
