@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: e25194ef55ac6e94db76d4cf5f8815b6
+guid: 11cad9c4530cfec409d7150ec5c0d326
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -48,7 +48,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 30
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -72,7 +72,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 2
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -136,13 +136,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: spritesheet 1_0
+      name: HitEffect4_0
       rect:
         serializedVersion: 2
-        x: 39
-        y: 7
-        width: 18
-        height: 18
+        x: 0
+        y: 0
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -150,20 +150,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: fe3d286f09773ab43ba95aeb2f957cf3
-      internalID: 1650399398
+      spriteID: 9169cb3bf1ceac24f92a5b12164a4e95
+      internalID: -2039097656
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: spritesheet 1_1
+      name: HitEffect4_1
       rect:
         serializedVersion: 2
-        x: 65
-        y: 2
-        width: 30
-        height: 28
+        x: 32
+        y: 0
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -171,20 +171,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ce8ea10f5b746f34d91ba6b1a9195556
-      internalID: -1361930478
+      spriteID: c83ce6c6a3883d9429a4de6afaa4f16d
+      internalID: -465796381
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: spritesheet 1_2
+      name: HitEffect4_2
       rect:
         serializedVersion: 2
-        x: 99
-        y: 3
-        width: 26
-        height: 26
+        x: 64
+        y: 0
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -192,20 +192,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 0d688a4bd46436c42937f648edafb4c6
-      internalID: 2073306993
+      spriteID: f7525302d4d7b764e946d23b296b5406
+      internalID: -1959936438
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: spritesheet 1_3
+      name: HitEffect4_3
       rect:
         serializedVersion: 2
-        x: 129
-        y: 20
-        width: 11
-        height: 11
+        x: 96
+        y: 0
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -213,20 +213,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b6f5f06d3e9461d4789b60b6ecd6c4c1
-      internalID: -2107930095
+      spriteID: 3220836dcd3eb324799d8f3dd6615f82
+      internalID: 2034100805
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: spritesheet 1_4
+      name: HitEffect4_4
       rect:
         serializedVersion: 2
-        x: 148
-        y: 20
-        width: 11
-        height: 11
+        x: 128
+        y: 0
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -234,146 +234,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 39c56191b31462145ae097b782c12341
-      internalID: -1605299699
+      spriteID: 52207a16a809d184897d88e7c8715e67
+      internalID: 373859463
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: spritesheet 1_5
-      rect:
-        serializedVersion: 2
-        x: 160
-        y: 21
-        width: 11
-        height: 11
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: b432dbc69c7835047ae45d765ea09717
-      internalID: 1848293680
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: spritesheet 1_6
-      rect:
-        serializedVersion: 2
-        x: 181
-        y: 21
-        width: 20
-        height: 11
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 0d48cfef77e9e864bb8b6de65cf70328
-      internalID: -1951294651
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: spritesheet 1_7
-      rect:
-        serializedVersion: 2
-        x: 215
-        y: 23
-        width: 9
-        height: 9
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: c65352eaa1e00574fa090a62389f971d
-      internalID: -1942209138
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: spritesheet 1_8
-      rect:
-        serializedVersion: 2
-        x: 10
-        y: 10
-        width: 12
-        height: 12
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: f1ed16123fa08f948bee4fd23e82ed21
-      internalID: 2107026203
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: spritesheet 1_9
-      rect:
-        serializedVersion: 2
-        x: 129
-        y: 1
-        width: 11
-        height: 11
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: f783b55cff5e5d94a82b550f078cb694
-      internalID: 1545153390
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: spritesheet 1_10
-      rect:
-        serializedVersion: 2
-        x: 148
-        y: 1
-        width: 11
-        height: 11
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 34c7a6866bf9e78498c8c0a2ef662cd9
-      internalID: 366753530
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: spritesheet 1_11
+      name: HitEffect4_5
       rect:
         serializedVersion: 2
         x: 160
         y: 0
-        width: 11
-        height: 11
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -381,20 +255,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1442dd7627be3984da357d37ad440b70
-      internalID: 2006242780
+      spriteID: 7cca9077e3e1dc74d8d4309a734ffc9f
+      internalID: -540087477
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: spritesheet 1_12
+      name: HitEffect4_6
       rect:
         serializedVersion: 2
-        x: 181
+        x: 192
         y: 0
-        width: 20
-        height: 11
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -402,29 +276,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 575751c072cea25419d99734eef07c30
-      internalID: -355672851
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: spritesheet 1_13
-      rect:
-        serializedVersion: 2
-        x: 215
-        y: 0
-        width: 9
-        height: 9
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: d3c7fbb7c94b98d4690042f35aa53950
-      internalID: 1339848014
+      spriteID: 9a8c9b8ea3e24a444b6b33abfb860de7
+      internalID: 1353253972
       vertices: []
       indices: 
       edges: []
@@ -440,20 +293,13 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      spritesheet 1_0: 1650399398
-      spritesheet 1_1: -1361930478
-      spritesheet 1_10: 366753530
-      spritesheet 1_11: 2006242780
-      spritesheet 1_12: -355672851
-      spritesheet 1_13: 1339848014
-      spritesheet 1_2: 2073306993
-      spritesheet 1_3: -2107930095
-      spritesheet 1_4: -1605299699
-      spritesheet 1_5: 1848293680
-      spritesheet 1_6: -1951294651
-      spritesheet 1_7: -1942209138
-      spritesheet 1_8: 2107026203
-      spritesheet 1_9: 1545153390
+      HitEffect4_0: -2039097656
+      HitEffect4_1: -465796381
+      HitEffect4_2: -1959936438
+      HitEffect4_3: 2034100805
+      HitEffect4_4: 373859463
+      HitEffect4_5: -540087477
+      HitEffect4_6: 1353253972
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

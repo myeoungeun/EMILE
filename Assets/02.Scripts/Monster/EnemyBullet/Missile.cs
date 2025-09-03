@@ -6,10 +6,13 @@ public class Missile : BaseBullet
 {
     private Transform target;
     private Coroutine rotateCoroutine;
+    private float chasingTime;
+
     public override void Init(Transform target)
     {
         this.target = target;
         rotateCoroutine = null;
+        chasingTime = 1f;
     }
 
     private void OnEnable()
@@ -21,16 +24,17 @@ public class Missile : BaseBullet
     {
         //위로 이동
         rb.velocity = transform.up * BulletData.Speed;
-        // 1초 뒤부터 조금씩 회전하면서 플레이어 추적
-        if(rotateCoroutine == null )
+        // 0.5초 후 추적 시작, 1.5초 부터 추적 종료
+        if(rotateCoroutine == null)
             rotateCoroutine = StartCoroutine(Rotate());
     }
 
     private IEnumerator Rotate()
     {
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(0.5f);
 
-        while(target != null)
+        float curTime = 0f;
+        while(target != null && curTime <= chasingTime)
         {
             Vector2 dir = ((Vector2)target.position - rb.position).normalized;
 
@@ -44,6 +48,8 @@ public class Missile : BaseBullet
                 targetRotation,
                 BulletData.RotationSpeed * Time.deltaTime
             );
+
+            curTime += Time.deltaTime;
             yield return null;
         }
     }
