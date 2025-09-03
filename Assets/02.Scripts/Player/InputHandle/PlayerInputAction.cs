@@ -62,6 +62,15 @@ public partial class @PlayerInputActionGenerated: IInputActionCollection2, IDisp
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""BulletChange"",
+                    ""type"": ""Button"",
+                    ""id"": ""4127b6f6-c8e6-42ed-878e-fea5967421ec"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -152,6 +161,17 @@ public partial class @PlayerInputActionGenerated: IInputActionCollection2, IDisp
                     ""action"": ""Attack"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""7fd71fbf-861c-4fe9-bcf9-1de89e1617ce"",
+                    ""path"": ""<Keyboard>/v"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""BulletChange"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -164,6 +184,7 @@ public partial class @PlayerInputActionGenerated: IInputActionCollection2, IDisp
         m_PlayerInput_Jump = m_PlayerInput.FindAction("Jump", throwIfNotFound: true);
         m_PlayerInput_Dash = m_PlayerInput.FindAction("Dash", throwIfNotFound: true);
         m_PlayerInput_Attack = m_PlayerInput.FindAction("Attack", throwIfNotFound: true);
+        m_PlayerInput_BulletChange = m_PlayerInput.FindAction("BulletChange", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -229,6 +250,7 @@ public partial class @PlayerInputActionGenerated: IInputActionCollection2, IDisp
     private readonly InputAction m_PlayerInput_Jump;
     private readonly InputAction m_PlayerInput_Dash;
     private readonly InputAction m_PlayerInput_Attack;
+    private readonly InputAction m_PlayerInput_BulletChange;
     public struct PlayerInputActions
     {
         private @PlayerInputActionGenerated m_Wrapper;
@@ -237,6 +259,7 @@ public partial class @PlayerInputActionGenerated: IInputActionCollection2, IDisp
         public InputAction @Jump => m_Wrapper.m_PlayerInput_Jump;
         public InputAction @Dash => m_Wrapper.m_PlayerInput_Dash;
         public InputAction @Attack => m_Wrapper.m_PlayerInput_Attack;
+        public InputAction @BulletChange => m_Wrapper.m_PlayerInput_BulletChange;
         public InputActionMap Get() { return m_Wrapper.m_PlayerInput; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -258,6 +281,9 @@ public partial class @PlayerInputActionGenerated: IInputActionCollection2, IDisp
             @Attack.started += instance.OnAttack;
             @Attack.performed += instance.OnAttack;
             @Attack.canceled += instance.OnAttack;
+            @BulletChange.started += instance.OnBulletChange;
+            @BulletChange.performed += instance.OnBulletChange;
+            @BulletChange.canceled += instance.OnBulletChange;
         }
 
         private void UnregisterCallbacks(IPlayerInputActions instance)
@@ -274,6 +300,9 @@ public partial class @PlayerInputActionGenerated: IInputActionCollection2, IDisp
             @Attack.started -= instance.OnAttack;
             @Attack.performed -= instance.OnAttack;
             @Attack.canceled -= instance.OnAttack;
+            @BulletChange.started -= instance.OnBulletChange;
+            @BulletChange.performed -= instance.OnBulletChange;
+            @BulletChange.canceled -= instance.OnBulletChange;
         }
 
         public void RemoveCallbacks(IPlayerInputActions instance)
@@ -297,5 +326,6 @@ public partial class @PlayerInputActionGenerated: IInputActionCollection2, IDisp
         void OnJump(InputAction.CallbackContext context);
         void OnDash(InputAction.CallbackContext context);
         void OnAttack(InputAction.CallbackContext context);
+        void OnBulletChange(InputAction.CallbackContext context);
     }
 }

@@ -2032,6 +2032,7 @@ MonoBehaviour:
     m_Bits: 448
   coll: {fileID: 859212400}
   currJumpTime: 0
+  dashDistance: 8
 --- !u!50 &859212399
 Rigidbody2D:
   serializedVersion: 4
@@ -2068,7 +2069,7 @@ CapsuleCollider2D:
   m_GameObject: {fileID: 859212397}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: a0065b1ea1bc4f149b62d8b65e6e7bd9, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -3457,7 +3458,7 @@ EdgeCollider2D:
     serializedVersion: 2
     m_Bits: 4294967295
   m_IsTrigger: 0
-  m_UsedByEffector: 0
+  m_UsedByEffector: 1
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   m_EdgeRadius: 0
@@ -3663,6 +3664,10 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: b5b68e53-bc48-43b7-9eae-ee46e115f32d
     m_ActionName: PlayerInput/Attack[/Keyboard/c]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 4127b6f6-c8e6-42ed-878e-fea5967421ec
+    m_ActionName: PlayerInput/BulletChange[/Keyboard/v]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: PlayerInput

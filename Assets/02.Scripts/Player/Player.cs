@@ -2,6 +2,7 @@ using PlayerStates;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
@@ -41,6 +42,7 @@ public class Player : MonoBehaviour
     {
         inputHandle = new PlayerInputHandle();
         inputHandle.input.PlayerInput.Jump.canceled += (a) => { if (jumpHandle.type == JumpTypes.linear && jumpHandle.state != JumpStates.doubleJump) {  currJumpTime = 0; } jumpHandle.ChangeJumpState(); };
+        inputHandle.input.PlayerInput.Dash.started += OnDash;
         stateMachine = new PlayerStatesMachine(StateType.idle, transform.GetComponentInChildren<Animator>());
         TryGetComponent<Rigidbody2D>(out rb);
         moveHandle = new LinearMove(rb);
@@ -52,6 +54,8 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (stateMachine.GetCurrType == StateType.dash) return;
+        dashTimer = Math.Clamp(dashTimer+Time.deltaTime, 0, dashCooltime);
         SetPlatformTimer();
         OnMove();
         OnJump();
@@ -127,8 +131,9 @@ public class Player : MonoBehaviour
             {
                 if (isGround)
                 {
-                    //�÷��̾ �ٴ� �νĿ��� ���
-                    RaycastHit2D ray = Physics2D.Raycast(transform.position, Vector3.down, coll.bounds.extents.y + 0.3f, 1<<8);
+                    //플레이어가 바닥 인식에서 벗어남
+
+                    RaycastHit2D ray = Physics2D.CircleCast(transform.position, 0.3f, Vector2.down, coll.bounds.extents.y, 1 << 8);
                     if (ray)
                     {
                         Debug.Log(ray.collider.excludeLayers);
@@ -168,10 +173,10 @@ public class Player : MonoBehaviour
 
     private void JumpReset()
     {
-        Debug.DrawRay(transform.position, Vector3.down * coll.bounds.extents.y);
-        isGround = Physics2D.Raycast(transform.position, Vector3.down, coll.bounds.extents.y+0.3f, groundLayers);
+        isGround = Physics2D.CircleCast(transform.position, 0.3f, Vector2.down, coll.bounds.extents.y,groundLayers); ;
         if (isGround)
         {
+            airDashed = false;
             jumpHandle.state = JumpStates.none;
             if (currJumpTime != default(float) || jumpHandle.type != JumpTypes.linear)
             {
@@ -193,6 +198,57 @@ public class Player : MonoBehaviour
                 stateMachine.Change(StateType.fall);
             }
         }
+    }
+
+    private void OnDash(InputAction.CallbackContext ctx)
+    {
+        if (ctx.started)
+        {
+            if (stateMachine.GetCurrType == StateType.dash || inputHandle.moveDir == Vector2.zero || airDashed || dashTimer < dashCooltime) return;
+            if(dashCoroutine != null)StopCoroutine(dashCoroutine);
+            dashCoroutine = StartCoroutine(DashCoroutine());
+        }
+    }
+
+    private void DashCancel(StateType type)
+    {
+        if (dashCoroutine != null)
+        {
+            StopCoroutine(dashCoroutine);
+            stateMachine.Change(type);
+            dashTimer = 0f;
+            stat.isDashing = false;
+            rb.velocity = Vector2.zero;
+        }
+    }
+
+    private Coroutine dashCoroutine;
+    [SerializeField] float dashDistance;
+    private float dashCooltime = 0.5f;
+    private float dashTimer = 0f;
+    private bool airDashed = false;//공중에선 1회만 대쉬 가능
+    private IEnumerator DashCoroutine()
+    {
+        airDashed = true;
+        stat.isDashing = true;
+        isGround = false;
+        stateMachine.Change(StateType.dash);
+
+        float speed = stat.MoveSpeed * 2.5f;
+        float goalDashTime = dashDistance / speed;
+        float currDashTime = 0f;
+        Vector2 dir = new Vector2(inputHandle.moveDir.x, 0);
+        while (currDashTime < goalDashTime)
+        {
+            currDashTime += Time.deltaTime;
+            yield return null;
+            rb.velocity = dir * (stat.MoveSpeed*2.5f);
+            if (inputHandle.isPressingJump)
+            {
+                DashCancel(StateType.jump);
+            }
+        }
+        DashCancel(StateType.idle);
     }
 }
 public class PlayerInputHandle

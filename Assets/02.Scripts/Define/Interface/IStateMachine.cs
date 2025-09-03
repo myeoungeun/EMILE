@@ -1,4 +1,4 @@
-﻿using PlayerStates;
+using PlayerStates;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,28 +19,30 @@ public interface IState
     public void Enter();
     public void Execute();
     public void Exit();
-    public static IState Factory(StateType type,IStateMachine<IState> state)
+    public static IState Factory(StateType type,IStateMachine<IState> stateMachine)
     {
         switch (type)
         {
             case StateType.idle:
-                return new Idle(state);
+                return new Idle(stateMachine);
             case StateType.jump:
-                return new Jump(state);
+                return new Jump(stateMachine);
             case StateType.run:
-                return new Run(state);
+                return new Run(stateMachine);
             case StateType.attack:
-                return new PlayerStates.Attack(state);
+                return new PlayerStates.Attack(stateMachine);
             case StateType.die:
-                return new Die(state);
+                return new Die(stateMachine);
             case StateType.grab:
-                return new Grab(state);
+                return new Grab(stateMachine);
             case StateType.fall:
-                return new Fall(state);
+                return new Fall(stateMachine);
+            case StateType.dash:
+                return new Dash(stateMachine);
             default:
                 break;
         }
         return null;
     }
 }
-public enum StateType { idle,jump,run,attack,die,grab,fall}
+public enum StateType { idle,jump,run,attack,die,grab,fall,dash}

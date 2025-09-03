@@ -1,4 +1,4 @@
-﻿
+
 namespace PlayerStates
 {
     using System;
@@ -173,6 +173,32 @@ namespace PlayerStates
         public void Enter()
         {
             stateMachine.Anim.Play("Fall");
+        }
+
+        public void Execute()
+        {
+             
+        }
+
+        public void Exit()
+        {
+             
+        }
+    }
+    public class Dash : IState
+    {
+        public StateType GetStateType => StateType.dash;
+        
+        public IStateMachine<IState> stateMachine { get; set; }
+
+        public Dash(IStateMachine<IState> state)
+        {
+            this.stateMachine = state;
+        }
+
+        public void Enter()
+        {
+            stateMachine.Anim.Play("Dash");
         }
 
         public void Execute()

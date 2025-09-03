@@ -15,6 +15,7 @@ public class PlayerStat : IDamageable
     public float MoveSpeed{ get { return moveSpeed; } set { moveSpeed = value; } }
     private float jumpForce;
     public float JumpForce { get { return jumpForce; } set { jumpForce = value; } }
+    public bool isDashing = false;
     public PlayerStat(int curHP,  int attackDamage,  float moveSpeed,float jumpForce)
     {
         this.curHP = curHP;
@@ -26,6 +27,8 @@ public class PlayerStat : IDamageable
 
     public void TakeDamage(int damage)
     {
+        if (!isDashing) return;
         curHP -= damage;
+        //TODO : 피격
     }
 }
