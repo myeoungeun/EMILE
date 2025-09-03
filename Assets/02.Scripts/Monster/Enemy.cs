@@ -11,6 +11,7 @@ public abstract class Enemy : MonoBehaviour
     public EnemyStateMachine StateMachine { get { return stateMachine; } }
 
     [SerializeField] protected int curHp;
+    public int CurHp { get { return curHp; } }
     protected Vector3 originPos;
 
     public Transform target;
