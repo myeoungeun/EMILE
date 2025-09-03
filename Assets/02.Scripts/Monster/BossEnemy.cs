@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class BossEnemy : Enemy, Monster.IAttackable, Monster.IDamageable
 {
-    private event System.Action onHpChanged;
+    public event System.Action onHpChanged;
 
     [Header("Booster Effect")]
     [SerializeField] GameObject boost1;
