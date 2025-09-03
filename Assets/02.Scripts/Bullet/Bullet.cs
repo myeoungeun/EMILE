@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Monster;
 using UnityEngine;
 
 public class Bullet : MonoBehaviour
@@ -24,6 +25,12 @@ public class Bullet : MonoBehaviour
       Interval = sInterval; //딜레이로 수정 필요
       Count = sCount; //총알 개수
       MoveDirection = lookDirectionRight ? Vector3.right : Vector3.left; //오른쪽 보면 오른쪽 발사, 왼쪽 보고있으면 왼쪽 발사
+      
+      SpriteRenderer sr = GetComponent<SpriteRenderer>();
+      if (sr != null)
+      {
+          sr.flipX = !lookDirectionRight; //플레이어 왼쪽이면 이미지도 뒤집음
+      }
    }
    
    void Update()
@@ -38,33 +45,41 @@ public class Bullet : MonoBehaviour
 
    protected virtual void HandleCollision(Collider2D other) //자식에서 재정의하기 위한 가상 메서드
    {
-      Debug.Log("충돌 작동중");
-      if (attacker == AttackType.Player && other.CompareTag("Monster"))
+      var iDamageable = other.GetComponent<IDamageable>(); //충돌한 오브젝트에 IDamageable 인터페이스가 있으면 그걸 가져옴
+      
+      if (attacker == AttackType.Player && other.CompareTag("Monster")) //공격자가 정해져있어서 본인이 쏜 총에 안 맞음
       {
-         //적이랑 충돌 판정
          Debug.Log("플레이어->몬스터 공격");
-         //var monster = other.GetComponent<Monster>();
-         //if(monster != null){ monster.TakeDamage(damage);}
-         if (bulletType != BulletType.Pierce) //관통탄일때는 파괴x, 몬스터 통과
-         {
-            Destroy(gameObject);
-         }
+         DealDamage(iDamageable);
       }
+      
       if (attacker == AttackType.Enemy && other.CompareTag("Player"))
       {
          Debug.Log("몬스터->플레이어 공격");
-         //플레이어 피 깎기
-         //필요하다면 탄환 파괴되는 애니메이션 추가
-         Destroy(gameObject);
+         DealDamage(iDamageable);
       }
+      
       if (other.CompareTag("Wall")) //모든 탄환은 벽에 닿으면 파괴
       {
-         Debug.Log("벽이랑 충돌");
          Destroy(gameObject);
       }
+      
       if (other.CompareTag("DeadZone")) //데드존에서 모든 탄환 파괴
       {
          Destroy(gameObject);
       }
+   }
+   
+   private void DealDamage(IDamageable target)
+   {
+       if (target != null)
+       {
+           target.TakeDamage(Damage);
+           Debug.Log(Damage);
+       }
+       if (bulletType != BulletType.Pierce) //관통탄일때는 파괴x, 통과함
+       {
+           Destroy(gameObject);
+       }
    }
 }

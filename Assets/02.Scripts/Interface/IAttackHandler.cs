@@ -18,5 +18,5 @@ public enum BulletType
 
 public interface IAttackHandler
 {
-    public void OnShot(int id); //공격 방식(데미지, 발사 각도)
+    public void OnShot(int id); //공격 방식(공격id)
 }
