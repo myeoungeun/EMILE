@@ -34,8 +34,17 @@
                 },
                 {
                     "name": "Attack",
-                    "type": "Button",
+                    "type": "Value",
                     "id": "b5b68e53-bc48-43b7-9eae-ee46e115f32d",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "BulletChange",
+                    "type": "Button",
+                    "id": "4127b6f6-c8e6-42ed-878e-fea5967421ec",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -128,6 +137,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "Attack",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "7fd71fbf-861c-4fe9-bcf9-1de89e1617ce",
+                    "path": "<Keyboard>/v",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "BulletChange",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
