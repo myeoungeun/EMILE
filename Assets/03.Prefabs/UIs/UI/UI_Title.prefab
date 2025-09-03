@@ -538,19 +538,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2048440421496984437}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 2033665117923316481}
-        m_TargetAssemblyTypeName: TitleUI, Assembly-CSharp
-        m_MethodName: OnStartButton
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!1 &3636602241775955991
 GameObject:
   m_ObjectHideFlags: 0
@@ -896,7 +884,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: E.M.I.L.A
+  m_text: E.M.I.L.E
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: f176aad5a97582448999f8fe684a39c3, type: 2}
   m_sharedMaterial: {fileID: -4060328838574728251, guid: f176aad5a97582448999f8fe684a39c3, type: 2}
@@ -1327,10 +1315,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c8440fdac2302dc43bd1fc6d7f9f55d9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  title: {fileID: 0}
-  menuPanel: {fileID: 0}
-  startButton: {fileID: 2667109659114247841}
-  optionButton: {fileID: 7719739371901138001}
+  title: {fileID: 6438407036120878122}
+  menuPanel: {fileID: 7950705552858330603}
+  startButton: {fileID: 7719739371901138001}
+  optionButton: {fileID: 2667109659114247841}
   exitButton: {fileID: 6736308615731920468}
 --- !u!1 &7950705552858330603
 GameObject:
