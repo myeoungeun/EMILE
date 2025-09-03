@@ -107,7 +107,7 @@ public class BossEnemy : Enemy, Monster.IAttackable, Monster.IDamageable
 
             // Todo: 오브젝트 풀에서 미사일을 생성
             //Instantiate(missile, missilePos.position, Quaternion.identity).GetComponent<TestBullet>().Init(5f, EnemyData.AttackPower, dir);
-            BulletPoolManager.Instance.GetBulletById(EnemyData.EnemyBulletId[0], missilePos.position, target);
+            BulletPoolManager.Instance.GetBulletById(EnemyData.EnemyBulletId[1], missilePos.position, target);
         }
     }
 

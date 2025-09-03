@@ -44,4 +44,9 @@ public class BulletPoolManager : MonoSingleton<BulletPoolManager>
         bullet.transform.position = position;
         bullet.Init(target);
     }
+
+    public void ReturnBullet(BaseBullet bullet)
+    {
+        bulletDic[bullet.BulletData.Id].Return(bullet);
+    }
 }

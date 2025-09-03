@@ -9,11 +9,17 @@ public class BaseBullet : MonoBehaviour
     [SerializeField] private BulletData bulletData;
     public BulletData BulletData { get { return bulletData; } }
 
-    private Rigidbody2D rb;
+    protected Rigidbody2D rb;
 
-    Vector2 dir;
+    protected Vector2 dir;
 
-    private void Awake()
+    // 나중에 공통 총알이면 데이터 변경이 가능하도록
+    public void InitData(BulletData newData)
+    {
+        bulletData = newData;
+    }
+
+    protected void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
     }
@@ -45,13 +51,11 @@ public class BaseBullet : MonoBehaviour
 
         if (bulletData.AttackType == global::AttackType.Player && other.CompareTag("Monster")) //공격자가 정해져있어서 본인이 쏜 총에 안 맞음
         {
-            Debug.Log("플레이어->몬스터 공격");
             DealDamage(iDamageable);
         }
 
         if (bulletData.AttackType == global::AttackType.Enemy && other.CompareTag("Player"))
         {
-            Debug.Log("몬스터->플레이어 공격");
             DealDamage(iDamageable);
         }
 
@@ -71,11 +75,7 @@ public class BaseBullet : MonoBehaviour
         if (target != null)
         {
             target.TakeDamage(bulletData.Damage);
-            Debug.Log(bulletData.Damage);
         }
-        if (bulletData.BulletType != BulletType.Pierce) //관통탄일때는 파괴x, 통과함
-        {
-            Destroy(gameObject);
-        }
+        BulletPoolManager.Instance.ReturnBullet(this);
     }
 }

@@ -20,6 +20,6 @@ MonoBehaviour:
   damage: 25
   speed: 5
   pierceNum: 0
-  rotateSpeed: 0
+  rotateSpeed: 60
   explosionRange: 0
   explosionEffectId: 605
