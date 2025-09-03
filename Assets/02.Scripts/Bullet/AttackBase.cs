@@ -3,16 +3,16 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class Attack : MonoSingleton<Attack>, IAttackHandler
+public abstract class AttackBase : MonoBehaviour
 {
     [Header("총알 기본 정보")]
-    public int baseDamage = 5;
-    public float baseShotSpeed = 30f;
+    public int baseDamage = 10;
+    public float baseShotSpeed = 20f;
     public int baseShotInterval = 5;
     public int baseShotCount = -1; //무한
     
     [Header("총알 이미지")]
-    private Sprite currentSprite; //현재 이미지
+    protected Sprite currentSprite; //현재 이미지
     public Sprite normalBulletSprite;
     public Sprite pierceBulletSprite;
     public Sprite hollowBulletSprite;
@@ -20,48 +20,75 @@ public class Attack : MonoSingleton<Attack>, IAttackHandler
     public Sprite homingBulletSprite; //보스 미사일 이미지
 
     [Header("총알 변수들")]
-    [SerializeField] private int id; //기본값
-    private string name;
-    private int damage;
-    private float shotSpeed; //총알 속도
-    private int shotInterval; //발사 간격이었는데 딜레이로 수정함
-    private int shotCount; //사용 가능한 총알 개수
-    private bool isShooting = false;
-    private float lastShotTime = 0f;
+    [SerializeField] protected int id;
+    protected string name;
+    protected int damage;
+    protected float shotSpeed; //총알 속도
+    protected int shotInterval; //발사 간격이었는데 딜레이로 수정함
+    protected int shotCount; //사용 가능한 총알 개수
+    protected bool isShooting = false;
+    protected float lastShotTime = 0f;
     public float shotCooldown => shotInterval * 0.05f; // shotInterval을 초 단위로 변환
+    [SerializeField] protected AttackType currentAttackType; //공격자
+    [SerializeField] protected BulletType currentBulletType; //현재 장착한 탄창 종류
     
-    [Header("총알 발사 위치 등")]
-    public PlayerMovement playerMovement;
-    public GameObject bullet;
-    public Transform bulletStart; //총알이 발사되는 위치
-    [SerializeField] private AttackType currentAttackType; //공격자
-    [SerializeField] private BulletType currentBulletType; //현재 장착한 탄창 종류
+    protected Dictionary<int, int> bulletRemain = new Dictionary<int, int>();
     
-    private Dictionary<int, int> bulletRemain = new Dictionary<int, int>();
-    
-    public void OnAttack(InputAction.CallbackContext context)
+    public void SetBulletByID(int sID)
     {
-        if (context.phase == InputActionPhase.Started) //버튼 누르고 있는 동안에
+        if (shotCount > 0) bulletRemain[id] = shotCount; //탄환 저장. 무한 탄환은 저장x
+        id = sID; //새로운 탄창ID 설정
+        OnShot(sID);
+        if (shotCount != -1 && bulletRemain.ContainsKey(sID)) //남은 탄환이 있으면 그거 사용하고, 없으면 기본값 사용
         {
-            StartShooting(); //총알 발사
-        }
-        else if (context.phase == InputActionPhase.Canceled)
-        {
-            StopShooting();
+            shotCount = bulletRemain[sID];
         }
     }
-
-    public void Shoot()
+    
+    public void ResetBullets() //씬이나 스테이지 바꿀 때 호출하기
     {
-        GameObject bulletObj = Instantiate(bullet, bulletStart.position, bulletStart.rotation); //총알 생성
+        bulletRemain.Clear(); // 남은 탄환 기록 초기화
+        OnShot(id);           // 탄창 다시 세팅
+    }
+    
+    public void Shoot(GameObject bulletPrefab, Transform bulletStart, Vector3 direction)
+    {
+        if (shotCount == 0)
+        {
+            Debug.Log("총알이 없습니다!");
+            return;
+        }
         
-        SpriteRenderer sr = bulletObj.GetComponent<SpriteRenderer>(); //총알 외형 변경
-        if (sr != null && currentSprite != null)
+        GameObject bulletObj = Instantiate(bulletPrefab, bulletStart.position, bulletStart.rotation); //총알 생성
+        SpriteRenderer sr = bulletObj.GetComponent<SpriteRenderer>();
+        if (sr != null && currentSprite != null) //총알 외형 변경
         {
             sr.sprite = currentSprite;
         }
         
-        bulletObj.GetComponent<Bullet>().Initialize(id, damage, shotSpeed, shotInterval, shotCount, currentAttackType, currentBulletType, playerMovement.lookDirectionRight); //데미지, 총알 크기, 방향을 Bullet에게 전달
+        bulletObj.GetComponent<Bullet>().Initialize(id, damage, shotSpeed, shotInterval, shotCount, 
+            currentAttackType, currentBulletType, direction.x >= 0); //데미지, 총알 크기, 방향을 Bullet에게 전달
+        
+        if (shotCount > 0) shotCount--; //탄환 감수
+        Debug.Log($"남은 탄환 {shotCount}");
+        bulletRemain[id] = shotCount; //남은 탄환 기록
+        lastShotTime = Time.time;
+    }
+    
+    protected abstract Vector3 GetShootDirection();
+    protected abstract Transform GetBulletStart();
+    protected abstract GameObject GetBulletPrefab();
+    
+    protected IEnumerator ShootingRoutine()
+    {
+        while (isShooting)
+        {
+            if (Time.time - lastShotTime >= shotCooldown) //쿨타임 체크
+            {
+                Shoot(GetBulletPrefab(), GetBulletStart(), GetShootDirection());
+            }
+            yield return null;
+        }
     }
     
     public void StartShooting()
@@ -72,50 +99,12 @@ public class Attack : MonoSingleton<Attack>, IAttackHandler
             StartCoroutine(ShootingRoutine());
         }
     }
-
+    
     public void StopShooting()
     {
         isShooting = false;
     }
-
-    private IEnumerator ShootingRoutine()
-    {
-        while (isShooting)
-        {
-            if (Time.time - lastShotTime >= shotCooldown) //쿨타임 체크
-            {
-                if (shotCount != 0) //총알이 있을 때만
-                {
-                    Shoot();            // 총알 발사
-                    if (shotCount > 0) //탄환 감소
-                    {
-                        shotCount--;
-                    }
-                    bulletRemain[id] = shotCount; //남은 탄환 기록
-                    Debug.Log($"남은 탄환 : {shotCount}");
-                    
-                    lastShotTime = Time.time;
-                }
-                else Debug.Log("총알이 없습니다!");
-            }
-            yield return null; //매 프레임 체크
-        }
-    }
     
-    public void SetBulletByID(int sID)
-    {
-        bulletRemain[id] = shotCount; //남은 탄환 저장
-        id = sID; //새로운 탄창ID 설정
-        OnShot(sID);
-        shotCount = bulletRemain.ContainsKey(sID) ? bulletRemain[sID] : shotCount; //남은 탄환이 있으면 그거 사용하고, 없으면 기본값 사용
-    }
-    
-    public void ResetBullets() //씬이나 스테이지 바꿀 때 호출하기
-    {
-        bulletRemain.Clear(); // 남은 탄환 기록 초기화
-        OnShot(id);           // 현재 탄창 기본 속성 다시 세팅
-    }
-
     public void OnShot(int sid) //총알(탄창) 정보
     {
         switch(sid)
