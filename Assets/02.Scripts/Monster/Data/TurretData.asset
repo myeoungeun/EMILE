@@ -24,4 +24,4 @@ MonoBehaviour:
   moveSpeed: 0
   detectRange: 8
   attackRange: 8
-  enemyBulletId: f7010000
+  enemyBulletId: f8010000

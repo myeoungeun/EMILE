@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fcd7467f7dbbeb54a8fdf5b796fbb4ef, type: 3}
+  m_Name: EnemyBulletData
+  m_EditorClassIdentifier: 
+  id: 504
+  bulletName: "\uC801_\uBCF4\uD1B5\uD22C\uC0AC\uCCB4"
+  imageId: 504
+  attackType: 1
+  bulletType: 0
+  damage: 10
+  speed: 5
+  pierceNum: 0
+  rotateSpeed: 0
+  explosionRange: 0
+  explosionEffectId: 604

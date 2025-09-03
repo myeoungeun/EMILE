@@ -21,7 +21,7 @@ public class TestBullet : MonoBehaviour
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
-        col = rb.GetComponent<Collider2D>();
+        col = GetComponent<Collider2D>();
     }
 
     private void FixedUpdate()
@@ -33,7 +33,7 @@ public class TestBullet : MonoBehaviour
     {
         if((1 << collision.gameObject.layer) == LayerMask.GetMask("Player"))
         {
-            Debug.Log("플레이어 총알 맞음");
+            //Debug.Log("플레이어 총알 맞음");
             Destroy(gameObject);
         }
     }
