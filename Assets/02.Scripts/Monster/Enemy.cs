@@ -10,8 +10,8 @@ public abstract class Enemy : MonoBehaviour
     [SerializeField] private EnemyStateMachine stateMachine;
     public EnemyStateMachine StateMachine { get { return stateMachine; } }
 
-    protected int curHp;
-    private Vector3 originPos;
+    [SerializeField] protected int curHp;
+    protected Vector3 originPos;
 
     public Transform target;
 
@@ -20,12 +20,16 @@ public abstract class Enemy : MonoBehaviour
     [SerializeField] private Animator anim;
     public Animator Anim { get { return anim; } }
 
-    private void Awake()
+    protected virtual void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
         col = GetComponentInChildren<Collider2D>();
         anim = GetComponentInChildren<Animator>();
+
         stateMachine = new EnemyStateMachine(this);
+
+        curHp = EnemyData.MaxHp;
+        originPos = transform.position;
     }
 
     private void Start()
@@ -43,7 +47,7 @@ public abstract class Enemy : MonoBehaviour
         stateMachine.FixedUpdate();
     }
 
-    protected void Die()
+    protected virtual void Die()
     {
         // Todo: 오브젝트 풀로 리턴
         Destroy(gameObject);
@@ -59,7 +63,7 @@ public abstract class Enemy : MonoBehaviour
         this.target = null;
     }
 
-    public void LookTarget()
+    public virtual void LookTarget()
     {
         float d = target.position.x < transform.position.x ? Mathf.Abs(transform.localScale.x) : -Mathf.Abs(transform.localScale.x);
         transform.localScale = new Vector3(d, transform.localScale.y, transform.localScale.z);
@@ -76,6 +80,15 @@ public abstract class Enemy : MonoBehaviour
         float dist = Vector3.Distance(transform.position, target.position);
 
         return dist;
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if ((1 << collision.gameObject.layer) == LayerMask.GetMask("Player"))
+        {
+            // Todo: 플레이어에게 피해를 줌
+            Debug.Log("플레이어 충돌 피해");
+        }
     }
 
     private void OnDrawGizmos()

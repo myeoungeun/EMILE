@@ -33,7 +33,7 @@ public class TestBullet : MonoBehaviour
     {
         if((1 << collision.gameObject.layer) == LayerMask.GetMask("Player"))
         {
-            Debug.Log("플레이어 총알 맞음");
+            //Debug.Log("플레이어 총알 맞음");
             Destroy(gameObject);
         }
     }

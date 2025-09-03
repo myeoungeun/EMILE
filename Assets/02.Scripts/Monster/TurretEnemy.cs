@@ -11,6 +11,11 @@ public class TurretEnemy : Enemy, Monster.IAttackable, Monster.IDamageable
     public GameObject bullet;
     private Coroutine attackCoroutine;
 
+    protected override void Awake()
+    {
+        base.Awake();
+    }
+
     public void StartAttack()
     {
         if(attackCoroutine == null)
