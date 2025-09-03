@@ -29,8 +29,8 @@ public interface IState
                 return new Jump(stateMachine);
             case StateType.run:
                 return new Run(stateMachine);
-            case StateType.attack:
-                return new PlayerStates.Attack(stateMachine);
+            case StateType.shot:
+                return new PlayerStates.Shot(stateMachine);
             case StateType.die:
                 return new Die(stateMachine);
             case StateType.grab:
@@ -39,10 +39,12 @@ public interface IState
                 return new Fall(stateMachine);
             case StateType.dash:
                 return new Dash(stateMachine);
+            case StateType.jumpShot:
+                return new JumpShot(stateMachine);
             default:
                 break;
         }
         return null;
     }
 }
-public enum StateType { idle,jump,run,attack,die,grab,fall,dash}
+public enum StateType { idle,jump,run,shot,die,grab,fall,dash,jumpShot}

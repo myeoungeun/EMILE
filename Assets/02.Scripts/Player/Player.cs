@@ -43,6 +43,8 @@ public class Player : MonoBehaviour
         inputHandle = new PlayerInputHandle();
         inputHandle.input.PlayerInput.Jump.canceled += (a) => { if (jumpHandle.type == JumpTypes.linear && jumpHandle.state != JumpStates.doubleJump) {  currJumpTime = 0; } jumpHandle.ChangeJumpState(); };
         inputHandle.input.PlayerInput.Dash.started += OnDash;
+        inputHandle.input.PlayerInput.Attack.started += OnShot;
+        inputHandle.input.PlayerInput.Attack.canceled += ShotPause;
         stateMachine = new PlayerStatesMachine(StateType.idle, transform.GetComponentInChildren<Animator>());
         TryGetComponent<Rigidbody2D>(out rb);
         moveHandle = new LinearMove(rb);
@@ -56,6 +58,7 @@ public class Player : MonoBehaviour
     {
         if (stateMachine.GetCurrType == StateType.dash) return;
         dashTimer = Math.Clamp(dashTimer+Time.deltaTime, 0, dashCooltime);
+        Shot();
         SetPlatformTimer();
         OnMove();
         OnJump();
@@ -68,11 +71,14 @@ public class Player : MonoBehaviour
 
             if (isGround)
             {
-                stateMachine.Change(StateType.run);
-
+                if(stateMachine.GetCurrType != StateType.shot && stateMachine.GetCurrType != StateType.jumpShot)
+                {
+                    stateMachine.Change(StateType.run);
+                    transform.localScale = new Vector3(inputHandle.moveDir.x > 0 ? 1 : -1, 1, 1);
+                }
                 moveHandle.OnMove((dir) * stat.MoveSpeed);
 
-                transform.localScale = new Vector3(inputHandle.moveDir.x > 0 ? 1 : -1, 1, 1);
+
             }
             else
             {
@@ -80,16 +86,18 @@ public class Player : MonoBehaviour
 
                 if (Physics2D.Raycast(transform.position, dir, coll.bounds.extents.x + 0.1f, 1 << 7))
                 {
-
+                    Debug.Log(stateMachine.GetCurrType);
                     if (stateMachine.GetCurrType != StateType.grab)
                     {
-                        transform.localScale = new Vector3(inputHandle.moveDir.x > 0 ? 1 : -1, 1, 1);
+                        if (stateMachine.GetCurrType != StateType.shot && stateMachine.GetCurrType != StateType.jumpShot)transform.localScale = new Vector3(inputHandle.moveDir.x > 0 ? 1 : -1, 1, 1);
+                            
                         currJumpTime = 0f;
                         rb.velocity = Vector3.zero;
                         inputHandle.isPressingJump = false;
                         
                         jumpHandle = IJumpHandler.Factory(JumpTypes.wall, rb);
                         stateMachine.Change(StateType.grab);
+                        ShotPause(StateType.grab);
                     }
                     else
                     {
@@ -118,7 +126,7 @@ public class Player : MonoBehaviour
             {
                 currJumpTime += Time.deltaTime;
                 jumpHandle.OnJump(inputHandle.moveDir, stat.JumpForce);
-                stateMachine.Change(StateType.jump);
+                if (stateMachine.GetCurrType != StateType.shot && stateMachine.GetCurrType != StateType.jumpShot) stateMachine.Change(StateType.jump);
                 if (jumpHandle.type == JumpTypes.wall)
                 {
                     jumpHandle = IJumpHandler.Factory(JumpTypes.linear, rb);
@@ -186,7 +194,7 @@ public class Player : MonoBehaviour
 
             if(rb.velocity == Vector2.zero)
             {
-                stateMachine.Change(StateType.idle);
+                if (stateMachine.GetCurrType != StateType.shot && stateMachine.GetCurrType != StateType.jumpShot) stateMachine.Change(StateType.idle);
             }
 
 
@@ -195,17 +203,18 @@ public class Player : MonoBehaviour
         {
             if (rb.velocity.y < 0)
             {
-                stateMachine.Change(StateType.fall);
+                if (stateMachine.GetCurrType != StateType.shot && stateMachine.GetCurrType != StateType.jumpShot) stateMachine.Change(StateType.fall);
             }
         }
     }
+    #region 대쉬
 
     private void OnDash(InputAction.CallbackContext ctx)
     {
         if (ctx.started)
         {
             if (stateMachine.GetCurrType == StateType.dash || inputHandle.moveDir == Vector2.zero || airDashed || dashTimer < dashCooltime) return;
-            if(dashCoroutine != null)StopCoroutine(dashCoroutine);
+            if (dashCoroutine != null) StopCoroutine(dashCoroutine);
             dashCoroutine = StartCoroutine(DashCoroutine());
         }
     }
@@ -242,7 +251,7 @@ public class Player : MonoBehaviour
         {
             currDashTime += Time.deltaTime;
             yield return null;
-            rb.velocity = dir * (stat.MoveSpeed*2.5f);
+            rb.velocity = dir * (stat.MoveSpeed * 2.5f);
             if (inputHandle.isPressingJump)
             {
                 DashCancel(StateType.jump);
@@ -250,6 +259,106 @@ public class Player : MonoBehaviour
         }
         DashCancel(StateType.idle);
     }
+    #endregion
+    #region 공격관련 명은님 여기에다가 객체 바꿔서 넣어주시면되요
+    
+    public void OnShot(InputAction.CallbackContext ctx)
+    {
+        bulletDir = ConvertDirrection(inputHandle.moveDir);
+        if (isGround)
+        {
+            if (bulletDir == BulletDirrections.S|| bulletDir == BulletDirrections.SE) bulletDir = BulletDirrections.E;
+            else if (bulletDir == BulletDirrections.SW) bulletDir = BulletDirrections.W;
+            stateMachine.Change(StateType.shot, bulletDir);//애니메이션 전이
+        }
+        else stateMachine.Change(StateType.jumpShot, bulletDir);//애니메이션 전이
+
+        fireDir = BulletDirToVector(bulletDir);
+
+        transform.localScale = Vector3.one;
+
+        isShotting = true;
+    }
+    public void ShotPause(InputAction.CallbackContext ctx)
+    {
+        stateMachine.Change(StateType.idle);
+        isShotting = false;
+    }
+    public void ShotPause(StateType state)
+    {
+        stateMachine.Change(state);
+        isShotting = false;
+    }
+    
+
+    private BulletDirrections ConvertDirrection(Vector2 vec)
+    {
+        if (vec.x == 0 && vec.y == 0) return BulletDirrections.E;//방향설정 없을 시 정면쏘도록
+
+        if (vec.x == 0 && vec.y > 0) return BulletDirrections.N;
+        else if (vec.x == 0 && vec.y < 0) return BulletDirrections.S;
+        else if (vec.x > 0 && vec.y == 0) return BulletDirrections.E;
+        else if (vec.x < 0 && vec.y == 0) return BulletDirrections.W;
+        else if (vec.x > 0 && vec.y > 0) return BulletDirrections.NE;
+        else if (vec.x < 0 && vec.y > 0) return BulletDirrections.NW;
+        else if (vec.x > 0 && vec.y < 0) return BulletDirrections.SE;
+        else return BulletDirrections.SW;
+    }
+    
+    private Vector2 BulletDirToVector(BulletDirrections dir)
+    {
+        switch (dir)
+        {
+            case BulletDirrections.N:
+                return Vector2.up;
+            case BulletDirrections.NE:
+                return Vector2.one.normalized;
+            case BulletDirrections.E:
+                return Vector2.right;
+            case BulletDirrections.SE:
+                return new Vector2(1, -1).normalized;
+            case BulletDirrections.S:
+                return Vector2.down;
+            case BulletDirrections.SW:
+                return new Vector2(-1, -1).normalized;
+            case BulletDirrections.W:
+                return Vector2.left;
+            case BulletDirrections.NW:
+                return new Vector2(-1, 1).normalized;
+        }
+        return Vector2.right;
+    }
+    public GameObject tempBullet;
+    private bool isShotting = false;
+    float attackDelay = 1f; // 임시 공속값 무기객체 받으면 해당 변수로 대입
+    float currAttakTime;//발사로부터의 시간,무기객체에서 받아야함
+    Vector3 fireDir;//발사방향
+    BulletDirrections bulletDir;
+    private void Shot()
+    {
+        if (isShotting == false) return;
+
+        currAttakTime += Time.deltaTime;
+        if (currAttakTime >= attackDelay)
+        {
+            currAttakTime = 0f;
+            //여기서 총알 생성
+            GameObject temp = GameObject.Instantiate(tempBullet);
+            temp.transform.position = transform.position + fireDir;
+            if (isGround) stateMachine.Change(StateType.shot, bulletDir);
+            else 
+            { 
+                stateMachine.Change(StateType.jumpShot, bulletDir);
+            }
+        }
+    }
+
+
+    #endregion
+}
+public enum BulletDirrections
+{
+    N,NE,E,SE,S,SW,W,NW
 }
 public class PlayerInputHandle
 {
