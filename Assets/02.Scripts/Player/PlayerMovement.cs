@@ -7,6 +7,7 @@ public class PlayerMovement : MonoBehaviour
     private Rigidbody2D rb;
     private Animator animator;
     private Vector2 inputValue;
+    public bool lookDirectionRight = true; //Attack.cs에서 바라보는 방향 판별용. 기본은 오른쪽 방향이라 true
 
     [Header("Move Settings")]
     [SerializeField] private float moveSpeed = 10.0f;
@@ -189,6 +190,7 @@ public class PlayerMovement : MonoBehaviour
         {
             if (inputValue != Vector2.zero)
             {
+                lookDirectionRight = inputValue.x > 0 ? true : false; //플레이어가 바라보는 방향
                 transform.localScale = new Vector3(Mathf.Sign(inputValue.x), 1, 1);
                 animator.SetBool("isMoving", true);
             }
