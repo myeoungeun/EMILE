@@ -11,14 +11,19 @@ public class BossHUD : MonoBehaviour
     [SerializeField] private TextMeshProUGUI bossName; // 보스몬스터 이름
     [SerializeField] private Image bossHpBar; //보스몬스터 체력바
 
-    void Start()
+    public void InitBossData(EnemyData bossData, BossEnemy bossEnemy) // 보스 정보 할당
     {
-        
+        bossName.text = bossData.Name;
+        bossPortrait.sprite = null; // TODO: SO에 스프라이트 정보 추가 요청
+        //bossPortrait.sprite = bossData.Sprite;
+        bossHpBar.fillAmount = 1f; // 시작때는 체력 100%
+
+        bossEnemy.OnHpChanged += UpdateBossHp; // 이벤트 구독
     }
 
-    // Update is called once per frame
-    void Update()
+    public void UpdateBossHp(float bossHp, float bossMaxHp)
     {
-        
+        bossHpBar.fillAmount = Mathf.Clamp01(bossHp / bossMaxHp);
     }
+
 }
