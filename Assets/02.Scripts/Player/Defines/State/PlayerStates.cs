@@ -56,19 +56,57 @@ namespace PlayerStates
              
         }
     }
-    public class Attack : IState
+    public class Shot : IState
     {
-        public StateType GetStateType => StateType.attack;
+        public StateType GetStateType => StateType.shot;
 
         public IStateMachine<IState> stateMachine { get; set; }
 
-        public Attack(IStateMachine<IState> state)
+        public BulletDirrections dir;
+
+        public Shot(IStateMachine<IState> state)
         {
             this.stateMachine = state;
         }
+        public void Enter(BulletDirrections dirr)
+        {
+            stateMachine.Anim.Play("Shot"+dirr.ToString());
+        }
         public void Enter()
         {
-            stateMachine.Anim.Play("Attack");
+            stateMachine.Anim.Play("Shot");
+        }
+
+        public void Execute()
+        {
+             
+        }
+
+        public void Exit()
+        {
+             
+        }
+    }
+    public class JumpShot : IState
+    {
+        public StateType GetStateType => StateType.jumpShot;
+
+        public IStateMachine<IState> stateMachine { get; set; }
+
+        public BulletDirrections dir;
+
+        public JumpShot(IStateMachine<IState> state)
+        {
+            this.stateMachine = state;
+        }
+        public void Enter(BulletDirrections dirr)
+        {
+            Debug.Log("JumpShot" + dirr.ToString());
+            stateMachine.Anim.Play("JumpShot" + dirr.ToString());
+        }
+        public void Enter()
+        {
+            stateMachine.Anim.Play("Shot");
         }
 
         public void Execute()
