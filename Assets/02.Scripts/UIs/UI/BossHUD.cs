@@ -18,10 +18,9 @@ public class BossHUD : MonoBehaviour
         //bossPortrait.sprite = bossData.Sprite;
         bossHpBar.fillAmount = 1f; // 시작때는 체력 100%
 
-        bossEnemy.OnHpChanged += UpdateBossHp; // 이벤트 구독
     }
 
-    public void UpdateBossHp(float bossHp, float bossMaxHp)
+    public void UpdateBossHp(int bossHp, int bossMaxHp)
     {
         bossHpBar.fillAmount = Mathf.Clamp01(bossHp / bossMaxHp);
     }
