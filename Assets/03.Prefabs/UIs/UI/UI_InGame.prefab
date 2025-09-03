@@ -87,7 +87,7 @@ GameObject:
   - component: {fileID: 6963898360879963612}
   - component: {fileID: 3214103359444461820}
   m_Layer: 5
-  m_Name: UI_HpBar
+  m_Name: UI_HpFrame
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -110,8 +110,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 31, y: -30}
-  m_SizeDelta: {x: 1400, y: 70}
+  m_AnchoredPosition: {x: 31, y: -36}
+  m_SizeDelta: {x: 1400, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6963898360879963612
 CanvasRenderer:
@@ -163,7 +163,7 @@ GameObject:
   - component: {fileID: 1277737127534650756}
   - component: {fileID: 3758084567598748450}
   m_Layer: 5
-  m_Name: UI_PlayerStatus
+  m_Name: UI_bossName
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -185,7 +185,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -572, y: 32}
+  m_AnchoredPosition: {x: -572, y: 0}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1277737127534650756
@@ -243,8 +243,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 50
-  m_fontSizeBase: 50
+  m_fontSize: 35
+  m_fontSizeBase: 35
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -682,8 +682,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: 0, y: 30}
-  m_SizeDelta: {x: 100, y: 100}
+  m_AnchoredPosition: {x: 0, y: 69}
+  m_SizeDelta: {x: 100, y: 0}
   m_Pivot: {x: 0.5, y: 0}
 --- !u!1 &3101980086458692949
 GameObject:
@@ -1011,6 +1011,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: de93297cdc65d4747b8eff79b25d3b77, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  portrait: {fileID: 0}
+  playerStatus: {fileID: 0}
+  hpBar: {fileID: 0}
+  bossPortrait: {fileID: 0}
+  bossName: {fileID: 0}
+  bossHpBar: {fileID: 0}
 --- !u!1 &3682545369485955086
 GameObject:
   m_ObjectHideFlags: 0
@@ -1104,7 +1110,7 @@ GameObject:
   - component: {fileID: 9121250716053046507}
   - component: {fileID: 8862325621005572465}
   m_Layer: 5
-  m_Name: FIled
+  m_Name: UI_HpBar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1127,7 +1133,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 1380, y: 50}
+  m_SizeDelta: {x: 1380, y: 40}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &9121250716053046507
 CanvasRenderer:
@@ -1564,8 +1570,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -744, y: 0}
-  m_SizeDelta: {x: 120, y: 120}
+  m_AnchoredPosition: {x: -720, y: -21}
+  m_SizeDelta: {x: 80, y: 80}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7973428156468802155
 CanvasRenderer:
@@ -1617,7 +1623,7 @@ GameObject:
   - component: {fileID: 3126791319434267938}
   - component: {fileID: 3349420582933168124}
   m_Layer: 5
-  m_Name: FIled
+  m_Name: UI_HpBar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1977,7 +1983,7 @@ GameObject:
   - component: {fileID: 3992305243804709607}
   - component: {fileID: 948682700778929459}
   m_Layer: 5
-  m_Name: UI_HpBar
+  m_Name: UI_HpFrane
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
