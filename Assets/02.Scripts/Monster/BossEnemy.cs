@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class BossEnemy : Enemy, Monster.IAttackable, Monster.IDamageable
 {
-    private event System.Action onHpChanged;
+    public event System.Action onHpChanged;
 
     [Header("Booster Effect")]
     [SerializeField] GameObject boost1;
@@ -90,7 +90,6 @@ public class BossEnemy : Enemy, Monster.IAttackable, Monster.IDamageable
             Vector2 dir = (target.position - transform.position).normalized;
 
             // Todo: 오브젝트 풀에서 총알을 생성
-            //Instantiate(bullet, bulletPos.position, Quaternion.identity).GetComponent<TestBullet>().Init(5f, EnemyData.AttackPower, dir);
             BulletPoolManager.Instance.GetBulletById(EnemyData.EnemyBulletId[0], bulletPos.position, target);
         }
     }
@@ -104,7 +103,6 @@ public class BossEnemy : Enemy, Monster.IAttackable, Monster.IDamageable
             Vector2 dir = (target.position - transform.position).normalized;
 
             // Todo: 오브젝트 풀에서 미사일을 생성
-            //Instantiate(missile, missilePos.position, Quaternion.identity).GetComponent<TestBullet>().Init(5f, EnemyData.AttackPower, dir);
             BulletPoolManager.Instance.GetBulletById(EnemyData.EnemyBulletId[1], missilePos.position, target);
         }
     }
@@ -113,7 +111,7 @@ public class BossEnemy : Enemy, Monster.IAttackable, Monster.IDamageable
     {
         PauseAttack();
         float curChaseTime = 0f;
-        float chaseTime = 5f;
+        float chaseTime = 2f;
 
         isAttacking = true;
         warningSign.gameObject.SetActive(true);
