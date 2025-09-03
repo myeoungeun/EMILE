@@ -1,6 +1,61 @@
-목차
-1. 프로젝트 소개
-2. 사용된 기술 소개
-3. 기술적 고민
-4. 트러블 슈팅과 해결 과정
-5. 팀원 소개
+# READ ME.md 작업
+
+![banner.png](banner.png)
+
+# **목차**
+
+---
+
+### 🎮 [프로젝트 소개](https://www.notion.so/READ-ME-md-263d0881b9c480ab84e1d07994ac9da8?pvs=21)
+
+---
+
+### 🖥️ [사용된 기술 소개](https://www.notion.so/READ-ME-md-263d0881b9c480ab84e1d07994ac9da8?pvs=21)
+
+---
+
+### 😟 [트러블 슈팅과 해결 과정 소개](https://www.notion.so/READ-ME-md-263d0881b9c480ab84e1d07994ac9da8?pvs=21)
+
+---
+
+### 🤝 [팀원 소개](https://www.notion.so/READ-ME-md-263d0881b9c480ab84e1d07994ac9da8?pvs=21)
+
+---
+
+# 프로젝트 소개
+
+## **✍️** [Figma 링크](https://www.figma.com/board/dKdvdpFbEZ4sBSMkXWzEzS/%EC%A0%9C%EB%AA%A9-%EC%97%86%EC%9D%8C?node-id=0-1&p=f&t=fnVup5KXCERHfWW3-0)
+
+## **👨‍👩‍👧‍👦** [Team Notion 링크](https://www.notion.so/25a2dc3ef514819ab176e7b6345b8b87?pvs=21)
+
+![image (19).png](image_(19).png)
+
+| **게임명** | E.M.I.L.E. |
+| --- | --- |
+| 장르 | 디스토피아적 사이버펑크 세계관을 배경으로 한 2D 플랫폼 액션 게임 |
+| 동작 환경 및 운영체제 | PC, Window |
+| 개발 환경 | Unity 2022.3.17f1 |
+| 사용언어 및 IDE | C#, Visual Studio 2022 |
+| 개발 기간 | 2025.09.01 ~ 2025.09.05 |
+|  |  |
+
+# 사용된 기술 소개
+
+📜 **[목차로 돌아가기](https://www.notion.so/READ-ME-md-263d0881b9c480ab84e1d07994ac9da8?pvs=21)**
+
+# 트러블 슈팅과 해결 과정 소개
+
+📜 **[목차로 돌아가기](https://www.notion.so/READ-ME-md-263d0881b9c480ab84e1d07994ac9da8?pvs=21)**
+
+# 팀원 소개
+
+| 직책 | 이름 | 담당 업무 | 개인 블로그 | 개인 깃허브 |
+| --- | --- | --- | --- | --- |
+| 개발 팀장 | 이명은 |  |  |  |
+| 개발 팀원 | 허윤 |  |  |  |
+| 개발 팀원 | 김남진 |  |  |  |
+| 개발 팀원 | 오승엽 |  |  |  |
+| 기획 팀원 | 박용규 |  |  |  |
+| 기획 팀원 | 박진우 |  |  |  |
+
+📜 **[목차로 돌아가기](https://www.notion.so/READ-ME-md-263d0881b9c480ab84e1d07994ac9da8?pvs=21)**
