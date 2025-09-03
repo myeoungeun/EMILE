@@ -9,19 +9,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ee38684669942d044808fb7350071f5a, type: 3}
-  m_Name: TurretData
+  m_Script: {fileID: 11500000, guid: fcd7467f7dbbeb54a8fdf5b796fbb4ef, type: 3}
+  m_Name: EnemyBulletData
   m_EditorClassIdentifier: 
-  id: 301
-  enemyName: "\uD130\uB81B"
-  monsterImageId: 301
-  maxHp: 10
-  attackPower: 10
-  defence: 0
-  attackSpeed: 2
+  id: 504
+  bulletName: "\uC801_\uBCF4\uD1B5\uD22C\uC0AC\uCCB4"
+  imageId: 504
   attackType: 1
-  dropItemKey: 0
-  moveSpeed: 0
-  detectRange: 8
-  attackRange: 8
-  enemyBulletId: f8010000
+  bulletType: 0
+  damage: 10
+  speed: 5
+  pierceNum: 0
+  rotateSpeed: 0
+  explosionRange: 0
+  explosionEffectId: 604
