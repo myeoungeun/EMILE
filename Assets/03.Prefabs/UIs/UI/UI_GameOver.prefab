@@ -117,6 +117,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5206089ea71f2e242b189e8ff5dfb01e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  exitButton: {fileID: 3863905207150896930}
 --- !u!1 &2535725844455169630
 GameObject:
   m_ObjectHideFlags: 0
@@ -130,7 +131,7 @@ GameObject:
   - component: {fileID: 7815656320752507205}
   - component: {fileID: 3863905207150896930}
   m_Layer: 5
-  m_Name: Button
+  m_Name: ExitButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -250,7 +251,7 @@ GameObject:
   - component: {fileID: 1766568884921428876}
   - component: {fileID: 219350502508430183}
   m_Layer: 5
-  m_Name: GoToTitleText
+  m_Name: ExitButtonText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
