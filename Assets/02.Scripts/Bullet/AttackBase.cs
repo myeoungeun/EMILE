@@ -58,6 +58,8 @@ public abstract class AttackBase : MonoBehaviour
             return; //ÃÑ¾Ëx
         }
         
+        Debug.Log($"Shoot È£Ãâ Àü -> damage: {damage}");
+        
         GameObject bulletObj = Instantiate(bulletPrefab, bulletStart.position, bulletStart.rotation); //ÃÑ¾Ë »ý¼º
         SpriteRenderer sr = bulletObj.GetComponent<SpriteRenderer>();
         if (sr != null && currentSprite != null) //ÃÑ¾Ë ¿ÜÇü º¯°æ
