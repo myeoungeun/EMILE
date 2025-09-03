@@ -5,6 +5,7 @@ using UnityEngine.InputSystem;
 
 public class BulletChange : MonoBehaviour
 {
+    [SerializeField] private AttackBase playerAttack;
     [SerializeField] private int[] bulletIDs = { 501, 502, 503 }; //¼ø¼­´ë·Î ¹Ù²ð ÅºÃ¢ ID
     private int currentBulletIndex = 0;
     
@@ -17,7 +18,7 @@ public class BulletChange : MonoBehaviour
             {
                 currentBulletIndex = 0;
             }
-            Attack.Instance.SetBulletByID(bulletIDs[currentBulletIndex]); //½ÇÁ¦ ÅºÃ¢ ±³Ã¼
+            playerAttack.SetBulletByID(bulletIDs[currentBulletIndex]); //½ÇÁ¦ ÅºÃ¢ ±³Ã¼
         }
     }
 }
