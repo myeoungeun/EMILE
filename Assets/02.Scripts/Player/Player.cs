@@ -192,19 +192,34 @@ public class Player : MonoBehaviour
                 currJumpTime = 0f;
             }
 
-            if(rb.velocity == Vector2.zero)
+            if (stateMachine.GetCurrType != StateType.shot && stateMachine.GetCurrType != StateType.jumpShot)
             {
-                if (stateMachine.GetCurrType != StateType.shot && stateMachine.GetCurrType != StateType.jumpShot) stateMachine.Change(StateType.idle);
+                if (rb.velocity == Vector2.zero)
+                {
+                    stateMachine.Change(StateType.idle);
+                }
             }
-
+            else
+            {
+                stateMachine.Change(StateType.shot, bulletDir);
+                if (bulletDir == BulletDirrections.SE || bulletDir == BulletDirrections.SW || bulletDir == BulletDirrections.S) 
+                {
+                    ShotPause(StateType.idle);                    
+                }
+            }
 
         }
         else
         {
-            if (rb.velocity.y < 0)
+            if (stateMachine.GetCurrType != StateType.shot && stateMachine.GetCurrType != StateType.jumpShot)
             {
-                if (stateMachine.GetCurrType != StateType.shot && stateMachine.GetCurrType != StateType.jumpShot) stateMachine.Change(StateType.fall);
+                if (rb.velocity.y < 0)
+                {
+                    if (stateMachine.GetCurrType != StateType.shot && stateMachine.GetCurrType != StateType.jumpShot) stateMachine.Change(StateType.fall);
+                }
             }
+            else stateMachine.Change(StateType.jumpShot, bulletDir);
+
         }
     }
     #region 대쉬
@@ -274,8 +289,8 @@ public class Player : MonoBehaviour
         else stateMachine.Change(StateType.jumpShot, bulletDir);//애니메이션 전이
 
         fireDir = BulletDirToVector(bulletDir);
-
-        transform.localScale = Vector3.one;
+        if(bulletDir == BulletDirrections.SW || bulletDir == BulletDirrections.W || bulletDir == BulletDirrections.NW) transform.localScale = new Vector3(-1,1,1);
+        else transform.localScale = Vector3.one;
 
         isShotting = true;
     }
@@ -330,26 +345,22 @@ public class Player : MonoBehaviour
     }
     public GameObject tempBullet;
     private bool isShotting = false;
-    float attackDelay = 1f; // 임시 공속값 무기객체 받으면 해당 변수로 대입
+    float attackDelay = 0.2f; // 임시 공속값 무기객체 받으면 해당 변수로 대입
     float currAttakTime;//발사로부터의 시간,무기객체에서 받아야함
     Vector3 fireDir;//발사방향
     BulletDirrections bulletDir;
     private void Shot()
     {
+        currAttakTime += Time.deltaTime;
         if (isShotting == false) return;
 
-        currAttakTime += Time.deltaTime;
         if (currAttakTime >= attackDelay)
         {
             currAttakTime = 0f;
             //여기서 총알 생성
             GameObject temp = GameObject.Instantiate(tempBullet);
             temp.transform.position = transform.position + fireDir;
-            if (isGround) stateMachine.Change(StateType.shot, bulletDir);
-            else 
-            { 
-                stateMachine.Change(StateType.jumpShot, bulletDir);
-            }
+
         }
     }
 
