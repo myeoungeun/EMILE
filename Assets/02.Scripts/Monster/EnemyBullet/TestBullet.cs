@@ -21,7 +21,7 @@ public class TestBullet : MonoBehaviour
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
-        col = rb.GetComponent<Collider2D>();
+        col = GetComponent<Collider2D>();
     }
 
     private void FixedUpdate()

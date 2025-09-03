@@ -6,6 +6,7 @@ using UnityEngine.InputSystem;
 public class EnemyTest : MonoBehaviour
 {
     [SerializeField] Enemy m_Enemy;
+    public int spawnEnemyId;
     private InputAction spaceAction;
 
     private void OnEnable()
@@ -26,6 +27,7 @@ public class EnemyTest : MonoBehaviour
 
     private void OnSpacePressed(InputAction.CallbackContext ctx)
     {
-        (m_Enemy as Monster.IDamageable).TakeDamage(10);
+        EnemyPlaceManager.Instance.GetEnemyById(spawnEnemyId, new Vector3(0,0,0));
+        //(m_Enemy as Monster.IDamageable).TakeDamage(10);
     }
 }

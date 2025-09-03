@@ -9,11 +9,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1631349286232222164}
-  - component: {fileID: 1572751972135593299}
+  - component: {fileID: -4402099915258037064}
   - component: {fileID: 8177149827323129411}
   - component: {fileID: 408492073942776315}
   m_Layer: 0
-  m_Name: EnemyBullet
+  m_Name: EnemyNormalBullet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -35,7 +35,7 @@ Transform:
   - {fileID: 1583384622417463433}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1572751972135593299
+--- !u!114 &-4402099915258037064
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -44,9 +44,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 835716248325961153}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a855af157fc03ec43aa381ff9a5e12d0, type: 3}
+  m_Script: {fileID: 11500000, guid: f8f7615fb16643f489f35175c12002c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  bulletData: {fileID: 11400000, guid: 8da0d15265771f44d9729803e540ec51, type: 2}
 --- !u!50 &8177149827323129411
 Rigidbody2D:
   serializedVersion: 4
