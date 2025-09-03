@@ -55,9 +55,10 @@ public abstract class AttackBase : MonoBehaviour
     {
         if (shotCount == 0)
         {
-            Debug.Log("ÃÑ¾ËÀÌ ¾ø½À´Ï´Ù!");
-            return;
+            return; //ÃÑ¾Ëx
         }
+        
+        Debug.Log($"Shoot È£Ãâ Àü -> damage: {damage}");
         
         GameObject bulletObj = Instantiate(bulletPrefab, bulletStart.position, bulletStart.rotation); //ÃÑ¾Ë »ý¼º
         SpriteRenderer sr = bulletObj.GetComponent<SpriteRenderer>();

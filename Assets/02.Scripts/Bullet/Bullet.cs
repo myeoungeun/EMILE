@@ -5,9 +5,9 @@ using Monster;
 using UnityEngine;
 
 public class Bullet : MonoBehaviour
-{
-   private AttackType attacker;
-   private BulletType bulletType;
+{ 
+    protected AttackType attacker;
+   protected BulletType bulletType;
    protected int Id;
    protected int Damage;
    protected float Speed;
@@ -26,6 +26,9 @@ public class Bullet : MonoBehaviour
       Count = sCount; //총알 개수
       MoveDirection = lookDirectionRight ? Vector3.right : Vector3.left; //오른쪽 보면 오른쪽 발사, 왼쪽 보고있으면 왼쪽 발사
       
+      Debug.Log($"[Initialize] ID={Id}, Damage={Damage}, Type={bulletType}, Obj={gameObject.GetInstanceID()}");
+
+      
       SpriteRenderer sr = GetComponent<SpriteRenderer>();
       if (sr != null)
       {
@@ -33,9 +36,9 @@ public class Bullet : MonoBehaviour
       }
    }
    
-   void Update()
+   protected virtual void Update()
    {
-      transform.Translate(MoveDirection * Speed * Time.deltaTime, Space.World);
+       transform.Translate(MoveDirection * Speed * Time.deltaTime, Space.World);
    }
    
    private void OnTriggerEnter2D(Collider2D other)
@@ -70,12 +73,12 @@ public class Bullet : MonoBehaviour
       }
    }
    
-   private void DealDamage(IDamageable target)
+   protected void DealDamage(IDamageable target)
    {
        if (target != null)
        {
            target.TakeDamage(Damage);
-           Debug.Log(Damage);
+           Debug.Log($"[DealDamage] ID={Id}, Damage={Damage}, Type={bulletType}, Obj={gameObject.GetInstanceID()}");
        }
        if (bulletType != BulletType.Pierce) //관통탄일때는 파괴x, 통과함
        {
