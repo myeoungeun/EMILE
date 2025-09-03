@@ -25,7 +25,7 @@ public class EnemyPlaceManager : MonoSingleton<EnemyPlaceManager>
                 if (handle.Status == AsyncOperationStatus.Succeeded)
                 {
                     enemyObj = handle.Result;
-                    ObjectPool<Enemy> pool = new ObjectPool<Enemy>(enemyObj.GetComponent<Enemy>(), 10, transform);
+                    ObjectPool<Enemy> pool = new ObjectPool<Enemy>(enemyObj.GetComponent<Enemy>(), 5, transform);
 
                     enemyDic[enemy.Id] = pool;
 

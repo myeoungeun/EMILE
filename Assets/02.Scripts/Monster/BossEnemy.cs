@@ -13,8 +13,6 @@ public class BossEnemy : Enemy, Monster.IAttackable, Monster.IDamageable
     [Header("Projectiles")]
     [SerializeField] Transform bulletPos;
     [SerializeField] Transform missilePos;
-    [SerializeField] Transform bullet;
-    [SerializeField] Transform missile;
 
     private Coroutine pattern1;
     private Coroutine pattern2;
