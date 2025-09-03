@@ -40,6 +40,6 @@ public class EnemyAttack : AttackBase
     private bool CanShoot()
     {
         //ex : 플레이어가 일정 거리 안에 있으면 발사
-        return Vector3.Distance(bulletStartTransform.position, target.position) < 30f;
+        return Vector3.Distance(bulletStartTransform.position, target.position) < 10f;
     }
 }
