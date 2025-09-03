@@ -121,7 +121,7 @@ public class BossEnemy : Enemy, Monster.IAttackable, Monster.IDamageable
         while(curChaseTime < chaseTime)
         {
             // 여기서 캐릭터 추적
-            float y = Mathf.Lerp(target.position.y, transform.position.y, curChaseTime / chaseTime);
+            float y = Mathf.Lerp(target.position.y, transform.position.y, chaseSpeed);
             transform.position = new Vector3(transform.position.x, y, transform.position.z);
             // 경고 표시도 변경
             warningSign.color = Color.Lerp(originColor, warningColor, curChaseTime / chaseTime);
