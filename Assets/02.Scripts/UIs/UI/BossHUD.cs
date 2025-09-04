@@ -11,18 +11,20 @@ public class BossHUD : UIBase
     [SerializeField] private TextMeshProUGUI bossName; // 보스몬스터 이름
     [SerializeField] private Image bossHpBar; //보스몬스터 체력바
 
-    [SerializeField] private BossEnemy boss; // Inspector에서 드래그로 할당
+    private BossEnemy bossEnemy;
 
     public override void Initialize()
     {
-        InitBossData(boss); // Scene에 있는 동일 객체
+        bossPortrait.sprite = null;
+        bossName.text = "???";
+        bossHpBar.fillAmount = 1f;
     }
 
-    public void InitBossData(BossEnemy boss) // 보스 정보 할당
+    public void SetBossData(BossEnemy boss) // 보스 정보 연결 
     {
-        this.boss = boss;
+        bossEnemy = boss;
         bossName.text = boss.EnemyData.Name;
-        bossPortrait.sprite = null; 
+        //bossPortrait.sprite = null; // 보스 이미지 추가안되어있음
         bossHpBar.fillAmount = 1f; // 시작때는 체력 100%
 
         boss.onHpChanged -= UpdateBossHp;
@@ -31,6 +33,6 @@ public class BossHUD : UIBase
 
     public void UpdateBossHp()
     {
-        bossHpBar.fillAmount = (float)boss.CurHp / boss.EnemyData.MaxHp;
+        bossHpBar.fillAmount = (float)bossEnemy.CurHp / bossEnemy.EnemyData.MaxHp;
     }
 }

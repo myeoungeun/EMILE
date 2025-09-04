@@ -9,7 +9,7 @@ public class BulletSlotUI : MonoBehaviour
     [SerializeField] private Image bulletIcon; // 탄약 이미지
     [SerializeField] private TextMeshProUGUI bulletCount; // 탄약 개수
     [SerializeField] private GameObject highlightBorder; // 선택 탄약 강조
-    [SerializeField] private Image cooldown; // 탄약 쿨다운(재장전)
+    //[SerializeField] private Image cooldown; // 탄약 쿨다운(재장전), 시간되면 구현 안되면 패스
 
     private int curBulletCount; // 현재 탄약 개수
     // 슬롯 초기화
@@ -19,11 +19,6 @@ public class BulletSlotUI : MonoBehaviour
         bulletCount.text = "0";
 
         SetSelected(false); // 기본 선택 해제
-    }
-
-    public void SetBulletData(int startBullet)
-    {
-        SetBulletCount(startBullet); // 최초 시작 탄약 개수
     }
 
     // 선택 탄약 강조 표시
@@ -42,7 +37,7 @@ public class BulletSlotUI : MonoBehaviour
     // 탄약 소모시 1씩 감소 - UI갱신
     public void UseBullet()
     {
-        if (curBulletCount < 0) return;
+        if (curBulletCount <= 0) return;
         curBulletCount--;
         SetBulletCount(curBulletCount);
     }

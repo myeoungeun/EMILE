@@ -78,6 +78,7 @@ public class UIManager : MonoSingleton<UIManager>
     #endregion
 
     #region UI 제어
+
     public void ShowUI(UIType type)
     {
         foreach (var ui in uiDictionary.Values)
@@ -86,24 +87,13 @@ public class UIManager : MonoSingleton<UIManager>
         }
         uiDictionary[type].Open(); // 요청한 일반UI 열기
     }
+
     #endregion 
 
     #region Popup 제어
+
     public void ShowPopup(PopupType type) => popupDictionary[type].Open(); // 요청한 팝업UI 열기
     public void ClosePopup(PopupType type) => popupDictionary[type].Close(); // 요청한 팝업UI 닫기
-    #endregion
 
-    #region HUD 제어
-    public void ShowPlayerHUD() => inGameUI.PlayerHUD.Open();
-    public void ClosePlayerHUD() => inGameUI.PlayerHUD.Close();
-    public void ShowBossHUD() => inGameUI.BossHUD.Open();
-    public void CloseBossHUD() => inGameUI.BossHUD.Close();
-    #endregion
-
-    #region 이벤트 구독
-    // 1. 플레이어 HP변화
-    // 2. 플레이어 목숨변화
-    // 3. 탄약 선택 
-    // 4. 보스 HP변화
     #endregion
 }
