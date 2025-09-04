@@ -5,7 +5,8 @@ using UnityEngine.InputSystem;
 
 public class PlayerAttack : AttackBase
 {
-    [SerializeField] private int[] bulletIDs = { 501, 502, 503 };
+    
+    private int[] bulletIDs = { 501, 502, 503 };
     private int currentBulletIndex = 0;
 
     public void OnBulletChange(InputAction.CallbackContext context)
