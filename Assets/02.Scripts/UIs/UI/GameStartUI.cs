@@ -1,6 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
-public class TitleUI : UIBase
+public class GameStartUI : UIBase
 {
     [Header("시작화면 오브젝트")]
     [SerializeField] private GameObject title;
@@ -27,8 +27,7 @@ public class TitleUI : UIBase
 
     public void OnOptionButton() // 옵션창 열기
     {
-        title.SetActive(false);
-        menuPanel.SetActive(false);
+        ShowTitleMenu(false);
         UIManager.Instance.ShowPopup(PopupType.Option);
     }
 
@@ -37,5 +36,9 @@ public class TitleUI : UIBase
         Application.Quit();
     }
 
-
+    public void ShowTitleMenu(bool isActive)
+    {
+        title.SetActive(isActive);
+        menuPanel.SetActive(isActive);
+    }
 }
