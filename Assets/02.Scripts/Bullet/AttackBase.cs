@@ -5,98 +5,76 @@ using UnityEngine.InputSystem;
 
 public abstract class AttackBase : MonoBehaviour
 {
-    [Header("√—æÀ ±‚∫ª ¡§∫∏")]
-    public int baseDamage = 10;
-    public float baseShotSpeed = 20f;
-    public int baseShotInterval = 5;
-    public int baseShotCount = -1; //π´«—
+    [Header("Ï¥ùÏïå")] public BulletData[] bulletSo;
+    public BulletData currentBullet; //ÌòÑÏû¨ Ïû•Ï†Ñ
+    protected int shotRemainCount; //ÎÇ®ÏùÄ Ï¥ùÏïå
     
-    [Header("√—æÀ ¿ÃπÃ¡ˆ")]
-    protected Sprite currentSprite; //«ˆ¿Á ¿ÃπÃ¡ˆ
-    public Sprite normalBulletSprite;
-    public Sprite pierceBulletSprite;
-    public Sprite hollowBulletSprite;
-    public Sprite enemyNormalBulletSprite; //¿˚ √—æÀ ¿ÃπÃ¡ˆ
-    public Sprite homingBulletSprite; //∫∏Ω∫ πÃªÁ¿œ ¿ÃπÃ¡ˆ
-
-    [Header("√—æÀ ∫ØºˆµÈ")]
-    [SerializeField] protected int id;
-    protected string name;
-    protected int damage;
-    protected float shotSpeed; //√—æÀ º”µµ
-    protected int shotInterval; //πﬂªÁ ∞£∞›¿Ãæ˙¥¬µ• µÙ∑π¿Ã∑Œ ºˆ¡§«‘
-    protected int shotCount; //ªÁøÎ ∞°¥…«— √—æÀ ∞≥ºˆ
+    
     protected bool isShooting = false;
     protected float lastShotTime = 0f;
-    public float shotCooldown => shotInterval * 0.05f; // shotInterval¿ª √  ¥‹¿ß∑Œ ∫Ø»Ø
-    [SerializeField] protected AttackType currentAttackType; //∞¯∞›¿⁄
-    [SerializeField] protected BulletType currentBulletType; //«ˆ¿Á ¿Â¬¯«— ≈∫√¢ ¡æ∑˘
+    public float shotCooldown => currentBullet.ShotInterval * 0.05f;
     
-    protected Dictionary<int, int> bulletRemain = new Dictionary<int, int>();
-    
+    protected Dictionary<int, int> bulletRemain = new Dictionary<int, int>(); //ÎÇ®ÏùÄ Ï¥ùÏïå Í∞úÏàò Í∏∞Î°ùÏö©
+
+    public void InitBullet(BulletData bullet) //Ï¥ùÏïå Í∞úÏàò Ï¥àÍ∏∞Ìôî
+    {
+        currentBullet = bullet;
+        shotRemainCount = bullet.ShotMaxCount;
+    }
+
+    void Start()
+    {
+        InitBullet(bulletSo[0]);
+    }
+
     public void SetBulletByID(int sID)
     {
-        if (shotCount > 0) bulletRemain[id] = shotCount; //≈∫»Ø ¿˙¿Â. π´«— ≈∫»Ø¿∫ ¿˙¿Âx
-        id = sID; //ªı∑ŒøÓ ≈∫√¢ID º≥¡§
-        OnShot(sID);
-        if (shotCount != -1 && bulletRemain.ContainsKey(sID)) //≥≤¿∫ ≈∫»Ø¿Ã ¿÷¿∏∏È ±◊∞≈ ªÁøÎ«œ∞Ì, æ¯¿∏∏È ±‚∫ª∞™ ªÁøÎ
+        if (shotRemainCount > 0 && currentBullet != null) //Ï¥ùÏïå ÎÇ®ÏùÄ ÌÉÑ Ï†ÄÏû•
         {
-            shotCount = bulletRemain[sID];
+            bulletRemain[currentBullet.Id] = shotRemainCount; //Ï¥ùÏïåÏùÑ Î∞îÍæ∏Í∏∞ Ï†Ñ, ÎÇ®ÏùÄ Î∞úÏÇ¨ ÌöüÏàò Í∏∞Î°ùÌï®
+        }
+        
+        if (shotRemainCount != -1 && bulletRemain.ContainsKey(sID)) //Î¨¥Ìïú Ï¥ùÏïå ÏïÑÎãå Í≤ΩÏö∞, ÏÑ†ÌÉùÌïòÎ†§Îäî Ï¥ùÏïå IDÍ∞Ä ÎîïÏÖîÎÑàÎ¶¨Ïóê Í∏∞Î°ùÎêòÏñ¥ ÏûàÎäî Í≤ΩÏö∞
+        {
+            shotRemainCount = bulletRemain[sID]; //Ïù¥Ï†ÑÏóê ÏÇ¨Ïö©ÌñàÎçò Ï¥ùÏïåÏù¥Î©¥ ÎÇ®ÏùÄ Î∞úÏÇ¨ ÌöüÏàò Ïù¥Ïñ¥ÏÑú ÏÇ¨Ïö©
         }
     }
     
-    public void ResetBullets() //æ¿¿Ã≥™ Ω∫≈◊¿Ã¡ˆ πŸ≤‹ ∂ß »£√‚«œ±‚
+    public void Shoot(Transform bulletStart)
     {
-        bulletRemain.Clear(); // ≥≤¿∫ ≈∫»Ø ±‚∑œ √ ±‚»≠
-        OnShot(id);           // ≈∫√¢ ¥ŸΩ√ ºº∆√
-    }
-    
-    public void Shoot(GameObject bulletPrefab, Transform bulletStart)
-    {
-        if (shotCount == 0)
+        if (shotRemainCount == 0)
         {
-            return; //√—æÀx
+            Debug.Log("Ï¥ùÏïåÏù¥ ÏóÜÏäµÎãàÎã§!");
+            return;
         }
         
-        Debug.Log($"Shoot »£√‚ ¿¸ -> damage: {damage}");
+        GameObject bulletObj = Instantiate(currentBullet.BulletPrefab, bulletStart.position, bulletStart.rotation); //Ï¥ùÏïå ÏÉùÏÑ±
+        bulletObj.GetComponent<Bullet>().Initialize(currentBullet);
         
-        GameObject bulletObj = Instantiate(bulletPrefab, bulletStart.position, bulletStart.rotation); //√—æÀ ª˝º∫
-        SpriteRenderer sr = bulletObj.GetComponent<SpriteRenderer>();
-        if (sr != null && currentSprite != null) //√—æÀ ø‹«¸ ∫Ø∞Ê
-        {
-            sr.sprite = currentSprite;
-        }
-        
-        bulletObj.GetComponent<Bullet>().Initialize(id, damage, shotSpeed, shotInterval, shotCount, 
-            currentAttackType, currentBulletType); //µ•πÃ¡ˆ, √—æÀ ≈©±‚, πÊ«‚¿ª Bulletø°∞‘ ¿¸¥ﬁ
-        
-        if (shotCount > 0) shotCount--; //≈∫»Ø ∞®ºˆ
-        Debug.Log($"≥≤¿∫ ≈∫»Ø {shotCount}");
-        bulletRemain[id] = shotCount; //≥≤¿∫ ≈∫»Ø ±‚∑œ
-        lastShotTime = Time.time;
+        if (shotRemainCount > 0) shotRemainCount--; //Ï¥ùÏïå Í∞êÏÜå
+        Debug.Log($"ÎÇ®ÏùÄ Ï¥ùÏïå {shotRemainCount}");
+        bulletRemain[currentBullet.Id] = shotRemainCount; //ÎÇ®ÏùÄ Í∞úÏàò Í∏∞Î°ù
+        lastShotTime = Time.time; //Î∞úÏÇ¨ ÏãúÍ∞Ñ Í∞±Ïã†(Ïó∞ÏÜç Î∞úÏÇ¨ Í∞ÑÍ≤© Í≥ÑÏÇ∞Ïö©)
     }
     
-    protected abstract Transform GetBulletStart();
-    protected abstract GameObject GetBulletPrefab();
-    
-    protected IEnumerator ShootingRoutine()
+    public IEnumerator ShootingRoutine(Transform bulletStart)
     {
         while (isShooting)
         {
-            if (Time.time - lastShotTime >= shotCooldown) //ƒ≈∏¿” √º≈©
+            if (Time.time - lastShotTime >= shotCooldown)
             {
-                Shoot(GetBulletPrefab(), GetBulletStart());
+                Shoot(bulletStart);
             }
             yield return null;
         }
     }
     
-    public void StartShooting()
+    public void StartShooting(Transform bulletStart)
     {
         if (!isShooting)
         {
             isShooting = true;
-            StartCoroutine(ShootingRoutine());
+            StartCoroutine(ShootingRoutine(bulletStart));
         }
     }
     
@@ -105,70 +83,15 @@ public abstract class AttackBase : MonoBehaviour
         isShooting = false;
     }
     
-    public void OnShot(int sid) //√—æÀ(≈∫√¢) ¡§∫∏
+    public BulletData GetBulletDataID(int id)
     {
-        switch(sid)
+        foreach (var bullet in bulletSo) //Î∞∞Ïó¥ÏóêÏÑú idÏ∞æÍ∏∞
         {
-            case 501 :
-                currentBulletType = BulletType.Normal;
-                currentAttackType = AttackType.Player;
-                name = "∫∏≈Î ≈ıªÁ√º";
-                currentSprite = normalBulletSprite; //¿ÃπÃ¡ˆ πŸ≤Ÿ¥¬ ∫Œ∫–. æ÷¥œ∏ﬁ¿Ãº« ¿Ã¬ ø°¥Ÿ ≥÷¿∏Ω√∏È µÀ¥œ¥Ÿ.
-                damage = baseDamage;
-                shotSpeed = baseShotSpeed;
-                shotInterval = baseShotInterval * 2;
-                shotCount = baseShotCount;
-                break;
-            case 502 :
-                currentBulletType = BulletType.Pierce;
-                currentAttackType = AttackType.Player;
-                name = "∞¸≈Î ≈ıªÁ√º";
-                currentSprite = pierceBulletSprite;
-                damage = baseDamage * 2;
-                shotSpeed = baseShotSpeed + 10f;
-                shotInterval = baseShotInterval;
-                shotCount = 10;
-                break;
-            case 503 :
-                currentBulletType = BulletType.Hollow;
-                currentAttackType = AttackType.Player;
-                name = "∆ƒø≠ ≈ıªÁ√º";
-                currentSprite = hollowBulletSprite;
-                damage = baseDamage * 2;
-                shotSpeed = baseShotSpeed;
-                shotInterval = baseShotInterval * 2;
-                shotCount = 5;
-                break;
-            case 504 :
-                currentBulletType = BulletType.Hollow;
-                currentAttackType = AttackType.Enemy;
-                name = "¿˚ ∫∏≈Î ≈ıªÁ√º";
-                currentSprite = enemyNormalBulletSprite;
-                damage = baseDamage * 2;
-                shotSpeed = baseShotSpeed;
-                shotInterval = baseShotInterval;
-                shotCount = baseShotCount;
-                break;
-            case 505 :
-                currentBulletType = BulletType.Homing;
-                currentAttackType = AttackType.Enemy;
-                name = "∫∏Ω∫ πÃªÁ¿œ ≈ıªÁ√º";
-                currentSprite = homingBulletSprite;
-                damage = baseDamage * 5;
-                shotSpeed = baseShotSpeed;
-                shotInterval = baseShotInterval * 2;
-                shotCount = baseShotCount;
-                break;
-            default:
-                currentBulletType = BulletType.Normal;
-                currentAttackType = AttackType.Player;
-                name = "∫∏≈Î ≈ıªÁ√º";
-                currentSprite = normalBulletSprite; //¿ÃπÃ¡ˆ πŸ≤Ÿ¥¬ ∫Œ∫–. æ÷¥œ∏ﬁ¿Ãº« ¿Ã¬ ø°¥Ÿ ≥÷¿∏Ω√∏È µÀ¥œ¥Ÿ.
-                damage = baseDamage;
-                shotSpeed = baseShotSpeed;
-                shotInterval = baseShotInterval * 2;
-                shotCount = baseShotCount;
-                break;
+            BulletData bData = bullet as BulletData;
+            if (bData != null && bData.Id == id)
+                return bData;
         }
+        Debug.LogWarning($"BulletData ID {id}Î•º Ï∞æÏùÑ Ïàò ÏóÜÏùå!");
+        return null;
     }
 }

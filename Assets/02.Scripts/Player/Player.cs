@@ -9,6 +9,7 @@ using UnityEngine.InputSystem;
 
 public class Player : MonoBehaviour
 {
+    private PlayerAttack playerAttack;
     private PlayerInputHandle inputHandle;
 
     private PlayerStatesMachine stateMachine;
@@ -40,11 +41,13 @@ public class Player : MonoBehaviour
 
     void Start()
     {
+        playerAttack = GetComponentInChildren<PlayerAttack>();
         inputHandle = new PlayerInputHandle();
         inputHandle.input.PlayerInput.Jump.canceled += (a) => { if (jumpHandle.type == JumpTypes.linear && jumpHandle.state != JumpStates.doubleJump) {  currJumpTime = 0; } jumpHandle.ChangeJumpState(); };
         inputHandle.input.PlayerInput.Dash.started += OnDash;
         inputHandle.input.PlayerInput.Attack.started += OnShot;
         inputHandle.input.PlayerInput.Attack.canceled += ShotPause;
+        inputHandle.input.PlayerInput.BulletChange.performed += OnBulletChange;
         stateMachine = new PlayerStatesMachine(StateType.idle, transform.GetComponentInChildren<Animator>());
         TryGetComponent<Rigidbody2D>(out rb);
         moveHandle = new LinearMove(rb);
@@ -343,7 +346,6 @@ public class Player : MonoBehaviour
         }
         return Vector2.right;
     }
-    public GameObject tempBullet;
     private bool isShotting = false;
     float attackDelay = 0.2f; // 임시 공속값 무기객체 받으면 해당 변수로 대입
     float currAttakTime;//발사로부터의 시간,무기객체에서 받아야함
@@ -352,23 +354,33 @@ public class Player : MonoBehaviour
     private void Shot()
     {
         currAttakTime += Time.deltaTime;
-        if (isShotting == false) return;
-        Debug.Log("Shot 실행! fireDir:" + fireDir);
-
+        if (!isShotting) return;
+        
         if (currAttakTime >= attackDelay)
         {
             currAttakTime = 0f;
-            // fireDir은 BulletDirToVector()로 구해온 방향 벡터
+            BulletData bulletData = playerAttack.currentBullet; // PlayerAttack에서 현재 장전된 총알
+            if (bulletData == null)
+            {
+                Debug.LogWarning("총알 데이터가 없음!");
+                return;
+            }
+            
             float angle = Mathf.Atan2(fireDir.y, fireDir.x) * Mathf.Rad2Deg;
 
             // 총알 생성 (위치 + 회전)
-            GameObject temp = GameObject.Instantiate(tempBullet,transform.position + (Vector3)fireDir, Quaternion.Euler(0, 0, angle));
+            GameObject temp = GameObject.Instantiate(bulletData.BulletPrefab,transform.position + (Vector3)fireDir, Quaternion.Euler(0, 0, angle));
             Bullet bullet = temp.GetComponent<Bullet>();
             if (bullet != null)
             {
-                bullet.Initialize(501, stat.AttackDamage, 10f, 0, 1, AttackType.Player, BulletType.Normal);
+                bullet.Initialize(bulletData); //총알 데이터로 초기화
             }
         }
+    }
+    
+    private void OnBulletChange(InputAction.CallbackContext ctx)
+    {
+        playerAttack.OnBulletChange(ctx);
     }
 
 
