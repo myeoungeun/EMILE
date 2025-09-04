@@ -16,11 +16,6 @@ public class PlayerAttack : AttackBase, IAttackHandler
         else if (context.phase == InputActionPhase.Canceled)
             StopShooting();
     }
-    
-    protected override Vector3 GetShootDirection()
-    {
-        return playerMovement.lookDirectionRight ? Vector3.right : Vector3.left;
-    }
 
     protected override Transform GetBulletStart()
     {

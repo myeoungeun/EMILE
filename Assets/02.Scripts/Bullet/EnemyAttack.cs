@@ -20,13 +20,6 @@ public class EnemyAttack : AttackBase
         }
     }
 
-    protected override Vector3 GetShootDirection()
-    {
-        if (target != null)
-            return (target.position - bulletStartTransform.position).normalized;
-        return Vector3.left;
-    }
-
     protected override Transform GetBulletStart()
     {
         return bulletStartTransform;

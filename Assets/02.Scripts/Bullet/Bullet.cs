@@ -13,9 +13,8 @@ public class Bullet : MonoBehaviour
    protected float Speed;
    protected int Interval;
    protected int Count;
-   protected Vector3 MoveDirection; //총알 이동 방향
 
-   public void Initialize(int sid, int sDamage, float sSpeed, int sInterval, int sCount, AttackType currentAttackType, BulletType currentBulletType, bool lookDirectionRight) //bullet에게 공격자 정보, 방향 전달
+   public void Initialize(int sid, int sDamage, float sSpeed, int sInterval, int sCount, AttackType currentAttackType, BulletType currentBulletType) //bullet에게 공격자 정보, 방향 전달
    {
       attacker = currentAttackType;
       bulletType = currentBulletType;
@@ -24,21 +23,11 @@ public class Bullet : MonoBehaviour
       Speed = sSpeed;
       Interval = sInterval; //딜레이로 수정 필요
       Count = sCount; //총알 개수
-      MoveDirection = lookDirectionRight ? Vector3.right : Vector3.left; //오른쪽 보면 오른쪽 발사, 왼쪽 보고있으면 왼쪽 발사
-      
-      Debug.Log($"[Initialize] ID={Id}, Damage={Damage}, Type={bulletType}, Obj={gameObject.GetInstanceID()}");
-
-      
-      SpriteRenderer sr = GetComponent<SpriteRenderer>();
-      if (sr != null)
-      {
-          sr.flipX = !lookDirectionRight; //플레이어 왼쪽이면 이미지도 뒤집음
-      }
    }
    
    protected virtual void Update()
    {
-       transform.Translate(MoveDirection * Speed * Time.deltaTime, Space.World);
+       transform.Translate( transform.right * Speed * Time.deltaTime, Space.World);
    }
    
    private void OnTriggerEnter2D(Collider2D other)
@@ -75,6 +64,7 @@ public class Bullet : MonoBehaviour
    
    protected void DealDamage(IDamageable target)
    {
+       Debug.Log(target);
        if (target != null)
        {
            target.TakeDamage(Damage);

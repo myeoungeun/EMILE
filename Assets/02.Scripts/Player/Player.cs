@@ -353,14 +353,21 @@ public class Player : MonoBehaviour
     {
         currAttakTime += Time.deltaTime;
         if (isShotting == false) return;
+        Debug.Log("Shot 실행! fireDir:" + fireDir);
 
         if (currAttakTime >= attackDelay)
         {
             currAttakTime = 0f;
-            //여기서 총알 생성
-            GameObject temp = GameObject.Instantiate(tempBullet);
-            temp.transform.position = transform.position + fireDir;
+            // fireDir은 BulletDirToVector()로 구해온 방향 벡터
+            float angle = Mathf.Atan2(fireDir.y, fireDir.x) * Mathf.Rad2Deg;
 
+            // 총알 생성 (위치 + 회전)
+            GameObject temp = GameObject.Instantiate(tempBullet,transform.position + (Vector3)fireDir, Quaternion.Euler(0, 0, angle));
+            Bullet bullet = temp.GetComponent<Bullet>();
+            if (bullet != null)
+            {
+                bullet.Initialize(501, stat.AttackDamage, 10f, 0, 1, AttackType.Player, BulletType.Normal);
+            }
         }
     }
 

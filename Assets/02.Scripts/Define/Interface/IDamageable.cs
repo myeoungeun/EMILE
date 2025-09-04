@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-interface IDamageable
+public interface IDamageable
 {
     void TakeDamage(int damage);
 }

@@ -51,7 +51,7 @@ public abstract class AttackBase : MonoBehaviour
         OnShot(id);           // 탄창 다시 세팅
     }
     
-    public void Shoot(GameObject bulletPrefab, Transform bulletStart, Vector3 direction)
+    public void Shoot(GameObject bulletPrefab, Transform bulletStart)
     {
         if (shotCount == 0)
         {
@@ -68,7 +68,7 @@ public abstract class AttackBase : MonoBehaviour
         }
         
         bulletObj.GetComponent<Bullet>().Initialize(id, damage, shotSpeed, shotInterval, shotCount, 
-            currentAttackType, currentBulletType, direction.x >= 0); //데미지, 총알 크기, 방향을 Bullet에게 전달
+            currentAttackType, currentBulletType); //데미지, 총알 크기, 방향을 Bullet에게 전달
         
         if (shotCount > 0) shotCount--; //탄환 감수
         Debug.Log($"남은 탄환 {shotCount}");
@@ -76,7 +76,6 @@ public abstract class AttackBase : MonoBehaviour
         lastShotTime = Time.time;
     }
     
-    protected abstract Vector3 GetShootDirection();
     protected abstract Transform GetBulletStart();
     protected abstract GameObject GetBulletPrefab();
     
@@ -86,7 +85,7 @@ public abstract class AttackBase : MonoBehaviour
         {
             if (Time.time - lastShotTime >= shotCooldown) //쿨타임 체크
             {
-                Shoot(GetBulletPrefab(), GetBulletStart(), GetShootDirection());
+                Shoot(GetBulletPrefab(), GetBulletStart());
             }
             yield return null;
         }
