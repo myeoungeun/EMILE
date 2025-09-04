@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour
 { 
-    private BulletData bulletData;
+    protected BulletData bulletData;
 
     public void Initialize(BulletData BulletData)
     {
