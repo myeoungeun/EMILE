@@ -190,6 +190,7 @@ MonoBehaviour:
     enemy: {fileID: 0}
   curHp: 0
   target: {fileID: 0}
+  explosionEffect: {fileID: 6810550054026484019, guid: c798bdf595747794d914903ca134ffdd, type: 3}
   rb: {fileID: 0}
   col: {fileID: 0}
   anim: {fileID: 0}

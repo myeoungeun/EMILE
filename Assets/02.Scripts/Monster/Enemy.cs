@@ -15,6 +15,7 @@ public abstract class Enemy : MonoBehaviour
     protected Vector3 originPos;
 
     public Transform target;
+    public GameObject explosionEffect;
 
     [SerializeField] private Rigidbody2D rb;
     [SerializeField] private Collider2D col;
@@ -51,7 +52,8 @@ public abstract class Enemy : MonoBehaviour
     protected virtual void Die()
     {
         // Todo: 오브젝트 풀로 리턴
-        Destroy(gameObject);
+        Instantiate(explosionEffect, transform.position, Quaternion.identity);
+        EnemyPlaceManager.Instance.Return(this);
     }
 
     public void SetTarget(Transform target)

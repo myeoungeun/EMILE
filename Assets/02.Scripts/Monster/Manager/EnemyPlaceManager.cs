@@ -39,9 +39,23 @@ public class EnemyPlaceManager : MonoSingleton<EnemyPlaceManager>
         }
     }
 
+    /// <summary>
+    /// 해당 인스턴스에 몬스터 아이디와 몬스터를 배치할 위치를 인자로 넘기면 해당 위치에 몬스터가 소환됨
+    /// </summary>
+    /// <param name="id">소환하고자 하는 몬스터 아이디</param>
+    /// <param name="position">몬스터 생성 위치</param>
     public void GetEnemyById(int id, Vector3 position)
     {
         Enemy enemy =  enemyDic[id]?.Get();
         enemy.transform.position = position;
+    }
+
+    /// <summary>
+    /// 에너미를 풀로 회수시킴
+    /// </summary>
+    /// <param name="enemy"></param>
+    public void Return(Enemy enemy)
+    {
+        enemyDic[enemy.EnemyData.Id].Return(enemy);
     }
 }

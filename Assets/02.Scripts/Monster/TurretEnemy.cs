@@ -47,8 +47,13 @@ public class TurretEnemy : Enemy, Monster.IAttackable, IDamageable
 
     public void TakeDamage(int damage)
     {
-        curHp -= (EnemyData.Defence - damage);
-        if(curHp <= 0)
+        if (curHp <= 0)
+            return;
+
+        curHp -= Mathf.Abs(EnemyData.Defence - damage);
+        curHp = Mathf.Max(curHp, 0);
+
+        if (curHp <= 0)
         {
             Die();
         }
