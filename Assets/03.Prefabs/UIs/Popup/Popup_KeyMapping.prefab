@@ -928,7 +928,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &2358717489588699344
 RectTransform:
   m_ObjectHideFlags: 0
@@ -964,16 +964,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   saveButton: {fileID: 3915944763207399400}
   exitButton: {fileID: 5181947479673507781}
-  leftKeyButton: {fileID: 7050646307525689807}
-  rightKeyButton: {fileID: 677356280330700828}
-  jumpKeyButton: {fileID: 5083636131461710598}
-  dashKeyButton: {fileID: 2458671340488225357}
-  attackKeyButton: {fileID: 7332568526393314350}
-  leftKeyText: {fileID: 5619767705750033948}
-  rightKeyText: {fileID: 7602969712969811129}
-  jumpKeyText: {fileID: 473195244758546933}
-  dashKeyText: {fileID: 5233979084576645913}
-  attackKeyText: {fileID: 3029312905843130395}
+  keyButtons: []
+  keyTexts: []
 --- !u!1 &4966970911306898933
 GameObject:
   m_ObjectHideFlags: 0

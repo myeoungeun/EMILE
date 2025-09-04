@@ -497,8 +497,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f026d52de1475244a96248923c154fd8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bulletImage: {fileID: 7352589278093767209}
-  bulletCountText: {fileID: 4950034192399092079}
+  bulletIcon: {fileID: 7352589278093767209}
+  bulletCount: {fileID: 4950034192399092079}
   highlightBorder: {fileID: 2723066408263669643}
   cooldown: {fileID: 0}
 --- !u!1 &2718874670023944723
@@ -764,6 +764,7 @@ MonoBehaviour:
   bossPortrait: {fileID: 8260046603413764702}
   bossName: {fileID: 3758084567598748450}
   bossHpBar: {fileID: 8862325621005572465}
+  boss: {fileID: 0}
 --- !u!1 &3101980086458692949
 GameObject:
   m_ObjectHideFlags: 0
@@ -993,7 +994,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1072595078799194187
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1189,7 +1190,10 @@ MonoBehaviour:
   portrait: {fileID: 146733381409540997}
   playerStatus: {fileID: 3005381151148049617}
   hpBar: {fileID: 3349420582933168124}
-  bulletSlots: []
+  bulletSlots:
+  - {fileID: 5912730856834497897}
+  - {fileID: 6611655911256686491}
+  - {fileID: 5500639174629587449}
 --- !u!1 &3897588140244200160
 GameObject:
   m_ObjectHideFlags: 0
@@ -1277,7 +1281,7 @@ GameObject:
   - component: {fileID: 6622440418429068677}
   - component: {fileID: 5500639174629587449}
   m_Layer: 5
-  m_Name: UI_Bullet_Hallow
+  m_Name: UI_Bullet_Hollow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1326,8 +1330,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f026d52de1475244a96248923c154fd8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bulletImage: {fileID: 4314266715929679717}
-  bulletCountText: {fileID: 6071816282817674879}
+  bulletIcon: {fileID: 4314266715929679717}
+  bulletCount: {fileID: 6071816282817674879}
   highlightBorder: {fileID: 6066397785591083773}
   cooldown: {fileID: 0}
 --- !u!1 &4461651949687619877
@@ -1525,8 +1529,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f026d52de1475244a96248923c154fd8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bulletImage: {fileID: 4180906075045262902}
-  bulletCountText: {fileID: 8867345180075761326}
+  bulletIcon: {fileID: 4180906075045262902}
+  bulletCount: {fileID: 8867345180075761326}
   highlightBorder: {fileID: 6890790669591780400}
   cooldown: {fileID: 0}
 --- !u!1 &4677957097368266518
