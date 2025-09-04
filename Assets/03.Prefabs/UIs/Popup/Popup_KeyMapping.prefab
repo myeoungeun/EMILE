@@ -964,8 +964,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   saveButton: {fileID: 3915944763207399400}
   exitButton: {fileID: 5181947479673507781}
-  keyButtons: []
-  keyTexts: []
+  keyButtons:
+  - {fileID: 7050646307525689807}
+  - {fileID: 677356280330700828}
+  - {fileID: 5083636131461710598}
+  - {fileID: 2458671340488225357}
+  - {fileID: 7332568526393314350}
+  keyTexts:
+  - {fileID: 3811472404854279544}
+  - {fileID: 1105779585340116668}
+  - {fileID: 4830342790413454490}
+  - {fileID: 1381358790315439592}
+  - {fileID: 6989942649722874408}
 --- !u!1 &4966970911306898933
 GameObject:
   m_ObjectHideFlags: 0

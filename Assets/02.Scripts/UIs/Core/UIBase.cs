@@ -4,7 +4,10 @@ using UnityEngine;
 
 public abstract class UIBase : MonoBehaviour
 {
-    public abstract void Initialize();
+    public virtual void Initialize()
+    {
+
+    }
     public virtual void Open()
     {
         gameObject.SetActive(true);

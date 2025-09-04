@@ -1059,6 +1059,28 @@ Canvas:
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
+--- !u!114 &1847376921 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1017720300523928735, guid: 492046bea4760854686e223f1536933d, type: 3}
+  m_PrefabInstance: {fileID: 4752032444899279292}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1847376923 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3268654112573222557, guid: 492046bea4760854686e223f1536933d, type: 3}
+  m_PrefabInstance: {fileID: 4752032444899279292}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 09d42d937e072264cbe8c1f3eeb21ba7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1853561646
 GameObject:
   m_ObjectHideFlags: 0
@@ -1511,6 +1533,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: UI_GameStart
       objectReference: {fileID: 0}
+    - target: {fileID: 6776887166857878726, guid: d53bd2646a7c19948bf95f9c8ede6722, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7523474233994036215, guid: d53bd2646a7c19948bf95f9c8ede6722, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -1700,14 +1726,26 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3268654112573222557, guid: 492046bea4760854686e223f1536933d, type: 3}
+      propertyPath: uiText
+      value: 
+      objectReference: {fileID: 1847376921}
     - target: {fileID: 3287211452689528966, guid: 492046bea4760854686e223f1536933d, type: 3}
       propertyPath: m_Name
       value: UI_InGame
+      objectReference: {fileID: 0}
+    - target: {fileID: 3287211452689528966, guid: 492046bea4760854686e223f1536933d, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3551806812649664667, guid: 492046bea4760854686e223f1536933d, type: 3}
       propertyPath: boss
       value: 
       objectReference: {fileID: 1384551985}
+    - target: {fileID: 7452049351670763191, guid: 492046bea4760854686e223f1536933d, type: 3}
+      propertyPath: uiTextHUD
+      value: 
+      objectReference: {fileID: 1847376923}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
