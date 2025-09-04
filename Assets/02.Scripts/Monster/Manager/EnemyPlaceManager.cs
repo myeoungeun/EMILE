@@ -44,4 +44,9 @@ public class EnemyPlaceManager : MonoSingleton<EnemyPlaceManager>
         Enemy enemy =  enemyDic[id]?.Get();
         enemy.transform.position = position;
     }
+
+    public void Return(Enemy enemy)
+    {
+        enemyDic[enemy.EnemyData.Id].Return(enemy);
+    }
 }
