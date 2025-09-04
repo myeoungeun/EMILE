@@ -762,7 +762,6 @@ MonoBehaviour:
   coll: {fileID: 1314183482}
   currJumpTime: 0
   dashDistance: 8
-  tempBullet: {fileID: 4752032444899279294}
 --- !u!50 &1314183481
 Rigidbody2D:
   serializedVersion: 4
@@ -1650,10 +1649,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: UI_GameStart
       objectReference: {fileID: 0}
-    - target: {fileID: 6776887166857878726, guid: d53bd2646a7c19948bf95f9c8ede6722, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 7523474233994036215, guid: d53bd2646a7c19948bf95f9c8ede6722, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -1879,11 +1874,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: de93297cdc65d4747b8eff79b25d3b77, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1 &4752032444899279294 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7756351807955268357, guid: 492046bea4760854686e223f1536933d, type: 3}
-  m_PrefabInstance: {fileID: 4752032444899279292}
-  m_PrefabAsset: {fileID: 0}
 --- !u!224 &4809867472395453558 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 7523474233994036215, guid: d53bd2646a7c19948bf95f9c8ede6722, type: 3}
