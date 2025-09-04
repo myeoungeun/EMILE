@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BossEnemy : Enemy, Monster.IAttackable, Monster.IDamageable
+public class BossEnemy : Enemy, Monster.IAttackable, IDamageable
 {
     public event System.Action onHpChanged;
 

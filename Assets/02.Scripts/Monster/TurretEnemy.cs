@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TurretEnemy : Enemy, Monster.IAttackable, Monster.IDamageable
+public class TurretEnemy : Enemy, Monster.IAttackable, IDamageable
 {
     // 총알이 발사되는 위치
     [SerializeField] private Transform bulletPos;
