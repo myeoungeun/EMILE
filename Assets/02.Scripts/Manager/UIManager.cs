@@ -3,7 +3,7 @@ using UnityEngine;
 
 public enum UIType
 {
-    Title,
+    GameStart,
     InGame,
     GameOver,
 }
@@ -17,9 +17,13 @@ public enum PopupType
 public class UIManager : MonoSingleton<UIManager>
 {
     [Header("UI")]
-    [SerializeField] private TitleUI titleUI;
+    [SerializeField] private GameStartUI gameStartUI;
     [SerializeField] private InGameUI inGameUI;
     [SerializeField] private GameOverUI gameOverUI;
+
+    public GameStartUI GameStartUI => gameStartUI;
+    public InGameUI InGameUI => inGameUI;
+    public GameOverUI GameOverUI => gameOverUI;
 
     [Header("Popup")]
     [SerializeField] private OptionPopup optionPopup;
@@ -33,7 +37,7 @@ public class UIManager : MonoSingleton<UIManager>
         base.Awake();
         InitUIManager();
 
-        ShowUI(UIType.Title); // 타이틀UI만 활성화
+        ShowUI(UIType.GameStart); // 시작화면UI만 활성화
 
         foreach (var popup in popupDictionary.Values)
         {
@@ -47,7 +51,7 @@ public class UIManager : MonoSingleton<UIManager>
         //일반 UI 딕셔너리 초기화
         uiDictionary = new Dictionary<UIType, UIBase>
         {
-            { UIType.Title, titleUI },
+            { UIType.GameStart, gameStartUI },
             { UIType.InGame, inGameUI },
             { UIType.GameOver, gameOverUI }
         };
@@ -72,7 +76,8 @@ public class UIManager : MonoSingleton<UIManager>
         }
     }
     #endregion
-    
+
+    #region UI 제어
     public void ShowUI(UIType type)
     {
         foreach (var ui in uiDictionary.Values)
@@ -81,14 +86,24 @@ public class UIManager : MonoSingleton<UIManager>
         }
         uiDictionary[type].Open(); // 요청한 일반UI 열기
     }
+    #endregion 
 
-    public void ShowPopup(PopupType type)
-    {
-        popupDictionary[type].Open(); // 요청한 팝업UI 열기
-    }
+    #region Popup 제어
+    public void ShowPopup(PopupType type) => popupDictionary[type].Open(); // 요청한 팝업UI 열기
+    public void ClosePopup(PopupType type) => popupDictionary[type].Close(); // 요청한 팝업UI 닫기
+    #endregion
 
-    public void ClosePopup(PopupType type)
-    {
-        popupDictionary[type].Close(); // 요청한 팝업UI 닫기
-    }
+    #region HUD 제어
+    public void ShowPlayerHUD() => inGameUI.PlayerHUD.Open();
+    public void ClosePlayerHUD() => inGameUI.PlayerHUD.Close();
+    public void ShowBossHUD() => inGameUI.BossHUD.Open();
+    public void CloseBossHUD() => inGameUI.BossHUD.Close();
+    #endregion
+
+    #region 이벤트 구독
+    // 1. 플레이어 HP변화
+    // 2. 플레이어 목숨변화
+    // 3. 탄약 선택 
+    // 4. 보스 HP변화
+    #endregion
 }
