@@ -22,7 +22,7 @@ public class EnemyDetectState : EnemyBaseState
         canMove = stateMachine.Enemy.EnemyData.MoveSpeed > 0 ? true : false;
         if (stateMachine.Enemy is IMovable)
             movable = stateMachine.Enemy as IMovable;
-        stateMachine.Enemy.Anim?.SetBool("InDetectRange", true);
+        stateMachine.Enemy.Anim?.SetBool(Monster.AnimatorParams.InDetectRange, true);
     }
 
     public override void Update()

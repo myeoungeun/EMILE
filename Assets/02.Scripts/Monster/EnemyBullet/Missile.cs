@@ -15,6 +15,7 @@ public class Missile : BaseBullet
         chasingTime = 1f;
     }
 
+    // 풀에서 꺼낼 때, 각도 초기화
     private void OnEnable()
     {
         transform.localEulerAngles = Vector3.zero;
@@ -22,18 +23,20 @@ public class Missile : BaseBullet
 
     protected override void Move()
     {
-        //위로 이동
+        // 지속적으로 자신의 위 방향으로 이동함
         rb.velocity = transform.up * BulletData.Speed;
-        // 0.5초 후 추적 시작, 1.5초 부터 추적 종료
+
         if(rotateCoroutine == null)
             rotateCoroutine = StartCoroutine(Rotate());
     }
 
     private IEnumerator Rotate()
     {
+        // 1. 0.5초 대기
         yield return new WaitForSeconds(0.5f);
 
         float curTime = 0f;
+        // 2. 1초 동안 플레이어 추적
         while(target != null && curTime <= chasingTime)
         {
             Vector2 dir = ((Vector2)target.position - rb.position).normalized;
@@ -52,5 +55,6 @@ public class Missile : BaseBullet
             curTime += Time.deltaTime;
             yield return null;
         }
+        // 3. 생성 이후 1.5초가 지나면 그냥 직진
     }
 }

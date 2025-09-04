@@ -17,9 +17,15 @@ namespace Monster
         Attack
     }
 
-    public static class Common
+    public static class Layers
     {
-        
+        public const string Player = "Player";
+    }
+
+    public static class AnimatorParams
+    {
+        public const string InDetectRange = "InDetectRange";
+        public const string InAttackRange = "InAttackRange";
     }
 
 }

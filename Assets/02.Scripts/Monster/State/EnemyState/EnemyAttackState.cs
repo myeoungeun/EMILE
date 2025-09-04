@@ -20,7 +20,7 @@ public class EnemyAttackState : EnemyBaseState
             attacker = stateMachine.Enemy as Monster.IAttackable;
         }
         
-        stateMachine.Enemy.Anim?.SetBool("InAttackRange", true);
+        stateMachine.Enemy.Anim?.SetBool(Monster.AnimatorParams.InAttackRange, true);
         attacker.StartAttack();
     }
 
@@ -38,6 +38,6 @@ public class EnemyAttackState : EnemyBaseState
     {
         attacker.StopAttack();
         attacker = null;
-        stateMachine.Enemy.Anim?.SetBool("InAttackRange", false);
+        stateMachine.Enemy.Anim?.SetBool(Monster.AnimatorParams.InAttackRange, false);
     }
 }

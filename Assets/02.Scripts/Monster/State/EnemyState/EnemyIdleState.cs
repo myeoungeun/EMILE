@@ -5,7 +5,7 @@ using UnityEngine;
 public class EnemyIdleState : EnemyBaseState
 {
     // 플레이어를 레이어를 통해 판별
-    private LayerMask layerMask = LayerMask.GetMask("Player");
+    private LayerMask layerMask = LayerMask.GetMask(Monster.Layers.Player);
 
     public EnemyIdleState(EnemyStateMachine owner) : base(owner)
     {
@@ -15,7 +15,7 @@ public class EnemyIdleState : EnemyBaseState
     public override void Enter()
     {
         stateMachine.Enemy.ResetTarget();
-        stateMachine.Enemy.Anim?.SetBool("InDetectRange", false);
+        stateMachine.Enemy.Anim?.SetBool(Monster.AnimatorParams.InDetectRange, false);
     }
 
     public override void Update()

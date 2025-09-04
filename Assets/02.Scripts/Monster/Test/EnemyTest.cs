@@ -40,6 +40,6 @@ public class EnemyTest : MonoBehaviour
     private void on1Pressed(InputAction.CallbackContext ctx)
     {
         if(m_Enemy != null)
-            (m_Enemy as Monster.IDamageable).TakeDamage(10);
+            (m_Enemy as IDamageable).TakeDamage(10);
     }
 }
