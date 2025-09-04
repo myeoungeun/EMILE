@@ -10,6 +10,6 @@ public class GameOverUI : UIBase
 
     public void OnExitButton()
     {
-        UIManager.Instance.ShowUI(UIType.Title); // Title 전환
+        UIManager.Instance.ShowUI(UIType.GameStart); // GameStart 전환
     }
 }
