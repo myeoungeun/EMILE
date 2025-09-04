@@ -3,22 +3,22 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class BulletChange : MonoBehaviour
-{
-    [SerializeField] private AttackBase playerAttack;
-    [SerializeField] private int[] bulletIDs = { 501, 502, 503 }; //¼ø¼­´ë·Î ¹Ù²ð ÅºÃ¢ ID
-    private int currentBulletIndex = 0;
-    
-    public void OnBulletChange(InputAction.CallbackContext context)
-    {
-        if (context.phase == InputActionPhase.Performed) //vÅ° ´­·¶À» ¶§
-        {
-            currentBulletIndex++;
-            if (currentBulletIndex >= bulletIDs.Length) //¼ýÀÚ Ä¿Áö¸é 0À¸·Î ÃÊ±âÈ­(¹Ýº¹)
-            {
-                currentBulletIndex = 0;
-            }
-            playerAttack.SetBulletByID(bulletIDs[currentBulletIndex]); //½ÇÁ¦ ÅºÃ¢ ±³Ã¼
-        }
-    }
-}
+// public class BulletChange : MonoBehaviour
+// {
+//     [SerializeField] private AttackBase playerAttack;
+//     [SerializeField] private int[] bulletIDs = { 501, 502, 503 }; //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ù²ï¿½ ÅºÃ¢ ID
+//     private int currentBulletIndex = 0;
+//     
+//     public void OnBulletChange(InputAction.CallbackContext context)
+//     {
+//         if (context.phase == InputActionPhase.Performed) //vÅ° ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½
+//         {
+//             currentBulletIndex++;
+//             if (currentBulletIndex >= bulletIDs.Length) //ï¿½ï¿½ï¿½ï¿½ Ä¿ï¿½ï¿½ï¿½ï¿½ 0ï¿½ï¿½ï¿½ï¿½ ï¿½Ê±ï¿½È­(ï¿½Ýºï¿½)
+//             {
+//                 currentBulletIndex = 0;
+//             }
+//             playerAttack.SetBulletByID(bulletIDs[currentBulletIndex]); //ï¿½ï¿½ï¿½ï¿½ ÅºÃ¢ ï¿½ï¿½Ã¼
+//         }
+//     }
+// }

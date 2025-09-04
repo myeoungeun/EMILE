@@ -10,19 +10,19 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fcd7467f7dbbeb54a8fdf5b796fbb4ef, type: 3}
-  m_Name: EnemyBulletData
+  m_Name: PierceBullet502
   m_EditorClassIdentifier: 
-  id: 504
-  bulletName: "\uC801_\uBCF4\uD1B5\uD22C\uC0AC\uCCB4"
-  imageId: 504
+  id: 502
+  bulletName: "\uBCF4\uD1B5\uD22C\uC0AC\uCCB4"
+  imageId: 502
   attackType: 0
-  bulletType: 0
+  bulletType: 1
   damage: 10
-  speed: 5
+  speed: 40
   pierceNum: 0
   rotateSpeed: 0
   explosionRange: 0
-  explosionEffectId: 604
+  explosionEffectId: 0
   shotInterval: 0
-  shotMaxCount: 0
-  bulletPrefab: {fileID: 0}
+  shotMaxCount: 10
+  bulletPrefab: {fileID: 4213447932003142925, guid: 981c26a3725d9cf44bb4e31b6f002423, type: 3}
