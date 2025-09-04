@@ -15,7 +15,7 @@ MonoBehaviour:
   id: 504
   bulletName: "\uC801_\uBCF4\uD1B5\uD22C\uC0AC\uCCB4"
   imageId: 504
-  attackType: 0
+  attackType: 1
   bulletType: 0
   damage: 10
   speed: 5
