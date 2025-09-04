@@ -3,16 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public abstract class AttackBase : MonoBehaviour
+public abstract class AttackBase
 {
     [Header("총알")] public BulletData[] bulletSo;
     public BulletData currentBullet; //현재 장전
     protected int shotRemainCount; //남은 총알
-    
-    
-    protected bool isShooting = false;
-    protected float lastShotTime = 0f;
-    public float shotCooldown => currentBullet.ShotInterval * 0.05f;
     
     protected Dictionary<int, int> bulletRemain = new Dictionary<int, int>(); //남은 총알 개수 기록용
 
@@ -22,8 +17,17 @@ public abstract class AttackBase : MonoBehaviour
         shotRemainCount = bullet.ShotMaxCount;
     }
 
-    void Start()
+    public void Start()
     {
+        List<BulletData> bullets = new List<BulletData>();
+        if (ResourceManager.GetInstance.GetPreLoad.TryGetValue("NormalBullet501", out object loadedObject))
+        {
+            bullets.Add((BulletData) loadedObject);
+        }
+        else
+        {
+            Debug.LogError("데이터 로딩 실패");
+        }
         InitBullet(bulletSo[0]);
     }
 
@@ -40,7 +44,7 @@ public abstract class AttackBase : MonoBehaviour
         }
     }
     
-    public void Shoot(Transform bulletStart)
+    public void Shoot(Vector3 position, Quaternion rotation)
     {
         if (shotRemainCount == 0)
         {
@@ -48,39 +52,19 @@ public abstract class AttackBase : MonoBehaviour
             return;
         }
         
-        GameObject bulletObj = Instantiate(currentBullet.BulletPrefab, bulletStart.position, bulletStart.rotation); //총알 생성
-        bulletObj.GetComponent<Bullet>().Initialize(currentBullet);
-        
+        GameObject bulletObj = GameObject.Instantiate(currentBullet.BulletPrefab, position, rotation); //총알 생성
+        if (bulletObj.TryGetComponent<Bullet>(out Bullet bullet))
+        {
+            bullet.Initialize(currentBullet);
+        }
+        else
+        {
+            bulletObj.AddComponent<Bullet>().Initialize(currentBullet);
+        }
+
         if (shotRemainCount > 0) shotRemainCount--; //총알 감소
         Debug.Log($"남은 총알 {shotRemainCount}");
         bulletRemain[currentBullet.Id] = shotRemainCount; //남은 개수 기록
-        lastShotTime = Time.time; //발사 시간 갱신(연속 발사 간격 계산용)
-    }
-    
-    public IEnumerator ShootingRoutine(Transform bulletStart)
-    {
-        while (isShooting)
-        {
-            if (Time.time - lastShotTime >= shotCooldown)
-            {
-                Shoot(bulletStart);
-            }
-            yield return null;
-        }
-    }
-    
-    public void StartShooting(Transform bulletStart)
-    {
-        if (!isShooting)
-        {
-            isShooting = true;
-            StartCoroutine(ShootingRoutine(bulletStart));
-        }
-    }
-    
-    public void StopShooting()
-    {
-        isShooting = false;
     }
     
     public BulletData GetBulletDataID(int id)

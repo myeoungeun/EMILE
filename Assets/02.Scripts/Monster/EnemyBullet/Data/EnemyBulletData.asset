@@ -15,7 +15,7 @@ MonoBehaviour:
   id: 504
   bulletName: "\uC801_\uBCF4\uD1B5\uD22C\uC0AC\uCCB4"
   imageId: 504
-  attackType: 1
+  attackType: 0
   bulletType: 0
   damage: 10
   speed: 5
@@ -23,3 +23,6 @@ MonoBehaviour:
   rotateSpeed: 0
   explosionRange: 0
   explosionEffectId: 604
+  shotInterval: 0
+  shotMaxCount: 0
+  bulletPrefab: {fileID: 0}

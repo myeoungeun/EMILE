@@ -41,7 +41,8 @@ public class Player : MonoBehaviour
 
     void Start()
     {
-        playerAttack = GetComponentInChildren<PlayerAttack>();
+        playerAttack = new();
+        playerAttack.Start();
         inputHandle = new PlayerInputHandle();
         inputHandle.input.PlayerInput.Jump.canceled += (a) => { if (jumpHandle.type == JumpTypes.linear && jumpHandle.state != JumpStates.doubleJump) {  currJumpTime = 0; } jumpHandle.ChangeJumpState(); };
         inputHandle.input.PlayerInput.Dash.started += OnDash;
@@ -359,21 +360,14 @@ public class Player : MonoBehaviour
         if (currAttakTime >= attackDelay)
         {
             currAttakTime = 0f;
-            BulletData bulletData = playerAttack.currentBullet; // PlayerAttack에서 현재 장전된 총알
-            if (bulletData == null)
-            {
-                Debug.LogWarning("총알 데이터가 없음!");
-                return;
-            }
-            
-            float angle = Mathf.Atan2(fireDir.y, fireDir.x) * Mathf.Rad2Deg;
 
-            // 총알 생성 (위치 + 회전)
-            GameObject temp = GameObject.Instantiate(bulletData.BulletPrefab,transform.position + (Vector3)fireDir, Quaternion.Euler(0, 0, angle));
-            Bullet bullet = temp.GetComponent<Bullet>();
-            if (bullet != null)
+            if (playerAttack != null)
             {
-                bullet.Initialize(bulletData); //총알 데이터로 초기화
+                float angle = Mathf.Atan2(fireDir.y, fireDir.x) * Mathf.Rad2Deg;
+                Vector3 spawnPos = transform.position + (Vector3)fireDir;
+                Quaternion spawnRot = Quaternion.Euler(0, 0, angle);
+
+                playerAttack.Shoot(spawnPos, spawnRot);
             }
         }
     }

@@ -5,17 +5,9 @@ using UnityEngine.InputSystem;
 
 public class PlayerAttack : AttackBase
 {
-    public Transform bulletStartTransform; // 발사 위치
     [SerializeField] private int[] bulletIDs = { 501, 502, 503 };
     private int currentBulletIndex = 0;
-    
-    public void OnAttack(InputAction.CallbackContext context)
-    {
-        if (context.phase == InputActionPhase.Started)
-            StartShooting(bulletStartTransform);
-        else if (context.phase == InputActionPhase.Canceled)
-            StopShooting();
-    }
+
     public void OnBulletChange(InputAction.CallbackContext context)
     {
         if (context.phase == InputActionPhase.Performed)
