@@ -9,25 +9,17 @@ public class SpawnTrigger : MonoBehaviour
 
     private bool isTriggered = false; // 중복 소환 방지용
 
-    private void OnTriggerEnter(Collider other)
-    {
-        Debug.Log($"[SpawnTrigger] 충돌 감지: {other.name}");
 
-        if (!isTriggered && other.CompareTag("Player"))
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (!isTriggered && collision.CompareTag("Player"))
         {
-            Debug.Log("[SpawnTrigger] Player 진입 → 몬스터 소환 시작");
             isTriggered = true;
 
-            if (EnemyPlaceManager.Instance != null)
-            {
-                EnemyPlaceManager.Instance.GetEnemyById(monsterId, spawnPoint.position);
-                Debug.Log($"[SpawnTrigger] 몬스터(ID={monsterId}) 소환 완료");
-            }
-            else
-            {
-                Debug.LogError("[SpawnTrigger] EnemyPlaceManager 인스턴스가 없음!");
-            }
+            // EnemyPlaceManager를 통해 소환
+            EnemyPlaceManager.Instance.GetEnemyById(monsterId, spawnPoint.position);
         }
     }
 }
+
 
