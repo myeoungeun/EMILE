@@ -20,6 +20,7 @@ public class KeyMappingPopup : PopupBase
     public override void Initialize()
     {
         InitKeyMapping();
+        exitButton.onClick.AddListener(OnExitButton);
     }
 
     private void OnKeyButton(int index)
