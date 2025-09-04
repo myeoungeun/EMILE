@@ -72,7 +72,11 @@ public class BossEnemy : Enemy, Monster.IAttackable, IDamageable
 
     public void TakeDamage(int damage)
     {
+        if (curHp <= 0)
+            return;
+
         curHp -= Mathf.Abs(EnemyData.Defence - damage);
+        curHp = Mathf.Max(curHp, 0);
 
         onHpChanged.Invoke();
         if (curHp <= 0)
