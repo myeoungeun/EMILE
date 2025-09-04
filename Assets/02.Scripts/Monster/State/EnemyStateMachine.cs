@@ -6,10 +6,13 @@ using UnityEngine;
 [Serializable]
 public class EnemyStateMachine
 {
+    // 해당 스테이트 머신을 가지고 있는 적 객체
     [SerializeField] private Enemy enemy;
     public Enemy Enemy { get { return enemy; } private set { enemy = value; } }
 
+    // 현재 상태
     private EnemyBaseState curState;
+    // 각 상태를 담고 있는 딕셔너리
     private Dictionary<Monster.EnemyStateType, EnemyBaseState> enemyStates;
 
     public EnemyStateMachine(Enemy owner)

@@ -29,7 +29,7 @@ public class EnemyPlaceManager : MonoSingleton<EnemyPlaceManager>
 
                     enemyDic[enemy.Id] = pool;
 
-                    Debug.Log($"{enemy.name} 프리팹 로드 완료");
+                    Debug.Log($"{enemy.Name} 프리팹 로드 완료");
                 }
                 else
                 {

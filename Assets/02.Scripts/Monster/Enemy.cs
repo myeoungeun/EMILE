@@ -83,15 +83,17 @@ public abstract class Enemy : MonoBehaviour
         return dist;
     }
 
+    // 플레이어가 몬스터에 부딪혔을 때, 몬스터의 공격력 만큼의 피해를 주는 메서드, 연결 필요함
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if ((1 << collision.gameObject.layer) == LayerMask.GetMask("Player"))
+        if ((1 << collision.gameObject.layer) == LayerMask.GetMask(Monster.Layers.Player))
         {
             // Todo: 플레이어에게 피해를 줌
-            Debug.Log("플레이어 충돌 피해");
+            Debug.Log($"플레이어 충돌 피해: {EnemyData.AttackPower}");
         }
     }
 
+    // 에디터에서 탐지 범위와 공격 가능 범위를 표시하는 메서드
     private void OnDrawGizmos()
     {
         if(_enemyData == null) return;

@@ -61,12 +61,12 @@ public class BaseBullet : MonoBehaviour
 
         if (other.CompareTag("Wall")) //모든 탄환은 벽에 닿으면 파괴
         {
-            Destroy(gameObject);
+            BulletPoolManager.Instance.ReturnBullet(this);
         }
 
         if (other.CompareTag("DeadZone")) //데드존에서 모든 탄환 파괴
         {
-            Destroy(gameObject);
+            BulletPoolManager.Instance.ReturnBullet(this);
         }
     }
 
