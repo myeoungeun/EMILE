@@ -97,7 +97,7 @@ GameObject:
   - component: {fileID: 2368842971053037349}
   m_Layer: 0
   m_Name: Boss
-  m_TagString: Untagged
+  m_TagString: Monster
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -142,8 +142,6 @@ MonoBehaviour:
   boost2: {fileID: 1413303149780241117}
   bulletPos: {fileID: 1130810209180591160}
   missilePos: {fileID: 3127896104059460702}
-  bullet: {fileID: 1631349286232222164, guid: f6e78a979b8c60c4891a0b91b2347aea, type: 3}
-  missile: {fileID: 1631349286232222164, guid: f6e78a979b8c60c4891a0b91b2347aea, type: 3}
   warningSign: {fileID: 7385940531988308828}
   warningColor: {r: 1, g: 0, b: 0, a: 0.39215687}
   dashSpeed: 10
