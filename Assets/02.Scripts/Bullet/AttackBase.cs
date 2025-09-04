@@ -25,6 +25,9 @@ public abstract class AttackBase
         }
         else
         {
+            prefabBullet = bullet.BulletPrefab.AddComponent<Bullet>();
+            prefabBullet.Initialize(bullet,this);
+            bulletPool = new ObjectPool<Bullet>(prefabBullet, 30);
             Debug.LogError("BulletPrefab에 Bullet 컴포넌트가 없음!");
         }
     }
