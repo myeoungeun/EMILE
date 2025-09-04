@@ -7,10 +7,12 @@ using UnityEngine;
 public class Bullet : MonoBehaviour
 { 
     protected BulletData bulletData;
+    private AttackBase owner; // 풀 반환용
 
-    public void Initialize(BulletData BulletData)
+    public void Initialize(BulletData BulletData, AttackBase owner)
     {
         bulletData = BulletData;
+        this.owner = owner;
     }
    
    protected virtual void Update() //shot move
@@ -41,7 +43,7 @@ public class Bullet : MonoBehaviour
       
       if (other.CompareTag("Wall") || other.CompareTag("DeadZone"))
       {
-         Destroy(gameObject);
+          ReturnToPool();
       }
    }
    
@@ -55,7 +57,12 @@ public class Bullet : MonoBehaviour
        }
        if (bulletData.BulletType != BulletType.Pierce) //pierce일 경우 통과
        {
-           Destroy(gameObject);
+           ReturnToPool();
        }
+   }
+   
+   private void ReturnToPool()
+   {
+       owner.ReturnBullet(this);
    }
 }

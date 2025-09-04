@@ -42,7 +42,7 @@ public class Player : MonoBehaviour
     void Start()
     {
         playerAttack = new();
-        playerAttack.Start();
+        playerAttack.Init();
         inputHandle = new PlayerInputHandle();
         inputHandle.input.PlayerInput.Jump.canceled += (a) => { if (jumpHandle.type == JumpTypes.linear && jumpHandle.state != JumpStates.doubleJump) {  currJumpTime = 0; } jumpHandle.ChangeJumpState(); };
         inputHandle.input.PlayerInput.Dash.started += OnDash;
