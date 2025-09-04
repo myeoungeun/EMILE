@@ -265,6 +265,7 @@ public class Player : MonoBehaviour
         float speed = stat.MoveSpeed * 2.5f;
         float goalDashTime = dashDistance / speed;
         float currDashTime = 0f;
+        inputHandle.isPressingJump = false;
         Vector2 dir = new Vector2(inputHandle.moveDir.x, 0);
         while (currDashTime < goalDashTime)
         {
