@@ -31,6 +31,6 @@ public class OptionPopup : PopupBase
     public void OnExitButton() // 돌아가기
     {
         UIManager.Instance.ClosePopup(PopupType.Option);
-        UIManager.Instance.ShowUI(UIType.Title);
+        UIManager.Instance.GameStartUI.ShowTitleMenu(true);
     }
 }
