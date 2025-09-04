@@ -26,8 +26,16 @@ public abstract class AttackBase
         }
         else
         {
-            Debug.LogError("데이터 로딩 실패");
+            Debug.LogError("데이터 로딩 실패, 직접로드 실행");
+            ResourceManager.GetInstance.LoadAsync<BulletData>("NormalBullet501", (result) =>
+            {
+                bullets.Add(result);
+                bulletSo = bullets.ToArray();
+                InitBullet(bulletSo[0]);
+            }, true);
+            return;
         }
+        bulletSo = bullets.ToArray();
         InitBullet(bulletSo[0]);
     }
 
