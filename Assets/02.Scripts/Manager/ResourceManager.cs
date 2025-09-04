@@ -1,170 +1,171 @@
-// using System;
-// using System.Collections;
-// using System.Collections.Generic;
-// using System.IO;
-// using Unity.VisualScripting;
-// using UnityEngine;
-// using UnityEngine.AddressableAssets;
-// using UnityEngine.ResourceManagement.AsyncOperations;
-//
-// public class ResourceManager : Singleton<ResourceManager>//ALL : (250707)½Ì±ÛÅæ ±â¹ÝÀÇ ºñµ¿±â ·Îµù ½ºÅ©¸³Æ® °¡´ÉÇÏ¸é Á¦°¡ Ä³½ÌÇØµÐ°É »ç¿ëÇÏ°ÚÁö¸¸ ¾Ë¾ÆµÎ¸é ÀÛ¾÷¿¡ ¼ö¿ù ÇÒ °Í °°¾Æ Ãß°¡ÇÕ´Ï´Ù
-// {
-//     private Dictionary<string, object> preloaded;
-//     public Dictionary<string,object> GetPreLoad { get { return preloaded; } }
-//     //¸Þ´ÏÀú ÀÎ½ºÅÏ½º »ý¼º½Ã ½ÇÇàµÇ´Â ÇÔ¼ö
-//     protected override void Init()
-//     {
-//         base.Init();
-//         preloaded = new Dictionary<string, object>();
-//     }
-//     /// <summary>
-//     /// 
-//     /// </summary>
-//     /// <typeparam name="T">¸®ÅÏÅ¸ÀÔ</typeparam>
-//     /// <param name="key">Å¸°Ù Å°°ª</param>
-//     /// <param name="callback">(obj)=>{targetInstance = obj}</param>
-//     public void LoadAsync<T>(string key, Action<T> callback, bool isCaching = false)
-//     {
-//         if (key.Contains(".sprite"))
-//         {
-//             key = $"{key}[{key.Replace(".sprite", "")}]";
-//         }
-//         AsyncOperationHandle<T> infoAsyncOP = Addressables.LoadAssetAsync<T>(key);
-//         infoAsyncOP.Completed += (op) =>
-//         {
-//
-//             callback?.Invoke(infoAsyncOP.Result);
-//             if (isCaching) Addressables.Release(infoAsyncOP);
-//         };
-//     }
-//     /// <summary>
-//     /// 
-//     /// </summary>
-//     /// <typeparam name="T">¸®ÅÏÅ¸ÀÔ</typeparam>
-//     /// <param name="label">Å¸°Ù Å°°ª</param>
-//     /// <param name="callback">(obj)=>{targetInstance = obj}</param>
-//     public void LoadAsyncAll<T>(string label, Action<(string, T)[]> callback, bool isCaching = true)
-//     {
-//         var labelKeys = Addressables.LoadResourceLocationsAsync(label, typeof(T));
-//         //labelÀÇ TÅ¸ÀÔÀÎ ¿ÀºêÁ§Æ®µéÀÇ Å°°ªÀ» °¡Á®¿Â´Ù
-//         labelKeys.WaitForCompletion();
-//         //resource¸¦ ÀüºÎ loadÇÒ¶§±îÁö ´ë±â
-//
-//         Debug.Log(labelKeys.Result);
-//         if (labelKeys.Result.Count == 0) { Debug.LogError($"{label}¶óº§ÀÌ ºñ¾îÀÖ½À´Ï´Ù."); callback.Invoke(null); }//ÇØ´çÇÏ´Â Å°°¡ ¾øÀ»°æ¿ì nullÀ» ¸®ÅÏ
-//
-//         int doneCount = 0;
-//
-//         (string, T)[] tempT = new (string, T)[labelKeys.Result.Count];
-//         for (int i = 0; i < tempT.Length; i++)
-//         {
-//             int curIndex = i;
-//             string curKey = labelKeys.Result[i].PrimaryKey; //ÄÝ¹éÀ» µ¿½Ã¿¡ ½ÇÇà½Ã Å¬·ÎÀú ÀÌ½´°¡ »ý±æ ¼ö ÀÖ±â¿¡ ºÐ¸®(´Ù¸¥ ·çÇÁÀÇ ½ºÅÃ¸Þ¸ð¸®¸¦ ÂüÁ¶ÇÏ´Â Çö»ó)
-//             LoadAsync<T>(labelKeys.Result[i].PrimaryKey, (result) =>
-//             {
-//                 tempT[curIndex].Item1 = curKey;
-//                 tempT[curIndex].Item2 = result;
-//                 doneCount++;
-//                 if (doneCount == labelKeys.Result.Count)
-//                 {
-//                     callback?.Invoke(tempT);
-//                 }
-//             }, isCaching);
-//         }
-//     }    
-//     /// <summary>
-//     /// 
-//     /// </summary>
-//     /// <typeparam name="T">´ë»óÀÇ Å¸ÀÔ</typeparam>
-//     /// <param name="label">´ë»ó ¶óº§ ÀÌ¸§</param>
-//     /// <param name="callback"> ´Ù½Ã</param>
-//     public void PreLoadAsyncAll(string label, Action<int, int> callback)
-//     {
-//         var oper = Addressables.LoadResourceLocationsAsync(label, typeof(object));
-//         //labelÀÇ TÅ¸ÀÔÀÎ ¿ÀºêÁ§Æ®µéÀÇ Å°°ªÀ» °¡Á®¿Â´Ù
-//         oper.WaitForCompletion();
-//         //resource¸¦ ÀüºÎ loadÇÒ¶§±îÁö ´ë±â
-//         if (oper.Result.Count == 0) { Debug.LogError($"{label}¶óº§ÀÌ ºñ¾îÀÖ½À´Ï´Ù."); callback.Invoke(0,0); }//ÇØ´çÇÏ´Â Å°°¡ ¾øÀ»°æ¿ì nullÀ» ¸®ÅÏ
-//
-//         int curr = 1;
-//         for (int i = 0; i < oper.Result.Count; i++)
-//         {
-//             string key = oper.Result[i].PrimaryKey;//Å¬·ÎÀúÀÌ½´ ¹æÁö
-//             int max = oper.Result.Count;
-//
-//             if (preloaded.ContainsKey(key))
-//             {
-//                 callback?.Invoke(max, curr);
-//                 curr++;
-//                 continue;
-//             }
-//
-//             LoadAsync<object>(key, (result) =>
-//             {
-//                 callback?.Invoke(max, curr);
-//                 curr++;
-//                 if (result == null)
-//                 {
-//                     Debug.Log("Å¸ÀÔÀÌ ¿Ã¹Ù¸£Áö ¾ÊÀ½");
-//                 }
-//                 else
-//                 {
-//                     preloaded.Add(key, result);
-//                 }
-//             },true);
-//         }
-//     }
-//     #region Json
-//     private string GetSavePath() => Application.persistentDataPath;
-//
-//     public bool SaveData<T>(T data, string fileName, bool isOverride)
-//     {
-//         string path = Path.Combine(GetSavePath(), fileName);
-//         string jsonStr = JsonUtility.ToJson(data);
-//         Debug.Log(path);
-//         if (File.Exists(path))
-//         {
-//             if (isOverride == true)
-//             {
-//                 File.WriteAllText(path, jsonStr);
-//                 return true;
-//             }
-//         }
-//         else
-//         {
-//             if (!File.Exists(GetSavePath()))
-//             {
-//                 Directory.CreateDirectory(GetSavePath());
-//             }
-//             StreamWriter file = File.CreateText(path);
-//             file.WriteLine(jsonStr);
-//             return true;
-//         }
-//         return false;
-//     }
-//     public T LoadData<T>(string fileName) where T : new()
-//     {
-//         string path = Path.Combine(GetSavePath(), fileName);
-//
-//         if (File.Exists(path))
-//         {
-//             T result;
-//             try
-//             {
-//                 result = JsonUtility.FromJson<T>(File.ReadAllText(path));
-//             }
-//             catch
-//             {
-//                 //ÆÄ½Ì ½ÇÆÐ½Ã
-//                 result = default(T);
-//             }
-//             return result;
-//         }
-//         else
-//         {
-//             Directory.CreateDirectory(GetSavePath());
-//             return default(T);
-//         }
-//     }
-//     #endregion
-// }
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.IO;
+using GenericManagers;
+using Unity.VisualScripting;
+using UnityEngine;
+using UnityEngine.AddressableAssets;
+using UnityEngine.ResourceManagement.AsyncOperations;
+
+public class ResourceManager : SingleTon<ResourceManager>//ALL : (250707)ï¿½Ì±ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ñµ¿±ï¿½ ï¿½Îµï¿½ ï¿½ï¿½Å©ï¿½ï¿½Æ® ï¿½ï¿½ï¿½ï¿½ï¿½Ï¸ï¿½ ï¿½ï¿½ï¿½ï¿½ Ä³ï¿½ï¿½ï¿½ØµÐ°ï¿½ ï¿½ï¿½ï¿½ï¿½Ï°ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ë¾ÆµÎ¸ï¿½ ï¿½Û¾ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ß°ï¿½ï¿½Õ´Ï´ï¿½
+{
+    private Dictionary<string, object> preloaded;
+    public Dictionary<string,object> GetPreLoad { get { return preloaded; } }
+    //ï¿½Þ´ï¿½ï¿½ï¿½ ï¿½Î½ï¿½ï¿½Ï½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Ç´ï¿½ ï¿½Ô¼ï¿½
+    protected override void Init()
+    {
+        base.Init();
+        preloaded = new Dictionary<string, object>();
+    }
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <typeparam name="T">ï¿½ï¿½ï¿½ï¿½Å¸ï¿½ï¿½</typeparam>
+    /// <param name="key">Å¸ï¿½ï¿½ Å°ï¿½ï¿½</param>
+    /// <param name="callback">(obj)=>{targetInstance = obj}</param>
+    public void LoadAsync<T>(string key, Action<T> callback, bool isCaching = false)
+    {
+        if (key.Contains(".sprite"))
+        {
+            key = $"{key}[{key.Replace(".sprite", "")}]";
+        }
+        AsyncOperationHandle<T> infoAsyncOP = Addressables.LoadAssetAsync<T>(key);
+        infoAsyncOP.Completed += (op) =>
+        {
+
+            callback?.Invoke(infoAsyncOP.Result);
+            if (isCaching) Addressables.Release(infoAsyncOP);
+        };
+    }
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <typeparam name="T">ï¿½ï¿½ï¿½ï¿½Å¸ï¿½ï¿½</typeparam>
+    /// <param name="label">Å¸ï¿½ï¿½ Å°ï¿½ï¿½</param>
+    /// <param name="callback">(obj)=>{targetInstance = obj}</param>
+    public void LoadAsyncAll<T>(string label, Action<(string, T)[]> callback, bool isCaching = true)
+    {
+        var labelKeys = Addressables.LoadResourceLocationsAsync(label, typeof(T));
+        //labelï¿½ï¿½ TÅ¸ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½ï¿½ï¿½ Å°ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Â´ï¿½
+        labelKeys.WaitForCompletion();
+        //resourceï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ loadï¿½Ò¶ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
+
+        Debug.Log(labelKeys.Result);
+        if (labelKeys.Result.Count == 0) { Debug.LogError($"{label}ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Ö½ï¿½ï¿½Ï´ï¿½."); callback.Invoke(null); }//ï¿½Ø´ï¿½ï¿½Ï´ï¿½ Å°ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ nullï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+
+        int doneCount = 0;
+
+        (string, T)[] tempT = new (string, T)[labelKeys.Result.Count];
+        for (int i = 0; i < tempT.Length; i++)
+        {
+            int curIndex = i;
+            string curKey = labelKeys.Result[i].PrimaryKey; //ï¿½Ý¹ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ã¿ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ Å¬ï¿½ï¿½ï¿½ï¿½ ï¿½Ì½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½Ö±â¿¡ ï¿½Ð¸ï¿½(ï¿½Ù¸ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ã¸Þ¸ð¸®¸ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï´ï¿½ ï¿½ï¿½ï¿½ï¿½)
+            LoadAsync<T>(labelKeys.Result[i].PrimaryKey, (result) =>
+            {
+                tempT[curIndex].Item1 = curKey;
+                tempT[curIndex].Item2 = result;
+                doneCount++;
+                if (doneCount == labelKeys.Result.Count)
+                {
+                    callback?.Invoke(tempT);
+                }
+            }, isCaching);
+        }
+    }    
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <typeparam name="T">ï¿½ï¿½ï¿½ï¿½ï¿½ Å¸ï¿½ï¿½</typeparam>
+    /// <param name="label">ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½Ì¸ï¿½</param>
+    /// <param name="callback"> ï¿½Ù½ï¿½</param>
+    public void PreLoadAsyncAll(string label, Action<int, int> callback)
+    {
+        var oper = Addressables.LoadResourceLocationsAsync(label, typeof(object));
+        //labelï¿½ï¿½ TÅ¸ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½ï¿½ï¿½ Å°ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Â´ï¿½
+        oper.WaitForCompletion();
+        //resourceï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ loadï¿½Ò¶ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
+        if (oper.Result.Count == 0) { Debug.LogError($"{label}ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Ö½ï¿½ï¿½Ï´ï¿½."); callback.Invoke(0,0); }//ï¿½Ø´ï¿½ï¿½Ï´ï¿½ Å°ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ nullï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+
+        int curr = 1;
+        for (int i = 0; i < oper.Result.Count; i++)
+        {
+            string key = oper.Result[i].PrimaryKey;//Å¬ï¿½ï¿½ï¿½ï¿½ï¿½Ì½ï¿½ ï¿½ï¿½ï¿½ï¿½
+            int max = oper.Result.Count;
+
+            if (preloaded.ContainsKey(key))
+            {
+                callback?.Invoke(max, curr);
+                curr++;
+                continue;
+            }
+
+            LoadAsync<object>(key, (result) =>
+            {
+                callback?.Invoke(max, curr);
+                curr++;
+                if (result == null)
+                {
+                    Debug.Log("Å¸ï¿½ï¿½ï¿½ï¿½ ï¿½Ã¹Ù¸ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½");
+                }
+                else
+                {
+                    preloaded.Add(key, result);
+                }
+            },true);
+        }
+    }
+    #region Json
+    private string GetSavePath() => Application.persistentDataPath;
+
+    public bool SaveData<T>(T data, string fileName, bool isOverride)
+    {
+        string path = Path.Combine(GetSavePath(), fileName);
+        string jsonStr = JsonUtility.ToJson(data);
+        Debug.Log(path);
+        if (File.Exists(path))
+        {
+            if (isOverride == true)
+            {
+                File.WriteAllText(path, jsonStr);
+                return true;
+            }
+        }
+        else
+        {
+            if (!File.Exists(GetSavePath()))
+            {
+                Directory.CreateDirectory(GetSavePath());
+            }
+            StreamWriter file = File.CreateText(path);
+            file.WriteLine(jsonStr);
+            return true;
+        }
+        return false;
+    }
+    public T LoadData<T>(string fileName) where T : new()
+    {
+        string path = Path.Combine(GetSavePath(), fileName);
+
+        if (File.Exists(path))
+        {
+            T result;
+            try
+            {
+                result = JsonUtility.FromJson<T>(File.ReadAllText(path));
+            }
+            catch
+            {
+                //ï¿½Ä½ï¿½ ï¿½ï¿½ï¿½Ð½ï¿½
+                result = default(T);
+            }
+            return result;
+        }
+        else
+        {
+            Directory.CreateDirectory(GetSavePath());
+            return default(T);
+        }
+    }
+    #endregion
+}

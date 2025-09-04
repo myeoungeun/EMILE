@@ -3,32 +3,31 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class PlayerAttack : AttackBase, IAttackHandler
+public class PlayerAttack : AttackBase
 {
-    public PlayerMovement playerMovement; //방향
-    public GameObject bulletPrefab; //총알
-    public Transform bulletStartTransform; //시작 위치
-    
-    public void OnAttack(InputAction.CallbackContext context)
-    {
-        if (context.phase == InputActionPhase.Started)
-            StartShooting();
-        else if (context.phase == InputActionPhase.Canceled)
-            StopShooting();
-    }
-    
-    protected override Vector3 GetShootDirection()
-    {
-        return playerMovement.lookDirectionRight ? Vector3.right : Vector3.left;
-    }
+    [SerializeField] private int[] bulletIDs = { 501, 502, 503 };
+    private int currentBulletIndex = 0;
 
-    protected override Transform GetBulletStart()
+    public void OnBulletChange(InputAction.CallbackContext context)
     {
-        return bulletStartTransform;
-    }
-
-    protected override GameObject GetBulletPrefab()
-    {
-        return bulletPrefab;
+        if (context.phase == InputActionPhase.Performed)
+        {
+            currentBulletIndex++;
+            if (currentBulletIndex >= bulletIDs.Length) //인덱스 넘어가면 0으로 초기화
+            {
+                currentBulletIndex = 0;
+            }
+            BulletData newBullet = GetBulletDataID(bulletIDs[currentBulletIndex]);
+            if (newBullet != null)
+            {
+                currentBullet = newBullet; //총알 종류 교체
+                SetBulletByID(newBullet.Id); //남은 탄 수 챙겨오기
+                Debug.Log($"총알 교체: ID {newBullet.Id}");
+            }
+            else
+            {
+                Debug.LogWarning($"총알 ID {bulletIDs[currentBulletIndex]}를 찾을 수 없습니다.");
+            }
+        }
     }
 }

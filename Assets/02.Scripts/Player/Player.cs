@@ -9,6 +9,7 @@ using UnityEngine.InputSystem;
 
 public class Player : MonoBehaviour
 {
+    private PlayerAttack playerAttack;
     private PlayerInputHandle inputHandle;
 
     private PlayerStatesMachine stateMachine;
@@ -40,11 +41,14 @@ public class Player : MonoBehaviour
 
     void Start()
     {
+        playerAttack = new();
+        playerAttack.Start();
         inputHandle = new PlayerInputHandle();
         inputHandle.input.PlayerInput.Jump.canceled += (a) => { if (jumpHandle.type == JumpTypes.linear && jumpHandle.state != JumpStates.doubleJump) {  currJumpTime = 0; } jumpHandle.ChangeJumpState(); };
         inputHandle.input.PlayerInput.Dash.started += OnDash;
         inputHandle.input.PlayerInput.Attack.started += OnShot;
         inputHandle.input.PlayerInput.Attack.canceled += ShotPause;
+        inputHandle.input.PlayerInput.BulletChange.performed += OnBulletChange;
         stateMachine = new PlayerStatesMachine(StateType.idle, transform.GetComponentInChildren<Animator>());
         TryGetComponent<Rigidbody2D>(out rb);
         moveHandle = new LinearMove(rb);
@@ -343,7 +347,6 @@ public class Player : MonoBehaviour
         }
         return Vector2.right;
     }
-    public GameObject tempBullet;
     private bool isShotting = false;
     float attackDelay = 0.2f; // 임시 공속값 무기객체 받으면 해당 변수로 대입
     float currAttakTime;//발사로부터의 시간,무기객체에서 받아야함
@@ -352,16 +355,26 @@ public class Player : MonoBehaviour
     private void Shot()
     {
         currAttakTime += Time.deltaTime;
-        if (isShotting == false) return;
-
+        if (!isShotting) return;
+        
         if (currAttakTime >= attackDelay)
         {
             currAttakTime = 0f;
-            //여기서 총알 생성
-            GameObject temp = GameObject.Instantiate(tempBullet);
-            temp.transform.position = transform.position + fireDir;
 
+            if (playerAttack != null)
+            {
+                float angle = Mathf.Atan2(fireDir.y, fireDir.x) * Mathf.Rad2Deg;
+                Vector3 spawnPos = transform.position + (Vector3)fireDir;
+                Quaternion spawnRot = Quaternion.Euler(0, 0, angle);
+
+                playerAttack.Shoot(spawnPos, spawnRot);
+            }
         }
+    }
+    
+    private void OnBulletChange(InputAction.CallbackContext ctx)
+    {
+        playerAttack.OnBulletChange(ctx);
     }
 
 
