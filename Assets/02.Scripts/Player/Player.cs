@@ -6,6 +6,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
+using UnityEngine.Timeline;
 
 public class Player : MonoBehaviour
 {
@@ -232,7 +233,7 @@ public class Player : MonoBehaviour
     {
         if (ctx.started)
         {
-            if (stateMachine.GetCurrType == StateType.dash || inputHandle.moveDir == Vector2.zero || airDashed || dashTimer < dashCooltime) return;
+            if (stateMachine.GetCurrType == StateType.dash || airDashed || dashTimer < dashCooltime) return;
             if (dashCoroutine != null) StopCoroutine(dashCoroutine);
             dashCoroutine = StartCoroutine(DashCoroutine());
         }
@@ -265,8 +266,14 @@ public class Player : MonoBehaviour
         float speed = stat.MoveSpeed * 2.5f;
         float goalDashTime = dashDistance / speed;
         float currDashTime = 0f;
+
         inputHandle.isPressingJump = false;
-        Vector2 dir = new Vector2(inputHandle.moveDir.x, 0);
+
+        Vector2 dir = Vector2.zero;
+
+        if (inputHandle.moveDir.x != 0) dir = new Vector2(inputHandle.moveDir.x, 0);
+        else dir = transform.localScale.x == -1 ? Vector2.left : Vector2.right;
+
         while (currDashTime < goalDashTime)
         {
             currDashTime += Time.deltaTime;

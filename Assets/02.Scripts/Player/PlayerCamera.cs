@@ -5,14 +5,23 @@ using UnityEngine;
 public class PlayerCamera : MonoBehaviour
 {
     [SerializeField] Transform playerTR;
-    [Range(0f,1f)][SerializeField] float sensitivity;
+    [Range(0f,10f)][SerializeField] float sensitivity;
     [SerializeField] Vector2 offset;
     [SerializeField]float minY;
     [SerializeField]float maxY;
     // Update is called once per frame
     void FixedUpdate()
     {
-        Vector3 curr = Vector3.Lerp(transform.position , playerTR.position , sensitivity);
+        float dist = GetEuclidDist(transform.position, playerTR.position);
+        Vector3 curr;
+        if (dist > 0)
+        {
+             curr = Vector3.Lerp(transform.position, playerTR.position, sensitivity / dist);
+        }
+        else
+        {
+            curr = Vector3.Lerp(transform.position, playerTR.position, sensitivity);
+        }
         curr.x += offset.x;
 
 
@@ -22,5 +31,9 @@ public class PlayerCamera : MonoBehaviour
 
         curr.z = -10f;
         transform.position = curr;
+    }
+    private float GetEuclidDist(Vector2 a , Vector2 b)
+    {
+        return Mathf.Pow((a.x - b.x),2) + Mathf.Pow((a.y - b.y),2);
     }
 }
