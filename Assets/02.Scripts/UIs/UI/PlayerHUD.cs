@@ -1,10 +1,11 @@
 using System;
 using System.Collections.Generic;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class PlayerHUD : MonoBehaviour
+public class PlayerHUD : UIBase
 {
     [Header("플레이어 정보")]
     [SerializeField] private Image portrait; // 플레이어 초상화
@@ -14,68 +15,51 @@ public class PlayerHUD : MonoBehaviour
     [Header("탄약 슬롯")]
     [SerializeField] private BulletSlotUI[] bulletSlots; // 탄약 슬롯(3개)
 
-    private Dictionary<BulletType, BulletSlotUI> slots = new Dictionary<BulletType, BulletSlotUI>();
+    private int curBulletIndex = 0; // 현재 선택된 탄약 슬롯 인덱스
 
-    private int selectedBulletIndex = 0; // 현재 선택된 탄약 슬롯 인덱스
-
-    // 유도탄은 플레이어가 사용 안해서 사용할 탄약 타입 지정
-    private BulletType[] playerBulletType = new BulletType[]
+    public override void Initialize()
     {
-        BulletType.Normal,
-        BulletType.Pierce,
-        BulletType.Hollow,
-    };
-
-    //정적 요소 초기화
-    public void InitPlayerHUD(Sprite portraitSprite, string playerName)
-    {
-        portrait.sprite = portraitSprite;
-        playerStatus.text = playerName;
+        hpBar.fillAmount = 1f; // 체력 초기값
+        playerStatus.text = "Player X 2";
+        InitSlots();
     }
 
-    public void InitSlots()
+    public void InitSlots() // 슬롯 초기화
     {
-        for (int i = 0; i < playerBulletType.Length; i++)
+        for (int i = 0; i < bulletSlots.Length; i++)
         {
             bulletSlots[i].Initialize();
-            slots[playerBulletType[i]] = bulletSlots[i];
         }
+
+        // 처음 기본탄 강조
+        curBulletIndex = 0;
+        bulletSlots[curBulletIndex].SetSelected(true);
     }
 
-    // TODO : 플레이어 정보를 받아와야함, Json으로 데이터 정적 관리 예정
-    public void InitPlayerData(Sprite portraitSprite, string name, int life, float hp, float maxHp)
+    //  슬롯 탄약 개수 업데이트
+    public void UpdateBulletCount(int slotIndex, int count)
     {
-        portrait.sprite = portraitSprite;
-        playerStatus.text = $"{name} X {life}";
-        hpBar.fillAmount = hp / maxHp; // 플레이어 현재 hp / 최대 hp
-    }
-
-    // TODO : 선택된 탄약 슬롯 강조 메서드
-    public void HighlightEquipBullet(BulletType type)
-    {
-        foreach (var bullet in slots)
+        if (slotIndex >= 0 && slotIndex < bulletSlots.Length)
         {
-            bullet.Value.SetSelected(bullet.Key == type);
-        }
-
-        selectedBulletIndex = Array.IndexOf(playerBulletType, type);
-    }
-
-    // TODO : 선택된 탄약 슬롯의 탄약 개수 갱신 메서드
-    public void UpdateEquipBullet(BulletType type, int bulletCount)
-    {
-        if (slots.ContainsKey(type))
-        {
-            slots[type].SetBulletCount(bulletCount);
+            bulletSlots[slotIndex].SetBulletCount(count);
         }
     }
 
-    // TODO : 선택된 탄약 사용(소비) 표시 메서드
-    public void UseEquipBullet()
+    // 현재 슬롯 탄약 사용 업데이트
+    public void UseCurBullet()
     {
-        bulletSlots[selectedBulletIndex].UseBullet();
+        bulletSlots[curBulletIndex].UseBullet();
     }
 
-    // 선택한 탄약 슬롯 인덱스 반환
-    public int GetEquipBulletIndex() => selectedBulletIndex;
+    // 체력 업데이트
+    public void UpdateHP(int curHp, int maxHp)
+    {
+        hpBar.fillAmount = Mathf.Clamp01((float)curHp / maxHp);
+    }
+
+    // 플레이어 목숨 업데이트
+    public void UpdateLife(int life)
+    {
+        playerStatus.text = $"Player X {life}";
+    }
 }
