@@ -4,7 +4,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class BossHUD : MonoBehaviour
+public class BossHUD : UIBase
 {
     [Header("보스 정보")]
     [SerializeField] private Image bossPortrait; // 보스 초상화
@@ -13,7 +13,7 @@ public class BossHUD : MonoBehaviour
 
     [SerializeField] private BossEnemy boss; // Inspector에서 드래그로 할당
 
-    void Start()
+    public override void Initialize()
     {
         InitBossData(boss); // Scene에 있는 동일 객체
     }
@@ -33,5 +33,4 @@ public class BossHUD : MonoBehaviour
     {
         bossHpBar.fillAmount = (float)boss.CurHp / boss.EnemyData.MaxHp;
     }
-
 }
