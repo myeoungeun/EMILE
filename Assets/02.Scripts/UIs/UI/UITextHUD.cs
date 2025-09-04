@@ -10,4 +10,10 @@ public class UITextHUD : UIBase
     {
         uiText.text = "";
     }
+
+    public void SetText(string message)
+    {
+        if (uiText != null)
+            uiText.text = message;
+    }
 }

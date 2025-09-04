@@ -268,11 +268,6 @@ Transform:
   - {fileID: 815207791}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!4 &292833382 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 3735721785697500969, guid: 56a0b6727aab7ec4fba78c3f762017ba, type: 3}
-  m_PrefabInstance: {fileID: 1985783007130969913}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &384430363
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -330,49 +325,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 65dc21112c78a6b49a8adecb918101da, type: 3}
---- !u!1 &663052084 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2252847904262227902, guid: 56a0b6727aab7ec4fba78c3f762017ba, type: 3}
-  m_PrefabInstance: {fileID: 1985783007130969913}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &663052086
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 663052084}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5bd3ff51269502841aa0e530672c78ab, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  monsterId: 401
-  spawnPoint: {fileID: 1791042023}
 --- !u!4 &815207791 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4633181835199051126, guid: 65dc21112c78a6b49a8adecb918101da, type: 3}
   m_PrefabInstance: {fileID: 384430363}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &996879829 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6020670077559704374, guid: 56a0b6727aab7ec4fba78c3f762017ba, type: 3}
-  m_PrefabInstance: {fileID: 1985783007130969913}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &996879831
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 996879829}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5bd3ff51269502841aa0e530672c78ab, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  monsterId: 301
-  spawnPoint: {fileID: 292833382}
 --- !u!224 &1132489422 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 2358717489588699344, guid: 2889a6b6bd8536940a674a49bb4665b0, type: 3}
@@ -1119,11 +1076,6 @@ Canvas:
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
---- !u!4 &1791042023 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 5807334450080735063, guid: 56a0b6727aab7ec4fba78c3f762017ba, type: 3}
-  m_PrefabInstance: {fileID: 1985783007130969913}
-  m_PrefabAsset: {fileID: 0}
 --- !u!114 &1847376921 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1017720300523928735, guid: 492046bea4760854686e223f1536933d, type: 3}
@@ -1629,13 +1581,7 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 6020670077559704374, guid: 56a0b6727aab7ec4fba78c3f762017ba, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 996879831}
-    - targetCorrespondingSourceObject: {fileID: 2252847904262227902, guid: 56a0b6727aab7ec4fba78c3f762017ba, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 663052086}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 56a0b6727aab7ec4fba78c3f762017ba, type: 3}
 --- !u!1001 &3073894826976118657
 PrefabInstance:
