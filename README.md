@@ -22,7 +22,7 @@
 
 ## **👨‍👩‍👧‍👦** [Team Notion 링크](https://www.notion.so/25a2dc3ef514819ab176e7b6345b8b87?pvs=21)
 
-## **✍️** [기획서 링크](https://www.notion.so/3-25b3482df94c809b94cec463b7f262e3)
+## **✍️** [기획서 링크]([https://www.notion.so/3-25b3482df94c809b94cec463b7f262e3](https://www.notion.so/E-M-I-L-E-25ad0881b9c4806cb7d7edf8a5762e60))
 
 ## **✍️** [담당 업무 로드맵 링크](https://www.notion.so/EMILE-2613482df94c806e92dcfb0f92accb4a)
 
