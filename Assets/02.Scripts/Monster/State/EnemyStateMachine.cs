@@ -11,9 +11,9 @@ public class EnemyStateMachine
     public Enemy Enemy { get { return enemy; } private set { enemy = value; } }
 
     // 현재 상태
-    private EnemyBaseState curState;
+    protected EnemyBaseState curState;
     // 각 상태를 담고 있는 딕셔너리
-    private Dictionary<Monster.EnemyStateType, EnemyBaseState> enemyStates;
+    protected Dictionary<Monster.EnemyStateType, EnemyBaseState> enemyStates;
 
     public EnemyStateMachine(Enemy owner)
     {
@@ -21,7 +21,7 @@ public class EnemyStateMachine
         Init();
     }
 
-    private void Init()
+    protected virtual void Init()
     {
         enemyStates = new Dictionary<Monster.EnemyStateType, EnemyBaseState>();
         enemyStates[Monster.EnemyStateType.Idle] = new EnemyIdleState(this);

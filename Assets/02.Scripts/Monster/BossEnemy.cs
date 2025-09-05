@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BossEnemy : Enemy, Monster.IAttackable, IDamageable
+public class BossEnemy : Enemy, IDamageable
 {
     public event System.Action onHpChanged;
 
@@ -27,33 +27,24 @@ public class BossEnemy : Enemy, Monster.IAttackable, IDamageable
     [SerializeField] private float chaseSpeed;
     [SerializeField] private float respawnDelay;
 
-    private bool is60Trigger;
-    private bool is30Trigger;
     private bool isAttacking;
+    public bool IsAttacking { get { return isAttacking; } }
 
     protected override void Awake()
     {
-        base.Awake();
+        rb = GetComponent<Rigidbody2D>();
+        col = GetComponentInChildren<Collider2D>();
+        anim = GetComponentInChildren<Animator>();
 
-        is60Trigger = false;
-        is30Trigger = false;
+        stateMachine = new BossEnemyStateMachine(this);
+
+        curHp = EnemyData.MaxHp;
+        originPos = transform.position;
+
         isAttacking = false;
 
         warningSign.gameObject.SetActive(false);
         originColor = warningSign.color;
-
-        onHpChanged -= CheckPatternChange;
-        onHpChanged += CheckPatternChange;
-    }
-
-    public void StartAttack()
-    {
-        CheckPatternChange();
-    }
-
-    public void StopAttack()
-    {
-        StopAllCoroutines();
     }
 
     private void PauseAttack()
@@ -68,6 +59,11 @@ public class BossEnemy : Enemy, Monster.IAttackable, IDamageable
             StopCoroutine(pattern2);
             pattern2 = null;
         }
+        if (pattern3 != null)
+        {
+            StopCoroutine(pattern3);
+            pattern3 = null;
+        }
     }
 
     public void TakeDamage(int damage)
@@ -78,11 +74,32 @@ public class BossEnemy : Enemy, Monster.IAttackable, IDamageable
         curHp -= Mathf.Abs(EnemyData.Defence - damage);
         curHp = Mathf.Max(curHp, 0);
 
-        onHpChanged.Invoke();
+        onHpChanged?.Invoke();
         if (curHp <= 0)
         {
             Die();
         }
+    }
+
+    public void Phase1()
+    {
+        pattern1 = StartCoroutine(AttackPattern1());
+    }
+
+    public void Phase2()
+    {
+        pattern1 = StartCoroutine(AttackPattern1());
+        pattern2 = StartCoroutine(AttackPattern2());
+    }
+
+    public void StartRushPattern()
+    {
+        pattern3 = StartCoroutine(AttackPattern3());
+    }
+
+    public void StopAllPattern()
+    {
+        PauseAttack();
     }
 
     private IEnumerator AttackPattern1()
@@ -111,9 +128,8 @@ public class BossEnemy : Enemy, Monster.IAttackable, IDamageable
         }
     }
 
-    private IEnumerator AttackPattern3()
+    public IEnumerator AttackPattern3()
     {
-        PauseAttack();
         float curChaseTime = 0f;
         float chaseTime = 2f;
 
@@ -160,31 +176,7 @@ public class BossEnemy : Enemy, Monster.IAttackable, IDamageable
         ToggelBosstEffect();
         pattern3 = null;
         isAttacking = false;
-        CheckPatternChange();
         yield return null;
-    }
-
-    private void CheckPatternChange()
-    {
-        if (isAttacking)
-            return;
-
-        if(pattern1 == null)
-            pattern1 = StartCoroutine(AttackPattern1());
-        if(pattern2 == null && curHp * 1.0f / EnemyData.MaxHp <= 0.9f)
-            pattern2 = StartCoroutine(AttackPattern2());
-        if(pattern3 == null && !is60Trigger && curHp * 1.0f / EnemyData.MaxHp <= 0.6f)
-        {
-            PauseAttack();
-            pattern3 = StartCoroutine(AttackPattern3());
-            is60Trigger = true;
-        }
-        if (pattern3 == null && !is30Trigger && curHp * 1.0f / EnemyData.MaxHp <= 0.3f)
-        {
-            PauseAttack();
-            pattern3 = StartCoroutine(AttackPattern3());
-            is30Trigger = true;
-        }
     }
 
     private void ToggelBosstEffect()

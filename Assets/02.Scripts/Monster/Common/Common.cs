@@ -14,7 +14,10 @@ namespace Monster
     {
         Idle,
         Detect,
-        Attack
+        Attack,
+        Phase1,
+        Phase2,
+        Rush
     }
 
     public static class Layers
