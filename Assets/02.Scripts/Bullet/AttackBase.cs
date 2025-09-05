@@ -29,7 +29,7 @@ public abstract class AttackBase
 
         if (bullet.BulletPrefab.TryGetComponent<Bullet>(out Bullet prefabBullet))
         {
-            bulletPool[index] = new ObjectPool<Bullet>(prefabBullet, 15);
+            bulletPool[index] = new ObjectPool<Bullet>(prefabBullet, 15, BulletPoolManager.Instance.transform);
         }
         else
         {
@@ -55,6 +55,9 @@ public abstract class AttackBase
                 bulletSo[tempI] = (BulletData)loadedObject;
                 InitBullet(bulletSo[tempI], tempI);
                 loadedCount++;
+
+                if (loadedCount == bulletNames.Length) // 모든 총알 로딩 완료 시 초기 총알 설정
+                    SetInitialBullet();
             }
             else
             {
@@ -65,14 +68,14 @@ public abstract class AttackBase
                     InitBullet(bulletSo[tempI], tempI);
                     loadedCount++;
 
-                    if (loadedCount == bulletNames.Length)
+                    if (loadedCount == bulletNames.Length){
                         SetInitialBullet();
+                    }
                 }, true);
             }
         }
 
-        if (loadedCount == bulletNames.Length) // 모든 총알 로딩 완료 시 초기 총알 설정
-            SetInitialBullet();
+        
     }
 
     private void SetInitialBullet()

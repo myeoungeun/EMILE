@@ -109,7 +109,7 @@ public class Player : MonoBehaviour
                         currJumpTime = 0f;
                         rb.velocity = Vector3.zero;
                         inputHandle.isPressingJump = false;
-                        
+                        airDashed = false;
                         jumpHandle = IJumpHandler.Factory(JumpTypes.wall, rb);
                         stateMachine.Change(StateType.grab);
                         ShotPause(StateType.grab);
@@ -124,6 +124,7 @@ public class Player : MonoBehaviour
                 else
                 {
                     if(jumpHandle.type == JumpTypes.wall&& stateMachine.GetCurrType == StateType.grab) jumpHandle = IJumpHandler.Factory(JumpTypes.linear, rb);
+                    moveHandle.OnMove((dir) * stat.MoveSpeed);
                 }
 
             }
@@ -283,9 +284,10 @@ public class Player : MonoBehaviour
 
         if (inputHandle.moveDir.x != 0) dir = new Vector2(inputHandle.moveDir.x, 0);
         else dir = transform.localScale.x == -1 ? Vector2.left : Vector2.right;
-
+        
         while (currDashTime < goalDashTime)
         {
+            RaycastHit2D ray = Physics2D.CircleCast(transform.position, 0.3f, Vector2.down, coll.bounds.extents.y, groundLayers);
             currDashTime += Time.deltaTime;
             yield return null;
             rb.velocity = dir * (stat.MoveSpeed * 2.5f);
