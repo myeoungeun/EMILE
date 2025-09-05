@@ -147,7 +147,7 @@ MonoBehaviour:
   missilePos: {fileID: 3127896104059460702}
   warningSign: {fileID: 7385940531988308828}
   warningColor: {r: 1, g: 0, b: 0, a: 0.39215687}
-  dashSpeed: 10
+  dashSpeed: 20
   chaseSpeed: 0.98
   respawnDelay: 1
   bulletCount: 4
