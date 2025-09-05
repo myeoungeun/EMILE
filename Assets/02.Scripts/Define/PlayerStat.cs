@@ -35,7 +35,7 @@ public class PlayerStat : IDamageable
 
     public void TakeDamage(int damage)
     {
-        if (isDashing) return;
+        if (isDashing || life <= 0) return;
         curHP -= damage;
         //TODO : 피격
         // HP 변경 이벤트 호출
@@ -54,7 +54,10 @@ public class PlayerStat : IDamageable
             }
             else
             {
+                curHP = 0;
+                life = 0;
                 UIManager.Instance.GameOverUI.Open();
+                Time.timeScale = 0;
             }
         }
     }
