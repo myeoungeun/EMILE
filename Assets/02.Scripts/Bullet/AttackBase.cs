@@ -104,6 +104,17 @@ public abstract class AttackBase
         }
     }
 
+    public void RaiseCurrentBulletState()
+    {
+        OnBulletSlotChanged?.Invoke(currentBulletIndex);
+        for (int i = 0; i < bulletSo.Length; i++)
+        {
+            if (bulletRemain.TryGetValue(i, out int count))
+                OnBulletCountChanged?.Invoke(i, count);
+        }
+    }
+
+
     public void SetBulletByID(int sID)
     {
         if (shotRemainCount > 0 && currentBullet != null) //총알 남은 탄 저장
