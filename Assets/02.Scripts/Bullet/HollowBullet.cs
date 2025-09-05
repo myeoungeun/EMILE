@@ -15,11 +15,13 @@ public class HollowBullet : Bullet
         {
             if (activeHollows.ContainsKey(iDamageable))
             {
-                StopCoroutine(activeHollows[iDamageable]);
+                Coroutine existingDot = activeHollows[iDamageable];
+                if (existingDot != null)
+                    CoroutineRunner.Instance.StopCoroutine(existingDot);
                 activeHollows.Remove(iDamageable);
             }
 
-            Coroutine dot = StartCoroutine(HollowDOT(iDamageable, bulletData.Damage / 5, 10f));
+            Coroutine dot = CoroutineRunner.Instance.StartCoroutine(HollowDOT(iDamageable, bulletData.Damage / 5, 10f));
             activeHollows.Add(iDamageable, dot);
         }
     }
