@@ -36,6 +36,7 @@ public class EnemyPlaceManager : MonoSingleton<EnemyPlaceManager>
                 {
                     Debug.LogError($"{enemy.Name} 프리팹 로드 실패");
                 }
+                Addressables.Release(handle);
             }
         }
     }
@@ -58,5 +59,14 @@ public class EnemyPlaceManager : MonoSingleton<EnemyPlaceManager>
     public void Return(Enemy enemy)
     {
         enemyDic[enemy.EnemyData.Id].Return(enemy);
+    }
+
+    public void ReturnAll()
+    {
+        Enemy[] enemies = transform.GetComponentsInChildren<Enemy>();
+        foreach(Enemy enemy in enemies)
+        {
+            Return(enemy);
+        }
     }
 }

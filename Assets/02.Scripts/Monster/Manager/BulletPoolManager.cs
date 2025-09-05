@@ -34,6 +34,7 @@ public class BulletPoolManager : MonoSingleton<BulletPoolManager>
                 {
                     Debug.LogError($"{bullet.Name} 프리팹 로드 실패");
                 }
+                Addressables.Release(handle);
             }
         }
     }
@@ -48,5 +49,14 @@ public class BulletPoolManager : MonoSingleton<BulletPoolManager>
     public void ReturnBullet(BaseBullet bullet)
     {
         bulletDic[bullet.BulletData.Id].Return(bullet);
+    }
+
+    public void ReturnAll()
+    {
+        BaseBullet[] bullets = transform.GetComponentsInChildren<BaseBullet>();
+        foreach (BaseBullet bullet in bullets)
+        {
+            ReturnBullet(bullet);
+        }
     }
 }

@@ -15,7 +15,7 @@ public class Player : MonoBehaviour
     private PlayerInputHandle inputHandle;
 
     private PlayerStatesMachine stateMachine;
-
+    private SpriteRenderer sr;
     private Rigidbody2D rb;
 
     [SerializeField]PlayerStat stat;
@@ -43,6 +43,7 @@ public class Player : MonoBehaviour
     {
         stat.TakeDamage(10);
     }
+    
     class PlatformTimer
     {
         public PlatformEffector2D effector;
@@ -51,6 +52,7 @@ public class Player : MonoBehaviour
 
     void Start()
     {
+        sr = transform.GetComponentInChildren<SpriteRenderer>();
         playerAttack = new();
         playerAttack.Init();
         inputHandle = new PlayerInputHandle();
@@ -65,6 +67,8 @@ public class Player : MonoBehaviour
         jumpHandle = new LinearJump(rb);
 
         stat = new PlayerStat(100,10,8f,16,2);
+        stat.Respawn += Respawn;
+
         UIManager.Instance.InGameUI.PlayerHUD.SetPlayer(this);
     }
 
@@ -109,7 +113,7 @@ public class Player : MonoBehaviour
                         currJumpTime = 0f;
                         rb.velocity = Vector3.zero;
                         inputHandle.isPressingJump = false;
-                        
+                        airDashed = false;
                         jumpHandle = IJumpHandler.Factory(JumpTypes.wall, rb);
                         stateMachine.Change(StateType.grab);
                         ShotPause(StateType.grab);
@@ -124,6 +128,7 @@ public class Player : MonoBehaviour
                 else
                 {
                     if(jumpHandle.type == JumpTypes.wall&& stateMachine.GetCurrType == StateType.grab) jumpHandle = IJumpHandler.Factory(JumpTypes.linear, rb);
+                    moveHandle.OnMove((dir) * stat.MoveSpeed);
                 }
 
             }
@@ -257,7 +262,7 @@ public class Player : MonoBehaviour
             stateMachine.Change(type);
             dashTimer = 0f;
             stat.isDashing = false;
-            rb.velocity = Vector2.zero;
+            //rb.velocity = Vector2.zero;
         }
     }
 
@@ -271,7 +276,7 @@ public class Player : MonoBehaviour
         airDashed = true;
         stat.isDashing = true;
         isGround = false;
-        stateMachine.Change(StateType.dash);
+        ShotPause(StateType.dash);
 
         float speed = stat.MoveSpeed * 2.5f;
         float goalDashTime = dashDistance / speed;
@@ -283,9 +288,10 @@ public class Player : MonoBehaviour
 
         if (inputHandle.moveDir.x != 0) dir = new Vector2(inputHandle.moveDir.x, 0);
         else dir = transform.localScale.x == -1 ? Vector2.left : Vector2.right;
-
+        
         while (currDashTime < goalDashTime)
         {
+            RaycastHit2D ray = Physics2D.CircleCast(transform.position, 0.3f, Vector2.down, coll.bounds.extents.y, groundLayers);
             currDashTime += Time.deltaTime;
             yield return null;
             rb.velocity = dir * (stat.MoveSpeed * 2.5f);
@@ -297,11 +303,14 @@ public class Player : MonoBehaviour
         DashCancel(StateType.idle);
     }
     #endregion
-    #region 공격관련 명은님 여기에다가 객체 바꿔서 넣어주시면되요
+    #region 공격
     
     public void OnShot(InputAction.CallbackContext ctx)
     {
+
         bulletDir = ConvertDirrection(inputHandle.moveDir);
+        if (stateMachine.GetCurrType == StateType.dash) { DashCancel(StateType.shot); }
+
         if (isGround)
         {
             if (bulletDir == BulletDirrections.S|| bulletDir == BulletDirrections.SE) bulletDir = BulletDirrections.E;
@@ -330,7 +339,7 @@ public class Player : MonoBehaviour
 
     private BulletDirrections ConvertDirrection(Vector2 vec)
     {
-        if (vec.x == 0 && vec.y == 0) return BulletDirrections.E;//방향설정 없을 시 정면쏘도록
+        if (vec.x == 0 && vec.y == 0) return transform.localScale.x == 1 ? BulletDirrections.E : BulletDirrections.W;//방향설정 없을 시 정면쏘도록
 
         if (vec.x == 0 && vec.y > 0) return BulletDirrections.N;
         else if (vec.x == 0 && vec.y < 0) return BulletDirrections.S;
@@ -397,6 +406,10 @@ public class Player : MonoBehaviour
 
 
     #endregion
+    public void Respawn()
+    {
+        transform.position = GameManager.GetInstance.GetCheckPoint;
+    }
 }
 public enum BulletDirrections
 {

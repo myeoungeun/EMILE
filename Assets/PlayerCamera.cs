@@ -10,6 +10,12 @@ public class PlayerCamera : MonoBehaviour
     [SerializeField]float minY;
     [SerializeField]float maxY;
     // Update is called once per frame
+    private IEnumerator Start()
+    {
+        Player stat = playerTR.parent.GetComponent<Player>();
+        yield return new WaitUntil(() => stat.Stat != null);
+        playerTR.parent.GetComponent<Player>().Stat.Respawn += ResetPosition;
+    }
     void FixedUpdate()
     {
         float dist = GetEuclidDist(transform.position, playerTR.position);
@@ -31,6 +37,11 @@ public class PlayerCamera : MonoBehaviour
 
         curr.z = -10f;
         transform.position = curr;
+    }
+    public void ResetPosition()
+    {
+        Vector3 pos = GameManager.GetInstance.GetCheckPoint;
+        transform.position = new Vector3(pos.x, pos.y, transform.position.z);
     }
     private float GetEuclidDist(Vector2 a , Vector2 b)
     {

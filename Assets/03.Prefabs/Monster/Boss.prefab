@@ -16,7 +16,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1902714043360354816
 Transform:
   m_ObjectHideFlags: 0
@@ -72,7 +72,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
   m_Color: {r: 1, g: 0.9795611, b: 0, a: 0.39215687}
   m_FlipX: 0
@@ -147,7 +147,7 @@ MonoBehaviour:
   missilePos: {fileID: 3127896104059460702}
   warningSign: {fileID: 7385940531988308828}
   warningColor: {r: 1, g: 0, b: 0, a: 0.39215687}
-  dashSpeed: 10
+  dashSpeed: 20
   chaseSpeed: 0.98
   respawnDelay: 1
   bulletCount: 4
@@ -314,7 +314,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 1
+  m_SortingOrder: 3
   m_Sprite: {fileID: 21300000, guid: 08d22e3695afd964f988adde96abbd31, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -608,6 +608,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7505035918974677497, guid: 497229ee0bf13d841bba146df32d3f2d, type: 3}
+      propertyPath: m_SortingOrder
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 8190194929550167206, guid: 497229ee0bf13d841bba146df32d3f2d, type: 3}
       propertyPath: m_Name
       value: Booster1
@@ -635,6 +639,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 7034398133028207508}
     m_Modifications:
+    - target: {fileID: 1226951791640531272, guid: 447d24d55c9ddf04fbd3468690ff2b78, type: 3}
+      propertyPath: m_SortingOrder
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 4109054584542393616, guid: 447d24d55c9ddf04fbd3468690ff2b78, type: 3}
       propertyPath: m_LocalScale.x
       value: -3

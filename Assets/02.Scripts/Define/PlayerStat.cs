@@ -7,6 +7,7 @@ public class PlayerStat : IDamageable
 {
     public event Action<int, int> OnHPChanged; // 현재HP, 최대HP
     public event Action<int> OnLifeChanged; // 목숨 수
+    public event Action Respawn;
 
 
     private int life;
@@ -35,7 +36,7 @@ public class PlayerStat : IDamageable
 
     public void TakeDamage(int damage)
     {
-        if (isDashing) return;
+        if (isDashing || life <= 0) return;
         curHP -= damage;
         //TODO : 피격
         // HP 변경 이벤트 호출
@@ -51,10 +52,14 @@ public class PlayerStat : IDamageable
             {
                 curHP = maxHP;
                 OnHPChanged?.Invoke(curHP, maxHP); // 부활 시 HP 회복 이벤트
+                Respawn?.Invoke();
             }
             else
             {
+                curHP = 0;
+                life = 0;
                 UIManager.Instance.GameOverUI.Open();
+                Time.timeScale = 0;
             }
         }
     }

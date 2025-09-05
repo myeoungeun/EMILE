@@ -39,6 +39,12 @@ public abstract class Enemy : MonoBehaviour
         originPos = transform.position;
     }
 
+    private void OnEnable()
+    {
+        stateMachine.Init();
+        curHp = EnemyData.MaxHp;
+    }
+
     private void Update()
     {
         stateMachine.Update();
@@ -91,6 +97,8 @@ public abstract class Enemy : MonoBehaviour
         if ((1 << collision.gameObject.layer) == LayerMask.GetMask(Monster.Layers.Player))
         {
             // Todo: 플레이어에게 피해를 줌
+            IDamageable player = collision.GetComponent<Player>()?.Stat as IDamageable;
+            player.TakeDamage(EnemyData.AttackPower);
             Debug.Log($"플레이어 충돌 피해: {EnemyData.AttackPower}");
         }
     }

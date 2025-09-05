@@ -10,7 +10,7 @@ public class BossEnemyStateMachine : EnemyStateMachine
     }
 
     // 보스는 일반 공격 대신 패턴을 진행하도록 수정
-    protected override void Init()
+    public override void Init()
     {
         enemyStates = new Dictionary<Monster.EnemyStateType, EnemyBaseState>();
         enemyStates[Monster.EnemyStateType.Idle] = new EnemyIdleState(this);

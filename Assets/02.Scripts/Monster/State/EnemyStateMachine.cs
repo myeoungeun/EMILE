@@ -21,7 +21,7 @@ public class EnemyStateMachine
         Init();
     }
 
-    protected virtual void Init()
+    public virtual void Init()
     {
         enemyStates = new Dictionary<Monster.EnemyStateType, EnemyBaseState>();
         enemyStates[Monster.EnemyStateType.Idle] = new EnemyIdleState(this);
