@@ -22,6 +22,13 @@
 
 ## **👨‍👩‍👧‍👦** [Team Notion 링크](https://www.notion.so/25a2dc3ef514819ab176e7b6345b8b87?pvs=21)
 
+## **✍️** [기획서 링크](https://www.notion.so/3-25b3482df94c809b94cec463b7f262e3)
+
+## **✍️** [담당 업무 로드맵 링크](https://www.notion.so/EMILE-2613482df94c806e92dcfb0f92accb4a)
+
+## **✍️** [QA 테스트](https://www.notion.so/ELIME-QA-264d0881b9c48054b336f18561de782e)
+
+
 ![image (19).png](https://github.com/user-attachments/assets/5f915775-73ea-438e-b1b3-af417c23ef77)
 
 | **게임명** | E.M.I.L.E. |
@@ -77,7 +84,7 @@
   <li>최종 발표 준비 및 시연</li>
 </ul>
 
-<hr>
+<br>
 
 📜 **[목차로 돌아가기](#목차)**
 <br><br><br>
