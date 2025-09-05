@@ -45,6 +45,7 @@ public class AsyncSceneManager : MonoBehaviour
                 {
                     if (sceneOper.IsDone)
                     {
+                        OnSceneChange?.Invoke();
                         SceneManager.SetActiveScene(sceneOper.Result.Scene);
                         gameObject.SetActive(false);
                     }
@@ -53,6 +54,7 @@ public class AsyncSceneManager : MonoBehaviour
                         sceneOper.Completed += h =>
                         {
                             // 원하는 시점에서 전환
+                            OnSceneChange?.Invoke();
                             SceneManager.SetActiveScene(h.Result.Scene);
                             gameObject.SetActive(false);
 

@@ -15,7 +15,7 @@ public class Player : MonoBehaviour
     private PlayerInputHandle inputHandle;
 
     private PlayerStatesMachine stateMachine;
-
+    private SpriteRenderer sr;
     private Rigidbody2D rb;
 
     [SerializeField]PlayerStat stat;
@@ -43,6 +43,7 @@ public class Player : MonoBehaviour
     {
         stat.TakeDamage(10);
     }
+    
     class PlatformTimer
     {
         public PlatformEffector2D effector;
@@ -51,6 +52,7 @@ public class Player : MonoBehaviour
 
     void Start()
     {
+        sr = transform.GetComponentInChildren<SpriteRenderer>();
         playerAttack = new();
         playerAttack.Init();
         inputHandle = new PlayerInputHandle();
@@ -65,6 +67,8 @@ public class Player : MonoBehaviour
         jumpHandle = new LinearJump(rb);
 
         stat = new PlayerStat(100,10,8f,16,2);
+        stat.Respawn += Respawn;
+
         UIManager.Instance.InGameUI.PlayerHUD.SetPlayer(this);
     }
 
@@ -402,6 +406,10 @@ public class Player : MonoBehaviour
 
 
     #endregion
+    public void Respawn()
+    {
+        transform.position = GameManager.GetInstance.GetCheckPoint;
+    }
 }
 public enum BulletDirrections
 {

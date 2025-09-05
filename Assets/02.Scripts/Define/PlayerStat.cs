@@ -7,6 +7,7 @@ public class PlayerStat : IDamageable
 {
     public event Action<int, int> OnHPChanged; // 현재HP, 최대HP
     public event Action<int> OnLifeChanged; // 목숨 수
+    public event Action Respawn;
 
 
     private int life;
@@ -51,6 +52,7 @@ public class PlayerStat : IDamageable
             {
                 curHP = maxHP;
                 OnHPChanged?.Invoke(curHP, maxHP); // 부활 시 HP 회복 이벤트
+                Respawn?.Invoke();
             }
             else
             {
