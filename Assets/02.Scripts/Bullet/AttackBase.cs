@@ -82,13 +82,10 @@ public abstract class AttackBase
     {
         currentBulletIndex = 0; // 501번
         currentBullet = bulletSo[currentBulletIndex];
-        
-        // 현재 슬롯의 탄 수 초기화
-        shotRemainCount = currentBullet.ShotMaxCount;
-        bulletRemain[currentBulletIndex] = shotRemainCount;
 
-        // 현재 슬롯 변경 이벤트 호출
-        OnBulletSlotChanged?.Invoke(currentBulletIndex);
+        // 현재 슬롯의 탄 수 초기화
+        shotRemainCount = currentBullet.ShotMaxCount; // 남은 총알 = 최대 총알
+        bulletRemain[currentBulletIndex] = shotRemainCount;
 
         // 모든 슬롯 탄 수 이벤트 호출
         for (int i = 0; i < bulletSo.Length; i++)
@@ -104,7 +101,8 @@ public abstract class AttackBase
         }
     }
 
-    public void RaiseCurrentBulletState()
+    // UI와 연결 직후 현재 상태를 재전송 
+    public void RaiseCurrentBulletState() 
     {
         OnBulletSlotChanged?.Invoke(currentBulletIndex);
         for (int i = 0; i < bulletSo.Length; i++)
