@@ -153,7 +153,7 @@ public class BossEnemy : Enemy, IDamageable
         ToggelBosstEffect();
 
         // 돌진
-        while (transform.position.x > -20f) // 화면 밖 기준값은 필요에 따라 수정
+        while (Mathf.Abs(originPos.x - transform.position.x) < 20) // 화면 밖 기준값은 필요에 따라 수정
         {
             transform.position += Vector3.left * dashSpeed * Time.deltaTime;
             yield return null;
@@ -163,7 +163,7 @@ public class BossEnemy : Enemy, IDamageable
         yield return new WaitForSeconds(respawnDelay);
 
         // 오른쪽 끝에서 원래 자리로 이동
-        Vector3 respawnPos = new Vector3(20f, originPos.y, originPos.z); // 오른쪽 끝 좌표는 수정 필요
+        Vector3 respawnPos = new Vector3(originPos.x + 20, originPos.y, originPos.z); // 오른쪽 끝 좌표는 수정 필요
         transform.position = respawnPos;
 
         // 복귀
