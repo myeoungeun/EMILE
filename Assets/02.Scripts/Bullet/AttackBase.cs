@@ -5,9 +5,12 @@ using UnityEngine.InputSystem;
 
 public abstract class AttackBase
 {
-    [Header("총알")] public BulletData[] bulletSo;
+    [Header("총알")]
+    public BulletData[] bulletSo;
     public BulletData currentBullet; //현재 장전
     protected int shotRemainCount; //남은 총알
+    
+    protected ObjectPool<Bullet> bulletPool;
     
     protected Dictionary<int, int> bulletRemain = new Dictionary<int, int>(); //남은 총알 개수 기록용
 
@@ -15,9 +18,21 @@ public abstract class AttackBase
     {
         currentBullet = bullet;
         shotRemainCount = bullet.ShotMaxCount;
+        
+        if (bullet.BulletPrefab.TryGetComponent<Bullet>(out Bullet prefabBullet))
+        {
+            bulletPool = new ObjectPool<Bullet>(prefabBullet, 30);
+        }
+        else
+        {
+            prefabBullet = bullet.BulletPrefab.AddComponent<Bullet>();
+            prefabBullet.Initialize(bullet,this);
+            bulletPool = new ObjectPool<Bullet>(prefabBullet, 30);
+            Debug.LogError("BulletPrefab에 Bullet 컴포넌트가 없음!");
+        }
     }
 
-    public void Start()
+    public void Init()
     {
         List<BulletData> bullets = new List<BulletData>();
         if (ResourceManager.GetInstance.GetPreLoad.TryGetValue("NormalBullet501", out object loadedObject))
@@ -60,16 +75,18 @@ public abstract class AttackBase
             return;
         }
         
-        GameObject bulletObj = GameObject.Instantiate(currentBullet.BulletPrefab, position, rotation); //총알 생성
-        if (bulletObj.TryGetComponent<Bullet>(out Bullet bullet))
+        Bullet bullet = bulletPool.Get();
+        bullet.transform.position = position;
+        bullet.transform.rotation = rotation;
+        if (bullet.TryGetComponent<Bullet>(out Bullet b))
         {
-            bullet.Initialize(currentBullet);
+            b.Initialize(currentBullet, this);
         }
         else
         {
-            bulletObj.AddComponent<Bullet>().Initialize(currentBullet);
+            bullet.gameObject.AddComponent<Bullet>().Initialize(currentBullet, this);
         }
-
+        
         if (shotRemainCount > 0) shotRemainCount--; //총알 감소
         Debug.Log($"남은 총알 {shotRemainCount}");
         bulletRemain[currentBullet.Id] = shotRemainCount; //남은 개수 기록
@@ -85,5 +102,10 @@ public abstract class AttackBase
         }
         Debug.LogWarning($"BulletData ID {id}를 찾을 수 없음!");
         return null;
+    }
+    
+    public void ReturnBullet(Bullet bullet)
+    {
+        bulletPool.Return(bullet);
     }
 }

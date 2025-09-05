@@ -7,7 +7,7 @@ public abstract class Enemy : MonoBehaviour
     [SerializeField] protected EnemyData _enemyData;
     public EnemyData EnemyData {  get { return _enemyData; } }
 
-    [SerializeField] private EnemyStateMachine stateMachine;
+    [SerializeField] protected EnemyStateMachine stateMachine;
     public EnemyStateMachine StateMachine { get { return stateMachine; } }
 
     [SerializeField] protected int curHp;
@@ -17,9 +17,9 @@ public abstract class Enemy : MonoBehaviour
     public Transform target;
     public GameObject explosionEffect;
 
-    [SerializeField] private Rigidbody2D rb;
-    [SerializeField] private Collider2D col;
-    [SerializeField] private Animator anim;
+    [SerializeField] protected Rigidbody2D rb;
+    [SerializeField] protected Collider2D col;
+    [SerializeField] protected Animator anim;
     public Animator Anim { get { return anim; } }
 
     protected virtual void Awake()
