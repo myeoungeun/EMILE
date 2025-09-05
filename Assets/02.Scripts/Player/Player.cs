@@ -6,6 +6,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.HID;
 using UnityEngine.Timeline;
 
 public class Player : MonoBehaviour
@@ -19,8 +20,9 @@ public class Player : MonoBehaviour
 
     [SerializeField]PlayerStat stat;
 
-    // PlayerStat 정보에 접근할 수 있도록 읽기 전용 프로퍼티 추가
+    // PlayerStat, PlayerAttack 정보에 접근할 수 있도록 읽기 전용 프로퍼티 추가
     public PlayerStat Stat => stat; 
+    public PlayerAttack Attack => playerAttack;
 
     private IMoveHandler moveHandle;
     private IJumpHandler jumpHandle;
@@ -37,7 +39,7 @@ public class Player : MonoBehaviour
 
     bool isGround;
 
-       public void TestTakeDamage() //데미지 테스트용 코드 - 병합후 삭제
+    public void TestTakeDamage() //데미지 테스트용 코드 - 병합후 삭제
     {
         stat.TakeDamage(10);
     }

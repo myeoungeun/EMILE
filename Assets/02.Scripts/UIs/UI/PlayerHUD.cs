@@ -4,6 +4,7 @@ using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
+using static UnityEditor.Experimental.GraphView.GraphView;
 
 public class PlayerHUD : UIBase
 {
@@ -18,6 +19,7 @@ public class PlayerHUD : UIBase
     private int curBulletIndex = 0; // 현재 선택된 탄약 슬롯 인덱스
 
     private PlayerStat playerStat;
+    private PlayerAttack playerAttack;
     public override void Initialize()
     {
         hpBar.fillAmount = 1f;
@@ -29,23 +31,29 @@ public class PlayerHUD : UIBase
     {
         //TODO: PlayerStat과 연결
         playerStat = player.Stat;
+        playerAttack = player.Attack;
+
         // TODO: PlayerStat에서 이벤트 구독
         playerStat.OnHPChanged += UpdateHP;
         playerStat.OnLifeChanged += UpdateLife;
-        //playerStat.OnBulletCountChanged += UpdateBulletCount;
-        //playerStat.OnBulletSlotChanged += ChangeBulletSlot;
 
         // 초기값 반영
         UpdateHP(playerStat.CurHP, playerStat.MaxHP);
         UpdateLife(playerStat.Life);
 
-        //for (int i = 0; i < bulletSlots.Length; i++)
-        //{
-        //    UpdateBulletCount(i, playerStat.GetBulletCount(i));
-        //}
+        playerAttack.OnBulletSlotChanged += ChangeBulletSlot;
+        playerAttack.OnBulletCountChanged += UpdateBulletCount;
 
-        //ChangeBulletSlot(playerStat.CurrentBulletIndex);
+        // 초기값 반영
+        UpdateHP(playerStat.CurHP, playerStat.MaxHP);
+        UpdateLife(playerStat.Life);
+
+        for (int i = 0; i < bulletSlots.Length; i++)
+            UpdateBulletCount(i, player.Attack.GetRemainCount(i));
+
+        ChangeBulletSlot(player.Attack.CurrentBulletIndex);
     }
+
     public void InitSlots() // 슬롯 초기화
     {
         for (int i = 0; i < bulletSlots.Length; i++)
