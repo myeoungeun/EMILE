@@ -9,25 +9,26 @@ public abstract class AttackBase
     public BulletData[] bulletSo;
     public BulletData currentBullet; //현재 장전
     protected int shotRemainCount; //남은 총알
-    
-    protected ObjectPool<Bullet> bulletPool;
+    protected int currentBulletIndex = 0;
+
+    protected ObjectPool<Bullet>[] bulletPool;
     
     protected Dictionary<int, int> bulletRemain = new Dictionary<int, int>(); //남은 총알 개수 기록용
 
-    public void InitBullet(BulletData bullet) //총알 개수 초기화
+    public void InitBullet(BulletData bullet,int index) //총알 개수 초기화
     {
         currentBullet = bullet;
         shotRemainCount = bullet.ShotMaxCount;
         
         if (bullet.BulletPrefab.TryGetComponent<Bullet>(out Bullet prefabBullet))
         {
-            bulletPool = new ObjectPool<Bullet>(prefabBullet, 15);
+            bulletPool[index] = new ObjectPool<Bullet>(prefabBullet, 15);
         }
         else
         {
             prefabBullet = bullet.BulletPrefab.AddComponent<Bullet>();
-            prefabBullet.Initialize(bullet,this);
-            bulletPool = new ObjectPool<Bullet>(prefabBullet, 15);
+            prefabBullet.Initialize(bullet, (idx,bullet) => {  },index);
+            bulletPool[index] = new ObjectPool<Bullet>(prefabBullet, 15);
             Debug.LogError("BulletPrefab에 Bullet 컴포넌트가 없음!");
         }
     }
@@ -36,14 +37,14 @@ public abstract class AttackBase
     {
         string[] bulletNames = { "NormalBullet501", "PierceBullet502", "HollowBullet503" };
         bulletSo = new BulletData[bulletNames.Length];
-        
+        bulletPool = new ObjectPool<Bullet>[bulletNames.Length];
         for (int i = 0; i < bulletNames.Length; i++)
         {
             int tempI = i; //클로저 이슈 대비를 위한 변수 복사
             if (ResourceManager.GetInstance.GetPreLoad.TryGetValue(bulletNames[tempI], out object loadedObject))
             {
                 bulletSo[tempI] = (BulletData)loadedObject;
-                InitBullet(bulletSo[tempI]);
+                InitBullet(bulletSo[tempI],tempI);
             }
             else
             {
@@ -51,7 +52,7 @@ public abstract class AttackBase
                 ResourceManager.GetInstance.LoadAsync<BulletData>(bulletNames[tempI], (result) =>
                 {
                     bulletSo[tempI] = result;
-                    InitBullet(bulletSo[tempI]);
+                    InitBullet(bulletSo[tempI], tempI);
                 }, true);
             }
         }
@@ -80,16 +81,16 @@ public abstract class AttackBase
             return;
         }
         
-        Bullet bullet = bulletPool.Get();
+        Bullet bullet = bulletPool[currentBulletIndex].Get();
         bullet.transform.position = position;
         bullet.transform.rotation = rotation;
         if (bullet.TryGetComponent<Bullet>(out Bullet b))
         {
-            b.Initialize(currentBullet, this);
+            b.Initialize(currentBullet,BulletEnqueue, currentBulletIndex);
         }
         else
         {
-            bullet.gameObject.AddComponent<Bullet>().Initialize(currentBullet, this);
+            bullet.gameObject.AddComponent<Bullet>().Initialize(currentBullet,BulletEnqueue, currentBulletIndex);
         }
         
         if (shotRemainCount > 0) shotRemainCount--; //총알 감소
@@ -108,9 +109,8 @@ public abstract class AttackBase
         Debug.LogWarning($"BulletData ID {id}를 찾을 수 없음!");
         return null;
     }
-    
-    public void ReturnBullet(Bullet bullet)
+    private void BulletEnqueue(int index, Bullet obj)
     {
-        bulletPool.Return(bullet);
+        bulletPool[index].Return(obj);
     }
 }
