@@ -21,7 +21,6 @@ public class PlayerAttack : AttackBase
             BulletData newBullet = GetBulletDataID(bulletIDs[currentBulletIndex]);
             if (newBullet != null)
             {
-                currentBullet = newBullet; //총알 종류 교체
                 SetBulletByID(newBullet.Id); //남은 탄 수 챙겨오기
                 Debug.Log($"총알 교체: ID {newBullet.Id}");
             }

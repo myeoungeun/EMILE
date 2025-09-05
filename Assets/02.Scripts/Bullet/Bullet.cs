@@ -41,7 +41,7 @@ public class Bullet : MonoBehaviour
          DealDamage(iDamageable);
       }
       
-      if (other.CompareTag("Wall") || other.CompareTag("DeadZone"))
+      if (other.CompareTag("Wall") || other.CompareTag("DeadZone") || other.CompareTag("BlockZone"))
       {
           ReturnToPool();
       }

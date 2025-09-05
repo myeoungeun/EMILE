@@ -12,7 +12,7 @@ public class Missile : BaseBullet
     {
         this.target = target;
         rotateCoroutine = null;
-        chasingTime = 1f;
+        chasingTime = 2f;
     }
 
     // 풀에서 꺼낼 때, 각도 초기화

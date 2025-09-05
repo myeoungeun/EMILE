@@ -27,6 +27,11 @@ public class BossEnemy : Enemy, IDamageable
     [SerializeField] private float chaseSpeed;
     [SerializeField] private float respawnDelay;
 
+    [SerializeField] private int bulletCount;
+    [SerializeField] private int misilleCount;
+    [SerializeField] private float bulletCoolTime;
+    [SerializeField] private float missileCoolTime;
+
     private bool isAttacking;
     public bool IsAttacking { get { return isAttacking; } }
 
@@ -45,6 +50,17 @@ public class BossEnemy : Enemy, IDamageable
 
         warningSign.gameObject.SetActive(false);
         originColor = warningSign.color;
+    }
+
+    private void OnEnable()
+    {
+        UIManager.Instance.InGameUI.BossHUD.Open();
+        UIManager.Instance.InGameUI.BossHUD.SetBossData(this);
+    }
+
+    private void OnDisable()
+    {
+        UIManager.Instance.InGameUI.BossHUD.Close();
     }
 
     private void PauseAttack()
@@ -104,6 +120,7 @@ public class BossEnemy : Enemy, IDamageable
 
     private IEnumerator AttackPattern1()
     {
+        int curBulletCount = 0;
         while(true)
         {
             yield return new WaitForSeconds(1 / EnemyData.AttackSpeed);
@@ -112,11 +129,19 @@ public class BossEnemy : Enemy, IDamageable
 
             // Todo: 오브젝트 풀에서 총알을 생성
             BulletPoolManager.Instance.GetBulletById(EnemyData.EnemyBulletId[0], bulletPos.position, target);
+
+            curBulletCount++;
+            if(curBulletCount >= bulletCount)
+            {
+                curBulletCount = 0;
+                yield return new WaitForSeconds(bulletCoolTime);
+            }
         }
     }
 
     private IEnumerator AttackPattern2()
     {
+        int curMissileCount = 0;
         while (true)
         {
             yield return new WaitForSeconds(1 / (EnemyData.AttackSpeed / 2));
@@ -125,6 +150,13 @@ public class BossEnemy : Enemy, IDamageable
 
             // Todo: 오브젝트 풀에서 미사일을 생성
             BulletPoolManager.Instance.GetBulletById(EnemyData.EnemyBulletId[1], missilePos.position, target);
+
+            curMissileCount++;
+            if(curMissileCount >= misilleCount)
+            {
+                curMissileCount = 0;
+                yield return new WaitForSeconds(missileCoolTime);
+            }
         }
     }
 
