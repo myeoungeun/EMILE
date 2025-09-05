@@ -1,0 +1,48 @@
+using System.Collections;
+using System.Collections.Generic;
+using TMPro;
+using UnityEngine;
+using UnityEngine.UI;
+
+public class BulletSlotUI : MonoBehaviour
+{
+    [SerializeField] private Image bulletIcon; // 탄약 이미지
+    [SerializeField] private TextMeshProUGUI bulletCount; // 탄약 개수
+    [SerializeField] private GameObject highlightBorder; // 선택 탄약 강조
+    //[SerializeField] private Image cooldown; // 탄약 쿨다운(재장전), 시간되면 구현 안되면 패스
+
+    private int curBulletCount; // 현재 탄약 개수
+    // 슬롯 초기화
+    public void Initialize()
+    {
+        curBulletCount = 0;
+        bulletCount.text = "0";
+
+        SetSelected(false); // 기본 선택 해제
+    }
+
+    // 선택 탄약 강조 표시
+    public void SetSelected(bool isSelected)
+    {
+        highlightBorder.SetActive(isSelected);
+    }
+
+    // 탄약 개수 갱신
+    public void SetBulletCount(int count)
+    {
+        curBulletCount = count;
+
+        if (count < 0) // -1이면 무한 탄약
+            bulletCount.text = "∞";
+        else
+            bulletCount.text = curBulletCount.ToString();
+    }
+
+    // 탄약 소모시 1씩 감소 - UI갱신
+    public void UseBullet()
+    {
+        if (curBulletCount <= 0) return;
+        curBulletCount--;
+        SetBulletCount(curBulletCount);
+    }
+}

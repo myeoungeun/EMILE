@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fcd7467f7dbbeb54a8fdf5b796fbb4ef, type: 3}
+  m_Name: MissileData
+  m_EditorClassIdentifier: 
+  id: 505
+  bulletName: "\uBCF4\uC2A4_\uBBF8\uC0AC\uC77C\uD22C\uC0AC\uCCB4"
+  imageId: 505
+  attackType: 1
+  bulletType: 2
+  damage: 25
+  speed: 5
+  pierceNum: 0
+  rotateSpeed: 120
+  explosionRange: 0
+  explosionEffectId: 605
+  shotInterval: 0
+  shotMaxCount: 0
+  bulletPrefab: {fileID: 0}

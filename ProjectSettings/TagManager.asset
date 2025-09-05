@@ -6,7 +6,14 @@ TagManager:
   tags:
   - Wall
   - Platform
+  - PassablePlatform
+  - BlockZone
+  - DeadZone
+  - TriggerObject
   - Ground
+  - Monster
+  - DeadZone
+  - Bullet
   layers:
   - Default
   - TransparentFX
