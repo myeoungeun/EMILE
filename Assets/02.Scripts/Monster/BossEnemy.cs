@@ -41,6 +41,11 @@ public class BossEnemy : Enemy, IDamageable
         col = GetComponentInChildren<Collider2D>();
         anim = GetComponentInChildren<Animator>();
 
+        target = null;
+        pattern1 = null;
+        pattern2 = null;
+        pattern3 = null;
+
         stateMachine = new BossEnemyStateMachine(this);
 
         curHp = EnemyData.MaxHp;

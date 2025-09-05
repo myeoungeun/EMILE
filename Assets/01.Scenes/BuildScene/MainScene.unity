@@ -123,11 +123,6 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!4 &21444399 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 5807334450080735063, guid: 56a0b6727aab7ec4fba78c3f762017ba, type: 3}
-  m_PrefabInstance: {fileID: 442339955}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &72500261
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5143,9 +5138,6 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 6020670077559704374, guid: 56a0b6727aab7ec4fba78c3f762017ba, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1861857136}
-    - targetCorrespondingSourceObject: {fileID: 2252847904262227902, guid: 56a0b6727aab7ec4fba78c3f762017ba, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1718784776}
   m_SourcePrefab: {fileID: 100100000, guid: 56a0b6727aab7ec4fba78c3f762017ba, type: 3}
 --- !u!1001 &500824613
 PrefabInstance:
@@ -6122,25 +6114,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isItem: 0
---- !u!1 &1718784771 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2252847904262227902, guid: 56a0b6727aab7ec4fba78c3f762017ba, type: 3}
-  m_PrefabInstance: {fileID: 442339955}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1718784776
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1718784771}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5bd3ff51269502841aa0e530672c78ab, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  monsterId: 401
-  spawnPoint: {fileID: 21444399}
 --- !u!1 &1726101745 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7306536586856327720, guid: 56a0b6727aab7ec4fba78c3f762017ba, type: 3}
