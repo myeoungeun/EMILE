@@ -34,6 +34,7 @@ public class BulletPoolManager : MonoSingleton<BulletPoolManager>
                 {
                     Debug.LogError($"{bullet.Name} 프리팹 로드 실패");
                 }
+                Addressables.Release(handle);
             }
         }
     }
