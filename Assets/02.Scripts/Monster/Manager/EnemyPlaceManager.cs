@@ -36,6 +36,7 @@ public class EnemyPlaceManager : MonoSingleton<EnemyPlaceManager>
                 {
                     Debug.LogError($"{enemy.Name} 프리팹 로드 실패");
                 }
+                Addressables.Release(handle);
             }
         }
     }
