@@ -7,8 +7,6 @@ public class PlayerAttack : AttackBase
 {
     
     private int[] bulletIDs = { 501, 502, 503 };
-    private int currentBulletIndex = 0;
-
     public void OnBulletChange(InputAction.CallbackContext context)
     {
         if (context.phase == InputActionPhase.Performed)

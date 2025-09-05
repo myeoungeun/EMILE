@@ -7,12 +7,14 @@ using UnityEngine;
 public class Bullet : MonoBehaviour
 { 
     protected BulletData bulletData;
-    private AttackBase owner; // 풀 반환용
+    private Action<int,Bullet> poolEnqueue;
+    private int bulletIndex;
 
-    public void Initialize(BulletData BulletData, AttackBase owner)
+    public void Initialize(BulletData BulletData, Action<int,Bullet> poolEnqueue,int index)
     {
         bulletData = BulletData;
-        this.owner = owner;
+        bulletIndex = index;
+        this.poolEnqueue = poolEnqueue;
     }
    
    protected virtual void Update() //shot move
@@ -63,6 +65,6 @@ public class Bullet : MonoBehaviour
    
    private void ReturnToPool()
    {
-       owner.ReturnBullet(this);
+       poolEnqueue.Invoke(bulletIndex,this);
    }
 }
