@@ -20,6 +20,9 @@ MonoBehaviour:
   damage: 25
   speed: 5
   pierceNum: 0
-  rotateSpeed: 60
+  rotateSpeed: 120
   explosionRange: 0
   explosionEffectId: 605
+  shotInterval: 0
+  shotMaxCount: 0
+  bulletPrefab: {fileID: 0}
