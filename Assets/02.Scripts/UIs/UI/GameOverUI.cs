@@ -10,6 +10,8 @@ public class GameOverUI : UIBase
 
     public void OnExitButton()
     {
+        EnemyPlaceManager.Instance.ReturnAll();
+        BulletPoolManager.Instance.ReturnAll();
         UIManager.Instance.ShowUI(UIType.GameStart); // GameStart 전환
     }
 }

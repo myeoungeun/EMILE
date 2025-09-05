@@ -49,4 +49,13 @@ public class BulletPoolManager : MonoSingleton<BulletPoolManager>
     {
         bulletDic[bullet.BulletData.Id].Return(bullet);
     }
+
+    public void ReturnAll()
+    {
+        BaseBullet[] bullets = transform.GetComponentsInChildren<BaseBullet>();
+        foreach (BaseBullet bullet in bullets)
+        {
+            ReturnBullet(bullet);
+        }
+    }
 }

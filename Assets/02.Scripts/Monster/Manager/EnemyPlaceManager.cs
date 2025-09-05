@@ -59,4 +59,13 @@ public class EnemyPlaceManager : MonoSingleton<EnemyPlaceManager>
     {
         enemyDic[enemy.EnemyData.Id].Return(enemy);
     }
+
+    public void ReturnAll()
+    {
+        Enemy[] enemies = transform.GetComponentsInChildren<Enemy>();
+        foreach(Enemy enemy in enemies)
+        {
+            Return(enemy);
+        }
+    }
 }
