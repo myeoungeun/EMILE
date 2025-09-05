@@ -8,7 +8,6 @@ public class TurretEnemy : Enemy, Monster.IAttackable, IDamageable
     [SerializeField] private Transform bulletPos;
 
     // 일단 현재는 총알 프리팹을 인스펙터로 등록하여 사용
-    public GameObject bullet;
     private Coroutine attackCoroutine;
 
     protected override void Awake()
