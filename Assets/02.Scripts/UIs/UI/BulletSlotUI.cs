@@ -31,7 +31,11 @@ public class BulletSlotUI : MonoBehaviour
     public void SetBulletCount(int count)
     {
         curBulletCount = count;
-        bulletCount.text = curBulletCount.ToString();
+
+        if (count < 0) // -1이면 무한 탄약
+            bulletCount.text = "∞";
+        else
+            bulletCount.text = curBulletCount.ToString();
     }
 
     // 탄약 소모시 1씩 감소 - UI갱신

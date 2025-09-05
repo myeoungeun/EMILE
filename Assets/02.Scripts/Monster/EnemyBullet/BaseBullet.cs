@@ -48,6 +48,10 @@ public class BaseBullet : MonoBehaviour
     protected virtual void HandleCollision(Collider2D other) //자식에서 재정의하기 위한 가상 메서드
     {
         var iDamageable = other.GetComponent<IDamageable>(); //충돌한 오브젝트에 IDamageable 인터페이스가 있으면 그걸 가져옴
+        if(iDamageable == null) // 플레이어는 해당 인터페이스가 스탯에 달려 있음
+        {
+            iDamageable = other.GetComponent<Player>()?.Stat as IDamageable;
+        }
 
         if (bulletData.AttackType == global::AttackType.Player && other.CompareTag("Monster")) //공격자가 정해져있어서 본인이 쏜 총에 안 맞음
         {
@@ -75,7 +79,7 @@ public class BaseBullet : MonoBehaviour
         if (target != null)
         {
             target.TakeDamage(bulletData.Damage);
+            BulletPoolManager.Instance.ReturnBullet(this);
         }
-        BulletPoolManager.Instance.ReturnBullet(this);
     }
 }

@@ -26,8 +26,8 @@ Transform:
   m_GameObject: {fileID: 680354253994639331}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -1, y: 0, z: 0}
-  m_LocalScale: {x: 4, y: 0.7, z: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 20, y: 0.7, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 586739226479644457}
@@ -147,9 +147,13 @@ MonoBehaviour:
   missilePos: {fileID: 3127896104059460702}
   warningSign: {fileID: 7385940531988308828}
   warningColor: {r: 1, g: 0, b: 0, a: 0.39215687}
-  dashSpeed: 10
+  dashSpeed: 20
   chaseSpeed: 0.98
   respawnDelay: 1
+  bulletCount: 4
+  misilleCount: 3
+  bulletCoolTime: 1
+  missileCoolTime: 3
 --- !u!50 &2368842971053037349
 Rigidbody2D:
   serializedVersion: 4

@@ -6,6 +6,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.HID;
 using UnityEngine.Timeline;
 
 public class Player : MonoBehaviour
@@ -18,6 +19,10 @@ public class Player : MonoBehaviour
     private Rigidbody2D rb;
 
     [SerializeField]PlayerStat stat;
+
+    // PlayerStat, PlayerAttack 정보에 접근할 수 있도록 읽기 전용 프로퍼티 추가
+    public PlayerStat Stat => stat; 
+    public PlayerAttack Attack => playerAttack;
 
     private IMoveHandler moveHandle;
     private IJumpHandler jumpHandle;
@@ -34,6 +39,10 @@ public class Player : MonoBehaviour
 
     bool isGround;
 
+    public void TestTakeDamage() //데미지 테스트용 코드 - 병합후 삭제
+    {
+        stat.TakeDamage(10);
+    }
     class PlatformTimer
     {
         public PlatformEffector2D effector;
@@ -55,7 +64,8 @@ public class Player : MonoBehaviour
         moveHandle = new LinearMove(rb);
         jumpHandle = new LinearJump(rb);
 
-        stat = new PlayerStat(100,10,8f,16);
+        stat = new PlayerStat(100,10,8f,16,2);
+        UIManager.Instance.InGameUI.PlayerHUD.SetPlayer(this);
     }
 
     // Update is called once per frame
