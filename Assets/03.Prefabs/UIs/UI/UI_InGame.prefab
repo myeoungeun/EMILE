@@ -500,7 +500,6 @@ MonoBehaviour:
   bulletIcon: {fileID: 7352589278093767209}
   bulletCount: {fileID: 4950034192399092079}
   highlightBorder: {fileID: 2723066408263669643}
-  cooldown: {fileID: 0}
 --- !u!1 &2718874670023944723
 GameObject:
   m_ObjectHideFlags: 0
@@ -764,7 +763,6 @@ MonoBehaviour:
   bossPortrait: {fileID: 8260046603413764702}
   bossName: {fileID: 3758084567598748450}
   bossHpBar: {fileID: 8862325621005572465}
-  boss: {fileID: 0}
 --- !u!1 &3101980086458692949
 GameObject:
   m_ObjectHideFlags: 0
@@ -1094,7 +1092,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerHUD: {fileID: 4594982196406175960}
   bossHUD: {fileID: 3551806812649664667}
-  uiTextHUD: {fileID: 0}
+  uiTextHUD: {fileID: 3268654112573222557}
 --- !u!1 &3682545369485955086
 GameObject:
   m_ObjectHideFlags: 0
@@ -1335,7 +1333,6 @@ MonoBehaviour:
   bulletIcon: {fileID: 4314266715929679717}
   bulletCount: {fileID: 6071816282817674879}
   highlightBorder: {fileID: 6066397785591083773}
-  cooldown: {fileID: 0}
 --- !u!1 &4461651949687619877
 GameObject:
   m_ObjectHideFlags: 0
@@ -1534,7 +1531,6 @@ MonoBehaviour:
   bulletIcon: {fileID: 4180906075045262902}
   bulletCount: {fileID: 8867345180075761326}
   highlightBorder: {fileID: 6890790669591780400}
-  cooldown: {fileID: 0}
 --- !u!1 &4677957097368266518
 GameObject:
   m_ObjectHideFlags: 0
@@ -1758,7 +1754,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 09d42d937e072264cbe8c1f3eeb21ba7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  uiText: {fileID: 0}
+  uiText: {fileID: 1017720300523928735}
 --- !u!1 &5921696125835291462
 GameObject:
   m_ObjectHideFlags: 0
