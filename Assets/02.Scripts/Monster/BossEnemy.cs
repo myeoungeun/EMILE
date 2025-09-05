@@ -57,8 +57,9 @@ public class BossEnemy : Enemy, IDamageable
         originColor = warningSign.color;
     }
 
-    private void OnEnable()
+    protected override void OnEnable()
     {
+        base.OnEnable();
         UIManager.Instance.InGameUI.BossHUD.Open();
         UIManager.Instance.InGameUI.BossHUD.SetBossData(this);
     }
