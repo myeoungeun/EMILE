@@ -255,7 +255,7 @@ public class Player : MonoBehaviour
             stateMachine.Change(type);
             dashTimer = 0f;
             stat.isDashing = false;
-            rb.velocity = Vector2.zero;
+            //rb.velocity = Vector2.zero;
         }
     }
 
@@ -269,7 +269,7 @@ public class Player : MonoBehaviour
         airDashed = true;
         stat.isDashing = true;
         isGround = false;
-        stateMachine.Change(StateType.dash);
+        ShotPause(StateType.dash);
 
         float speed = stat.MoveSpeed * 2.5f;
         float goalDashTime = dashDistance / speed;
@@ -295,11 +295,14 @@ public class Player : MonoBehaviour
         DashCancel(StateType.idle);
     }
     #endregion
-    #region 공격관련 명은님 여기에다가 객체 바꿔서 넣어주시면되요
+    #region 공격
     
     public void OnShot(InputAction.CallbackContext ctx)
     {
+
         bulletDir = ConvertDirrection(inputHandle.moveDir);
+        if (stateMachine.GetCurrType == StateType.dash) { DashCancel(StateType.shot); }
+
         if (isGround)
         {
             if (bulletDir == BulletDirrections.S|| bulletDir == BulletDirrections.SE) bulletDir = BulletDirrections.E;
@@ -328,7 +331,7 @@ public class Player : MonoBehaviour
 
     private BulletDirrections ConvertDirrection(Vector2 vec)
     {
-        if (vec.x == 0 && vec.y == 0) return BulletDirrections.E;//방향설정 없을 시 정면쏘도록
+        if (vec.x == 0 && vec.y == 0) return transform.localScale.x == 1 ? BulletDirrections.E : BulletDirrections.W;//방향설정 없을 시 정면쏘도록
 
         if (vec.x == 0 && vec.y > 0) return BulletDirrections.N;
         else if (vec.x == 0 && vec.y < 0) return BulletDirrections.S;
