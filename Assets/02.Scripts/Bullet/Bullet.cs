@@ -5,37 +5,19 @@ using Monster;
 using UnityEngine;
 
 public class Bullet : MonoBehaviour
-{
-   private AttackType attacker;
-   private BulletType bulletType;
-   protected int Id;
-   protected int Damage;
-   protected float Speed;
-   protected int Interval;
-   protected int Count;
-   protected Vector3 MoveDirection; //ÃÑ¾Ë ÀÌµ¿ ¹æÇâ
+{ 
+    protected BulletData bulletData;
+    private AttackBase owner; // í’€ ë°˜í™˜ìš©
 
-   public void Initialize(int sid, int sDamage, float sSpeed, int sInterval, int sCount, AttackType currentAttackType, BulletType currentBulletType, bool lookDirectionRight) //bullet¿¡°Ô °ø°İÀÚ Á¤º¸, ¹æÇâ Àü´Ş
-   {
-      attacker = currentAttackType;
-      bulletType = currentBulletType;
-      Id = sid;
-      Damage = sDamage;
-      Speed = sSpeed;
-      Interval = sInterval; //µô·¹ÀÌ·Î ¼öÁ¤ ÇÊ¿ä
-      Count = sCount; //ÃÑ¾Ë °³¼ö
-      MoveDirection = lookDirectionRight ? Vector3.right : Vector3.left; //¿À¸¥ÂÊ º¸¸é ¿À¸¥ÂÊ ¹ß»ç, ¿ŞÂÊ º¸°íÀÖÀ¸¸é ¿ŞÂÊ ¹ß»ç
-      
-      SpriteRenderer sr = GetComponent<SpriteRenderer>();
-      if (sr != null)
-      {
-          sr.flipX = !lookDirectionRight; //ÇÃ·¹ÀÌ¾î ¿ŞÂÊÀÌ¸é ÀÌ¹ÌÁöµµ µÚÁıÀ½
-      }
-   }
+    public void Initialize(BulletData BulletData, AttackBase owner)
+    {
+        bulletData = BulletData;
+        this.owner = owner;
+    }
    
-   void Update()
+   protected virtual void Update() //shot move
    {
-      transform.Translate(MoveDirection * Speed * Time.deltaTime, Space.World);
+       transform.Translate( transform.right * bulletData.Speed * Time.deltaTime, Space.World);
    }
    
    private void OnTriggerEnter2D(Collider2D other)
@@ -43,43 +25,44 @@ public class Bullet : MonoBehaviour
       HandleCollision(other);
    }
 
-   protected virtual void HandleCollision(Collider2D other) //ÀÚ½Ä¿¡¼­ ÀçÁ¤ÀÇÇÏ±â À§ÇÑ °¡»ó ¸Ş¼­µå
+   protected virtual void HandleCollision(Collider2D other) //ì¶©ëŒ ì²˜ë¦¬
    {
-      var iDamageable = other.GetComponent<IDamageable>(); //Ãæµ¹ÇÑ ¿ÀºêÁ§Æ®¿¡ IDamageable ÀÎÅÍÆäÀÌ½º°¡ ÀÖÀ¸¸é ±×°É °¡Á®¿È
+      var iDamageable = other.GetComponent<IDamageable>();
       
-      if (attacker == AttackType.Player && other.CompareTag("Monster")) //°ø°İÀÚ°¡ Á¤ÇØÁ®ÀÖ¾î¼­ º»ÀÎÀÌ ½ğ ÃÑ¿¡ ¾È ¸ÂÀ½
+      if (bulletData.AttackType == AttackType.Player && other.CompareTag("Monster"))
       {
-         Debug.Log("ÇÃ·¹ÀÌ¾î->¸ó½ºÅÍ °ø°İ");
+         Debug.Log("player -> monster attack");
          DealDamage(iDamageable);
       }
       
-      if (attacker == AttackType.Enemy && other.CompareTag("Player"))
+      if (bulletData.AttackType == AttackType.Enemy && other.CompareTag("Player"))
       {
-         Debug.Log("¸ó½ºÅÍ->ÇÃ·¹ÀÌ¾î °ø°İ");
+         Debug.Log("monster -> player attack");
          DealDamage(iDamageable);
       }
       
-      if (other.CompareTag("Wall")) //¸ğµç ÅºÈ¯Àº º®¿¡ ´êÀ¸¸é ÆÄ±«
+      if (other.CompareTag("Wall") || other.CompareTag("DeadZone"))
       {
-         Destroy(gameObject);
-      }
-      
-      if (other.CompareTag("DeadZone")) //µ¥µåÁ¸¿¡¼­ ¸ğµç ÅºÈ¯ ÆÄ±«
-      {
-         Destroy(gameObject);
+          ReturnToPool();
       }
    }
    
-   private void DealDamage(IDamageable target)
+   protected void DealDamage(IDamageable target)
    {
+       Debug.Log(target);
        if (target != null)
        {
-           target.TakeDamage(Damage);
-           Debug.Log(Damage);
+           target.TakeDamage(bulletData.Damage);
+           Debug.Log($"[DealDamage] ID={bulletData.Id}, Damage={bulletData.Damage}, Type={bulletData.BulletType}, Obj={gameObject.GetInstanceID()}");
        }
-       if (bulletType != BulletType.Pierce) //°üÅëÅºÀÏ¶§´Â ÆÄ±«x, Åë°úÇÔ
+       if (bulletData.BulletType != BulletType.Pierce) //pierceì¼ ê²½ìš° í†µê³¼
        {
-           Destroy(gameObject);
+           ReturnToPool();
        }
+   }
+   
+   private void ReturnToPool()
+   {
+       owner.ReturnBullet(this);
    }
 }
