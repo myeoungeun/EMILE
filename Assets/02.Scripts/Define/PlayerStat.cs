@@ -35,7 +35,7 @@ public class PlayerStat : IDamageable
 
     public void TakeDamage(int damage)
     {
-        if (!isDashing) return;
+        if (isDashing) return;
         curHP -= damage;
         //TODO : 피격
         // HP 변경 이벤트 호출
