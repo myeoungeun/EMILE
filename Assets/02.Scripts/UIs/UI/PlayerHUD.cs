@@ -28,17 +28,16 @@ public class PlayerHUD : UIBase
     public void SetPlayer(Player player)
     {
         //TODO: PlayerStat과 연결
-        //playerStat = player.Stat;
-
+        playerStat = player.Stat;
         // TODO: PlayerStat에서 이벤트 구독
-        //playerStat.OnHPChanged += UpdateHP;
-        //playerStat.OnLifeChanged += UpdateLife;
+        playerStat.OnHPChanged += UpdateHP;
+        playerStat.OnLifeChanged += UpdateLife;
         //playerStat.OnBulletCountChanged += UpdateBulletCount;
         //playerStat.OnBulletSlotChanged += ChangeBulletSlot;
 
         // 초기값 반영
-        //UpdateHP(playerStat.CurHP, playerStat.MaxHP);
-        //UpdateLife(playerStat.Life);
+        UpdateHP(playerStat.CurHP, playerStat.MaxHP);
+        UpdateLife(playerStat.Life);
 
         //for (int i = 0; i < bulletSlots.Length; i++)
         //{
