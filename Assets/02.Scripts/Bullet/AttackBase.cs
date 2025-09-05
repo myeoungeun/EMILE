@@ -21,37 +21,42 @@ public abstract class AttackBase
         
         if (bullet.BulletPrefab.TryGetComponent<Bullet>(out Bullet prefabBullet))
         {
-            bulletPool = new ObjectPool<Bullet>(prefabBullet, 30);
+            bulletPool = new ObjectPool<Bullet>(prefabBullet, 15);
         }
         else
         {
             prefabBullet = bullet.BulletPrefab.AddComponent<Bullet>();
             prefabBullet.Initialize(bullet,this);
-            bulletPool = new ObjectPool<Bullet>(prefabBullet, 30);
+            bulletPool = new ObjectPool<Bullet>(prefabBullet, 15);
             Debug.LogError("BulletPrefab에 Bullet 컴포넌트가 없음!");
         }
     }
 
     public void Init()
     {
-        List<BulletData> bullets = new List<BulletData>();
-        if (ResourceManager.GetInstance.GetPreLoad.TryGetValue("NormalBullet501", out object loadedObject))
+        string[] bulletNames = { "NormalBullet501", "PierceBullet502", "HollowBullet503" };
+        bulletSo = new BulletData[bulletNames.Length];
+        
+        for (int i = 0; i < bulletNames.Length; i++)
         {
-            bullets.Add((BulletData) loadedObject);
-        }
-        else
-        {
-            Debug.LogError("데이터 로딩 실패, 직접로드 실행");
-            ResourceManager.GetInstance.LoadAsync<BulletData>("NormalBullet501", (result) =>
+            int tempI = i; //클로저 이슈 대비를 위한 변수 복사
+            if (ResourceManager.GetInstance.GetPreLoad.TryGetValue(bulletNames[tempI], out object loadedObject))
             {
-                bullets.Add(result);
-                bulletSo = bullets.ToArray();
-                InitBullet(bulletSo[0]);
-            }, true);
-            return;
+                bulletSo[tempI] = (BulletData)loadedObject;
+                InitBullet(bulletSo[tempI]);
+            }
+            else
+            {
+                Debug.LogWarning("데이터 로딩 실패, 직접로드 실행");
+                ResourceManager.GetInstance.LoadAsync<BulletData>(bulletNames[tempI], (result) =>
+                {
+                    bulletSo[tempI] = result;
+                    InitBullet(bulletSo[tempI]);
+                }, true);
+            }
         }
-        bulletSo = bullets.ToArray();
-        InitBullet(bulletSo[0]);
+
+        
     }
 
     public void SetBulletByID(int sID)
