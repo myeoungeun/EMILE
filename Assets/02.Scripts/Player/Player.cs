@@ -37,6 +37,10 @@ public class Player : MonoBehaviour
 
     bool isGround;
 
+       public void TestTakeDamage() //데미지 테스트용 코드 - 병합후 삭제
+    {
+        stat.TakeDamage(10);
+    }
     class PlatformTimer
     {
         public PlatformEffector2D effector;
