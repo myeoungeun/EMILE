@@ -172,7 +172,13 @@ public abstract class AttackBase
     // 현재 슬롯별 남은 탄 수를 반환하는 메서드
     public int GetRemainCount(int slotIndex)
     {
-        if (slotIndex < 0 || slotIndex >= bulletSo.Length) return 0;
+        if (bulletSo == null || slotIndex < 0 || slotIndex >= bulletSo.Length)
+            return 0;
+
+        if (bulletSo[slotIndex] == null)
+            return 0;
+
         return bulletRemain.TryGetValue(bulletSo[slotIndex].Id, out int count) ? count : 0;
     }
+
 }

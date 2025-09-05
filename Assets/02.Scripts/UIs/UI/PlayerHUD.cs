@@ -44,10 +44,6 @@ public class PlayerHUD : UIBase
         playerAttack.OnBulletSlotChanged += ChangeBulletSlot;
         playerAttack.OnBulletCountChanged += UpdateBulletCount;
 
-        // 초기값 반영
-        UpdateHP(playerStat.CurHP, playerStat.MaxHP);
-        UpdateLife(playerStat.Life);
-
         for (int i = 0; i < bulletSlots.Length; i++)
             UpdateBulletCount(i, player.Attack.GetRemainCount(i));
 
