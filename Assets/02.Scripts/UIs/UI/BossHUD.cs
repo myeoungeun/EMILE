@@ -13,6 +13,23 @@ public class BossHUD : UIBase
 
     private BossEnemy bossEnemy;
 
+    private void OnEnable()
+    {
+        EnemyPlaceManager.Instance.OnBossSpawned += HandleBossSpawned;
+    }
+
+    private void OnDisable()
+    {
+        EnemyPlaceManager.Instance.OnBossSpawned -= HandleBossSpawned;
+    }
+
+    private void HandleBossSpawned(BossEnemy boss)
+    {
+        Open();
+        SetBossData(boss);
+    }
+
+
     public override void Initialize()
     {
         bossPortrait.sprite = null;

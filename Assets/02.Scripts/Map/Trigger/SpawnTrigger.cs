@@ -16,7 +16,6 @@ public class SpawnTrigger : MonoBehaviour
         {
             isTriggered = true;
 
-            // EnemyPlaceManager를 통해 소환
             EnemyPlaceManager.Instance.GetEnemyById(monsterId, spawnPoint.position);
         }
     }

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -11,6 +12,7 @@ public class EnemyPlaceManager : MonoSingleton<EnemyPlaceManager>
 
     private Dictionary<int, ObjectPool<Enemy>> enemyDic;
 
+    public event Action<BossEnemy> OnBossSpawned;
     private async void Start()
     {
         enemyDic = new Dictionary<int, ObjectPool<Enemy>>();
@@ -48,6 +50,11 @@ public class EnemyPlaceManager : MonoSingleton<EnemyPlaceManager>
     {
         Enemy enemy =  enemyDic[id]?.Get();
         enemy.transform.position = position;
+
+        //if(enemy is BossEnemy boss)
+        //{
+        //    OnBossSpawned?.Invoke(boss);
+        //}
     }
 
     /// <summary>
