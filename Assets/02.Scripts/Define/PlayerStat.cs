@@ -1,3 +1,4 @@
+using DG.Tweening;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -7,8 +8,8 @@ public class PlayerStat : IDamageable
 {
     public event Action<int, int> OnHPChanged; // 현재HP, 최대HP
     public event Action<int> OnLifeChanged; // 목숨 수
-    public event Action Respawn;
-
+    public Action Respawn;
+    public Action Damaged;
 
     private int life;
     public int Life { get { return life; } set { life = value; } }
@@ -40,8 +41,8 @@ public class PlayerStat : IDamageable
         curHP -= damage;
         //TODO : 피격
         // HP 변경 이벤트 호출
+        Damaged?.Invoke();
         OnHPChanged?.Invoke(curHP, maxHP);
-
         // HP가 0 이하라면 목숨 감소
         if (curHP <= 0)
         {

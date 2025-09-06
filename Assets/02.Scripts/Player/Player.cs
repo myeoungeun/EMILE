@@ -1,8 +1,8 @@
+using DG.Tweening;
 using PlayerStates;
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
@@ -72,10 +72,10 @@ public class Player : MonoBehaviour
 
         stat = new PlayerStat(100,10,8f,16,2);
         stat.Respawn += Respawn;
-
+        stat.Damaged = OnDamagedColor;
         UIManager.Instance.InGameUI.PlayerHUD.SetPlayer(this);
     }
-
+    
     // Update is called once per frame
     void Update()
     {
@@ -85,6 +85,14 @@ public class Player : MonoBehaviour
         SetPlatformTimer();
         OnMove();
         OnJump();
+    }
+
+    private void OnDamagedColor()
+    {
+        Sequence sequence = DOTween.Sequence();
+        sequence.Append(sr.DOColor(Color.clear, 0.03f));
+        sequence.Append(sr.DOColor(Color.red, 0.04f));
+        sequence.Append(sr.DOColor(Color.white, 0.03f));
     }
     private void OnMove()
     {
@@ -289,6 +297,7 @@ public class Player : MonoBehaviour
             stateMachine.Change(type);
             dashTimer = 0f;
             stat.isDashing = false;
+            coll.excludeLayers -= 1;
             //rb.velocity = Vector2.zero;
         }
     }
@@ -302,6 +311,9 @@ public class Player : MonoBehaviour
     {
         airDashed = true;
         stat.isDashing = true;
+        sr.DOKill();
+        coll.excludeLayers = 1;
+
         isGround = false;
         ShotPause(StateType.dash);
 
@@ -369,7 +381,7 @@ public class Player : MonoBehaviour
         stateMachine.Change(state);
         isShotting = false;
     }
-    
+
 
     private BulletDirrections ConvertDirrection(Vector2 vec)
     {
@@ -459,6 +471,7 @@ public class Player : MonoBehaviour
     private void OnDestroy()
     {
         EventReset();
+        sr.DOKill();
     }
 }
 public enum BulletDirrections
