@@ -14,5 +14,6 @@ public class GameManager : GenericManagers.SingleTon<GameManager>
     public void RegistCheckPoint(Vector3 pos)
     {
         checkPoint = pos;
+        Debug.Log("체크포인트 기록" + pos);
     }
 }

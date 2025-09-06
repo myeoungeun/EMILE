@@ -443,6 +443,7 @@ public class Player : MonoBehaviour
     #endregion
     private void Respawn()
     {
+        rb.velocity = Vector2.zero;
         transform.position = GameManager.GetInstance.GetCheckPoint;
     }
 

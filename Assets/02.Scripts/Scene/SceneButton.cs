@@ -5,9 +5,24 @@ using UnityEngine;
 public class SceneButton : MonoBehaviour
 {
     [SerializeField] string sceneName;
+    [SerializeField] bool isRetryButton = false;
     public void OnButtonClick()
     {
         StopAllCoroutines();
-        AsyncSceneManager.GetInstance.AsyncSceneLoad(sceneName);
+
+        if (isRetryButton)
+        {
+            string retryScene = UIManager.Instance.CurrentStageName;
+            if (!string.IsNullOrEmpty(retryScene))
+            {
+                Time.timeScale = 1f;
+                UIManager.Instance.GameOverUI.Close();
+                AsyncSceneManager.GetInstance.AsyncSceneLoad(retryScene);
+            }
+        }
+        else
+        {
+            AsyncSceneManager.GetInstance.AsyncSceneLoad(sceneName);
+        }
     }
 }
