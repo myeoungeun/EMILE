@@ -522,6 +522,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sceneName: LobbyScene
+  isRetryButton: 0
 --- !u!1 &5962645423202560948
 GameObject:
   m_ObjectHideFlags: 0

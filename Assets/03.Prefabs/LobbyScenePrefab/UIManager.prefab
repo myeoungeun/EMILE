@@ -587,6 +587,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sceneName: LobbyScene
+  isRetryButton: 0
 --- !u!114 &6318484456557955303 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 5637400412871300558, guid: 1d1a36ee5d335f94ea89899af591801e, type: 3}
@@ -748,6 +749,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sceneName: 
+  isRetryButton: 0
 --- !u!1001 &6003324752535806365
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1028,6 +1030,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sceneName: MainScene
+  isRetryButton: 0
 --- !u!114 &8070997193032986514 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 2033665117923316481, guid: d53bd2646a7c19948bf95f9c8ede6722, type: 3}

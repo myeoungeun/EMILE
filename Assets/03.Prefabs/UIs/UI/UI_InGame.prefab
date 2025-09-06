@@ -1093,6 +1093,7 @@ MonoBehaviour:
   playerHUD: {fileID: 4594982196406175960}
   bossHUD: {fileID: 3551806812649664667}
   uiTextHUD: {fileID: 3268654112573222557}
+  pauseButton: {fileID: 0}
 --- !u!1 &3682545369485955086
 GameObject:
   m_ObjectHideFlags: 0

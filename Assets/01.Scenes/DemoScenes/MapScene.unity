@@ -437,7 +437,8 @@ MonoBehaviour:
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: f176aad5a97582448999f8fe684a39c3, type: 2}
   m_sharedMaterial: {fileID: -4060328838574728251, guid: f176aad5a97582448999f8fe684a39c3, type: 2}
-  m_fontSharedMaterials: []
+  m_fontSharedMaterials:
+  - {fileID: -4060328838574728251, guid: f176aad5a97582448999f8fe684a39c3, type: 2}
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:
@@ -713,6 +714,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 482f6e3162b50a7459756591e0669a63, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  runDustLeft: {fileID: 0}
+  runDustRight: {fileID: 0}
   groundLayers:
     serializedVersion: 2
     m_Bits: 448

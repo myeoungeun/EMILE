@@ -430,7 +430,8 @@ MonoBehaviour:
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: f176aad5a97582448999f8fe684a39c3, type: 2}
   m_sharedMaterial: {fileID: -4060328838574728251, guid: f176aad5a97582448999f8fe684a39c3, type: 2}
-  m_fontSharedMaterials: []
+  m_fontSharedMaterials:
+  - {fileID: -4060328838574728251, guid: f176aad5a97582448999f8fe684a39c3, type: 2}
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:
@@ -752,6 +753,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sceneName: AsyncLoadDemo
+  isRetryButton: 0
 --- !u!1001 &4684071944617584584
 PrefabInstance:
   m_ObjectHideFlags: 0
