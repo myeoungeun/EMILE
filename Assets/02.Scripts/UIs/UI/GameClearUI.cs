@@ -18,6 +18,7 @@ public class GameClaerUI : UIBase
         EnemyPlaceManager.Instance.ReturnAll();
         BulletPoolManager.Instance.ReturnAll();
 
+        Time.timeScale = 1;
         //TODO 다음 스테이지 이동
         Debug.Log("다음 스테이지로 이동합니다");
         // 비동기 씬로드로 2번째 맵으로 이동
@@ -27,6 +28,7 @@ public class GameClaerUI : UIBase
 
     public void OnExitButton()
     {
+        Time.timeScale = 1;
         UIManager.Instance.GameOverUI.OnExitButton();
     }
 }
