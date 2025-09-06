@@ -6,9 +6,10 @@ public class CheckPointer : MonoBehaviour
 {
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.layer == 1<<9)
+        if (collision.gameObject.layer == 9)
         {
             GameManager.GetInstance.RegistCheckPoint(transform.position);
+            Destroy(this);
         }
     }
 }
