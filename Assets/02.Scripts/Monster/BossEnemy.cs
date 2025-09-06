@@ -100,6 +100,7 @@ public class BossEnemy : Enemy, IDamageable
         if (curHp <= 0)
         {
             Die();
+            UIManager.Instance.GameClaerUI.Open();
         }
     }
 
