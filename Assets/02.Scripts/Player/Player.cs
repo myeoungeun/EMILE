@@ -315,7 +315,7 @@ public class Player : MonoBehaviour
 
         if (inputHandle.moveDir.x != 0) dir = new Vector2(inputHandle.moveDir.x, 0);
         else dir = transform.localScale.x == -1 ? Vector2.left : Vector2.right;
-        float trailGoal = 0.1f;
+        float trailGoal = 0.05f;
         float trailCurr = 0f;
         while (currDashTime < goalDashTime)
         {
@@ -327,10 +327,7 @@ public class Player : MonoBehaviour
             if (trailGoal <= trailCurr)
             {
                 trailCurr = 0f;
-                GameObject temp = new GameObject("playerTrail");
-                temp.transform.position = transform.position;
-                temp.AddComponent<PlayerTrail>().Init(sr.sprite);
-
+                PlayerTrail.CreateTrail(sr.sprite, transform.position,transform.localScale);
             }
             if (inputHandle.isPressingJump)
             {
@@ -427,6 +424,7 @@ public class Player : MonoBehaviour
 
             if (playerAttack != null)
             {
+                PlayerTrail.CreateTrail(sr.sprite, transform.position,transform.localScale);
                 float angle = Mathf.Atan2(fireDir.y, fireDir.x) * Mathf.Rad2Deg;
                 Vector3 spawnPos = transform.position + (Vector3)fireDir;
                 Quaternion spawnRot = Quaternion.Euler(0, 0, angle);
