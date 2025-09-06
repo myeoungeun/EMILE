@@ -19,7 +19,7 @@ public class OptionPopup : PopupBase
 
     protected override void OnDisable()
     {
-        UIManager.Instance.InGameUI.PauseButton.TooglePause
+        UIManager.Instance.InGameUI.PauseButton.TooglePause();
     }
 
     public void SetSlider()
