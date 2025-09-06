@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public enum UIType
 {
@@ -35,6 +36,8 @@ public class UIManager : MonoSingleton<UIManager>
     private Dictionary<UIType, UIBase> uiDictionary; // 일반UI 관리
     private Dictionary<PopupType, PopupBase> popupDictionary; // 팝업UI 관리
 
+    public string CurrentStageName { get; private set; }
+
     protected override void Awake()
     {
         base.Awake();
@@ -46,6 +49,7 @@ public class UIManager : MonoSingleton<UIManager>
         {
             popup.Close(); // 팝업UI 비활성화
         }
+        SceneManager.sceneLoaded += OnSceneLoaded;
     }
 
     #region 초기화
@@ -100,4 +104,10 @@ public class UIManager : MonoSingleton<UIManager>
     public void ClosePopup(PopupType type) => popupDictionary[type].Close(); // 요청한 팝업UI 닫기
 
     #endregion
+
+    // 
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        CurrentStageName = scene.name;
+    }
 }
