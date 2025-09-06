@@ -9,6 +9,7 @@ public class EnemyData : ScriptableObject
     [SerializeField] private int id;
     [SerializeField] private string enemyName;
     [SerializeField] private int monsterImageId;
+    [SerializeField] private Sprite monsterSprite;
     // 상태
     [SerializeField] private int maxHp;
     // 현재 체력
