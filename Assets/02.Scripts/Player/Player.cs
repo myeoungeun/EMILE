@@ -8,6 +8,7 @@ using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.HID;
 using UnityEngine.Timeline;
+using static Unity.Burst.Intrinsics.X86;
 
 public class Player : MonoBehaviour
 {
@@ -90,6 +91,7 @@ public class Player : MonoBehaviour
     private void OnDamagedColor()
     {
         Sequence sequence = DOTween.Sequence();
+        if (sr == null) sr = transform.GetComponentInChildren<SpriteRenderer>();
         sequence.Append(sr.DOColor(Color.clear, 0.03f));
         sequence.Append(sr.DOColor(Color.red, 0.04f));
         sequence.Append(sr.DOColor(Color.white, 0.03f));

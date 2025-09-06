@@ -16,6 +16,8 @@ public class SceneButton : MonoBehaviour
             if (!string.IsNullOrEmpty(retryScene))
             {
                 Time.timeScale = 1f;
+                EnemyPlaceManager.Instance.ReturnAll();
+                BulletPoolManager.Instance.ReturnAll();
                 UIManager.Instance.GameOverUI.Close();
                 AsyncSceneManager.GetInstance.AsyncSceneLoad(retryScene);
             }

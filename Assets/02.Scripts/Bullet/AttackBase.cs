@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -39,7 +40,6 @@ public abstract class AttackBase
             Debug.LogError("BulletPrefab에 Bullet 컴포넌트가 없음!");
         }
     }
-
     public void Init()
     {
         string[] bulletNames = { "NormalBullet501", "PierceBullet502", "HollowBullet503" };
@@ -56,12 +56,12 @@ public abstract class AttackBase
                 InitBullet(bulletSo[tempI], tempI);
                 loadedCount++;
 
+
                 if (loadedCount == bulletNames.Length) // 모든 총알 로딩 완료 시 초기 총알 설정
                     SetInitialBullet();
             }
             else
             {
-                Debug.LogWarning("데이터 로딩 실패, 직접로드 실행");
                 ResourceManager.GetInstance.LoadAsync<BulletData>(bulletNames[tempI], (result) =>
                 {
                     bulletSo[tempI] = result;
@@ -175,11 +175,10 @@ public abstract class AttackBase
 
     public BulletData GetBulletDataID(int id)
     {
-        foreach (var bullet in bulletSo) //배열에서 id찾기
+        for (int i = 0; i < bulletSo.Length; i++)
         {
-            BulletData bData = bullet as BulletData;
-            if (bData != null && bData.Id == id)
-                return bData;
+            if (bulletSo[i] != null && bulletSo[i].Id == id)
+                return bulletSo[i];
         }
         Debug.LogWarning($"BulletData ID {id}를 찾을 수 없음!");
         return null;

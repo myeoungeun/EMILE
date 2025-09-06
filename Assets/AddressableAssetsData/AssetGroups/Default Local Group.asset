@@ -47,17 +47,338 @@ MonoBehaviour:
     m_SerializedLabels:
     - PreLoad
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: ac5081bca44706f4dbadbb64334dd606
+    m_Address: NormalBullet501
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - PreLoad
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 41a27efab32961b4fb3b0ac4e8f7d44c
     m_Address: PierceBullet502
     m_ReadOnly: 0
     m_SerializedLabels:
     - PreLoad
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: ac5081bca44706f4dbadbb64334dd606
-    m_Address: NormalBullet501
+  - m_GUID: a97c105638bdf8b4a8650670310a4cd3
+    m_Address: Packages/com.unity.render-pipelines.universal/Runtime/Materials/Sprite-Lit-Default.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 9705b9e73bdb102419d0ff88416fe7b0
+    m_Address: Assets/02.Scripts/Monster/Data/TurretData.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 63bfc874185900843b6ffc4663286e90
+    m_Address: Assets/02.Scripts/Monster/Data/BossData.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: a5c5775a1418a38449f478e932f176c9
+    m_Address: Assets/New Material.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 84ba68a09beb1884eaca7fb04b79faf8
+    m_Address: Assets/07.InputAction
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: d784612e7aff8b54d81e2f031d6c3dbb
+    m_Address: Assets/09.Sound
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: a83a830ebd660d94e8f43f95a0cb2e8f
+    m_Address: Assets/05.Sprites
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 79294e175a73d754da368e2ef2aac5ed
+    m_Address: Assets/06.Animations
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 995d692b290f90d4eb02a80c331e3d64
+    m_Address: Assets/08.Material
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 850d86af0ba94a644a81ade616abf615
+    m_Address: Assets/02.Scripts
     m_ReadOnly: 0
     m_SerializedLabels:
     - PreLoad
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: c798bdf595747794d914903ca134ffdd
+    m_Address: Assets/03.Prefabs/Effect/ExplosionEffect.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 6c47e54bd031e124c9db6a1cc199787f
+    m_Address: Assets/01.Scenes
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: e15bd3e90dd1e1344a852fe112a34d5b
+    m_Address: Sector_7
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: fe53e0454f4d5d94a8b6ffea27cc7460
+    m_Address: Sector_1
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: ae7dee87c940ed24da6ee593a6f084f3
+    m_Address: Sector_10
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: b680c2046b7399e4987160c90488175b
+    m_Address: Sector_9
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: d8a9c86965d1f9646918fc042f381408
+    m_Address: Sector_5
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 4b525225a42166a46a8cbee7a391c008
+    m_Address: Sector_3
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: b72ab7db37394044d9ebd954f38bf0d6
+    m_Address: Sector_8
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: b06fefe6dd1588d4480ed33a7c8c1377
+    m_Address: Sector_6
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 2fe0a6de73eb98247b8dd99997658229
+    m_Address: Sector_2
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 7ebcfd81e7224c94e96c21f2fee7d088
+    m_Address: Sector_0
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: e753d86277a3c5049a9b03ed14f41f10
+    m_Address: Sector_4
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 8da0d15265771f44d9729803e540ec51
+    m_Address: Assets/02.Scripts/Monster/EnemyBullet/Data/EnemyBulletData.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: da5d5967f405bc249a025b7b58dbf270
+    m_Address: Assets/02.Scripts/Monster/EnemyBullet/Data/MissileData.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 447d24d55c9ddf04fbd3468690ff2b78
+    m_Address: Assets/03.Prefabs/Effect/Booster2.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 497229ee0bf13d841bba146df32d3f2d
+    m_Address: Assets/03.Prefabs/Effect/Booster1.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: b0db8e8af8e687d46ae8ac909ca32d83
+    m_Address: Assets/03.Prefabs/Effect/HitEffect5.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 589b0aa4902164141a312b31d9912012
+    m_Address: Assets/03.Prefabs/Effect/HitEffect3.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 25edc7124c7485d4987c517e17d52559
+    m_Address: Assets/03.Prefabs/Effect/HitEffect6.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 6c88bdcb571f8b548bafab94cc3cef1a
+    m_Address: Assets/03.Prefabs/Effect/DustEffect.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: dfaf5d001d2cc834fbd897656c2cfe24
+    m_Address: Assets/03.Prefabs/Effect/HitEffect4.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: de965d5a8f070d344bbf8cab20f7e8e6
+    m_Address: Assets/03.Prefabs/Effect/HitEffect1.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 2f8f0c4c4cea5f64291e7d7995daadc7
+    m_Address: Assets/03.Prefabs/Effect/HitEffect2.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: ce8e247abded5d14780dc2a5295fd9af
+    m_Address: Assets/03.Prefabs/LobbyScenePrefab/UIManager.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 7a56ad38090d0eb4eae8ae7e3263bb62
+    m_Address: Assets/03.Prefabs/LobbyScenePrefab/LoadingCanvas.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: ee5d834f682a94541ba5418dbe15c1a4
+    m_Address: Assets/03.Prefabs/Maps/background/Backgrounds.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 2c48d7df4adb3d0438e7567e7b436c58
+    m_Address: Assets/03.Prefabs/Maps/background/Main Camera.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 76b9133306ae0544da1a76edc6efe307
+    m_Address: Assets/03.Prefabs/Maps/Stages/Stage2Map.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 56a0b6727aab7ec4fba78c3f762017ba
+    m_Address: Assets/03.Prefabs/Maps/Stages/Stage1Map.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 65dc21112c78a6b49a8adecb918101da
+    m_Address: Assets/03.Prefabs/Monster/EnemyPlaceManager.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 2f9772bed3c50af4a84a4c7a4c8438f9
+    m_Address: Assets/03.Prefabs/Monster/BulletPoolManager.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 981c26a3725d9cf44bb4e31b6f002423
+    m_Address: Assets/03.Prefabs/Projectile/PierceShot.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 244796d645511a64cb05f42296b2fa10
+    m_Address: Assets/03.Prefabs/Projectile/NomalShot.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: d54988da5a87c664ab0bfc3eb42a5db3
+    m_Address: Assets/03.Prefabs/Projectile/HollowShot.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 08b8657ec4823ca4c809bb122f968344
+    m_Address: Assets/05.Sprites/Projectile/NormalShot 1.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: b7e7e1ad6c3c38340b27c1d5c165739b
+    m_Address: Assets/05.Sprites/Projectile/Booster2.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 57ccef87c15b0c249b9435a59415aff4
+    m_Address: Assets/05.Sprites/Projectile/HollowShot.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 23d5011511d5c80489db97d0e99b5531
+    m_Address: Assets/05.Sprites/Projectile/EnemyShot.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: f0edce9db231127428007678f3354a73
+    m_Address: Assets/05.Sprites/Projectile/ExplosionEffect.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: ccc2d817447a319419cea141da5dd26e
+    m_Address: Assets/05.Sprites/Projectile/Booster1.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 3c88c99dbda30fe44968a5501d6ba4a6
+    m_Address: Assets/05.Sprites/Projectile/BossMissile.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 925a8767565458b48ae242a60a5be818
+    m_Address: Assets/06.Animations/Projectile/HollowShot.anim
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: b614957a95ce48c4b9f7e13f91b9902b
+    m_Address: Assets/06.Animations/Projectile/PierceShot.anim
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 97e8f7b6dd3dee341ac551c75332733f
+    m_Address: Assets/06.Animations/Projectile/ExplosionEffect.anim
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 786ae0dc91e24d94197e662232c47e0f
+    m_Address: Assets/06.Animations/Projectile/EnemyShot.anim
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 7a026e411706b9e4a84b700e52ec07e8
+    m_Address: Assets/06.Animations/Projectile/NormalShot.anim
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 213fe344f3eb3884ca3a707a67387cc3
+    m_Address: Assets/06.Animations/Projectile/NomalShot_0.controller
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: f8d15b1f35bb4584ebab8f85e930cf49
+    m_Address: Assets/06.Animations/Projectile/ExplosionEffect.controller
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: eadf197b13e1be748946f266761aa632
+    m_Address: Assets/06.Animations/Projectile/EnemyShot.controller
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 4c2e8458129ecf940b9045afe69de206
+    m_Address: Assets/06.Animations/Projectile/EnemyShot_0.controller
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 8c372d9bc326ca349a380695b85e8679
+    m_Address: Assets/06.Animations/Projectile/HollowShot_0.controller
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 0e96c92b29f517541a857b97d6f4232f
+    m_Address: Assets/06.Animations/Projectile/PierceShot_0.controller
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: a83a9255d3a570348ba43736dfe43247
+    m_Address: Assets/05.Sprites/Projectile/PierceShot.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 8ad4f6527651a9f41a24ba403c3d155e, type: 2}

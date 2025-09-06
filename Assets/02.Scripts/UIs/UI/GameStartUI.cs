@@ -33,7 +33,9 @@ public class GameStartUI : UIBase
 
     public void OnExitButton() // 나가기
     {
+#if UNITY_EDITOR
         UnityEditor.EditorApplication.isPlaying = false;
+#endif
         Application.Quit();
     }
 

@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public enum UIType
 {
@@ -23,7 +24,6 @@ public class UIManager : MonoSingleton<UIManager>
     [SerializeField] private InGameUI inGameUI;
     [SerializeField] private GameClaerUI gameClaerUI;
     [SerializeField] private GameOverUI gameOverUI;
-
     public GameStartUI GameStartUI => gameStartUI;
     public InGameUI InGameUI => inGameUI;
     public GameClaerUI GameClaerUI => gameClaerUI;
