@@ -24,6 +24,7 @@ public class OptionPopup : PopupBase
 
     public void OnKeyMappingButton() // 키매핑 팝업 열기
     {
+
         UIManager.Instance.ClosePopup(PopupType.Option); // 옵션 팝업UI 닫고
         UIManager.Instance.ShowPopup(PopupType.KeyMapping); // 키설정 팝업UI 열기
     }
@@ -32,5 +33,6 @@ public class OptionPopup : PopupBase
     {
         UIManager.Instance.ClosePopup(PopupType.Option);
         UIManager.Instance.GameStartUI.ShowTitleMenu(true);
+        UIManager.Instance.InGameUI.PauseButton.TooglePause();
     }
 }
