@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4197023856438628132}
   - component: {fileID: 1044317602075447520}
   m_Layer: 0
-  m_Name: Grid
+  m_Name: Stage1Map
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
