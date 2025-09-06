@@ -17,6 +17,11 @@ public class OptionPopup : PopupBase
         exitButton.onClick.AddListener(OnExitButton);
     }
 
+    protected override void OnDisable()
+    {
+        UIManager.Instance.InGameUI.PauseButton.TooglePause
+    }
+
     public void SetSlider()
     {
         //TODO 슬라이더 초기값 설정
@@ -33,6 +38,5 @@ public class OptionPopup : PopupBase
     {
         UIManager.Instance.ClosePopup(PopupType.Option);
         UIManager.Instance.GameStartUI.ShowTitleMenu(true);
-        UIManager.Instance.InGameUI.PauseButton.TooglePause();
     }
 }
