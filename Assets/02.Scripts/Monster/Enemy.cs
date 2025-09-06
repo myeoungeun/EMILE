@@ -39,7 +39,7 @@ public abstract class Enemy : MonoBehaviour
         originPos = transform.position;
     }
 
-    private void OnEnable()
+    protected virtual void OnEnable()
     {
         stateMachine.Init();
         curHp = EnemyData.MaxHp;

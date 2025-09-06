@@ -41,6 +41,11 @@ public class BossEnemy : Enemy, IDamageable
         col = GetComponentInChildren<Collider2D>();
         anim = GetComponentInChildren<Animator>();
 
+        target = null;
+        pattern1 = null;
+        pattern2 = null;
+        pattern3 = null;
+
         stateMachine = new BossEnemyStateMachine(this);
 
         curHp = EnemyData.MaxHp;
@@ -52,8 +57,9 @@ public class BossEnemy : Enemy, IDamageable
         originColor = warningSign.color;
     }
 
-    private void OnEnable()
+    protected override void OnEnable()
     {
+        base.OnEnable();
         UIManager.Instance.InGameUI.BossHUD.Open();
         UIManager.Instance.InGameUI.BossHUD.SetBossData(this);
     }

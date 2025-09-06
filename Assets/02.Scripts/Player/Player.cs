@@ -56,6 +56,7 @@ public class Player : MonoBehaviour
         playerAttack = new();
         playerAttack.Init();
         inputHandle = new PlayerInputHandle();
+        EventReset();
         inputHandle.input.PlayerInput.Jump.canceled += (a) => { if (jumpHandle.type == JumpTypes.linear && jumpHandle.state != JumpStates.doubleJump) {  currJumpTime = 0; } jumpHandle.ChangeJumpState(); };
         inputHandle.input.PlayerInput.Dash.started += OnDash;
         inputHandle.input.PlayerInput.Attack.started += OnShot;
@@ -406,9 +407,23 @@ public class Player : MonoBehaviour
 
 
     #endregion
-    public void Respawn()
+    private void Respawn()
     {
         transform.position = GameManager.GetInstance.GetCheckPoint;
+    }
+
+    private void EventReset()
+    {
+        dashCoroutine = null;
+        inputHandle.input.PlayerInput.Jump.canceled -= (a) => { if (jumpHandle.type == JumpTypes.linear && jumpHandle.state != JumpStates.doubleJump) { currJumpTime = 0; } jumpHandle.ChangeJumpState(); };
+        inputHandle.input.PlayerInput.Dash.started -= OnDash;
+        inputHandle.input.PlayerInput.Attack.started -= OnShot;
+        inputHandle.input.PlayerInput.Attack.canceled -= ShotPause;
+        inputHandle.input.PlayerInput.BulletChange.performed -= OnBulletChange;
+    }
+    private void OnDestroy()
+    {
+        EventReset();
     }
 }
 public enum BulletDirrections
@@ -423,6 +438,24 @@ public class PlayerInputHandle
     public PlayerInputHandle()
     {
         input = new PlayerInputActionGenerated();
+        input.RemoveAllBindingOverrides();
+
+        RemoveKeyEvent();
+        RegistKeyEvent();
+        
+
+    }
+    private void RemoveKeyEvent()
+    {
+        input.PlayerInput.Disable();
+        input.PlayerInput.Move.Reset();
+        input.PlayerInput.Jump.Reset();
+        input.PlayerInput.Attack.Reset();
+        input.PlayerInput.Dash.Reset();
+        input.PlayerInput.BulletChange.Reset();
+    }
+    private void RegistKeyEvent()
+    {
         input.PlayerInput.Enable();
         input.PlayerInput.Move.canceled += OnMove;
         input.PlayerInput.Move.performed += OnMove;
