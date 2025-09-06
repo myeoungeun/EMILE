@@ -6068,6 +6068,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1469028468245644140, guid: ee5d834f682a94541ba5418dbe15c1a4, type: 3}
+      propertyPath: m_SortingOrder
+      value: -10
+      objectReference: {fileID: 0}
+    - target: {fileID: 1555802905658022196, guid: ee5d834f682a94541ba5418dbe15c1a4, type: 3}
+      propertyPath: m_SortingOrder
+      value: -10
+      objectReference: {fileID: 0}
     - target: {fileID: 2013120357822552473, guid: ee5d834f682a94541ba5418dbe15c1a4, type: 3}
       propertyPath: m_Name
       value: Backgrounds
@@ -6111,6 +6119,22 @@ PrefabInstance:
     - target: {fileID: 3395084147813749708, guid: ee5d834f682a94541ba5418dbe15c1a4, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3975044471381171536, guid: ee5d834f682a94541ba5418dbe15c1a4, type: 3}
+      propertyPath: m_SortingOrder
+      value: -10
+      objectReference: {fileID: 0}
+    - target: {fileID: 4018620814381463304, guid: ee5d834f682a94541ba5418dbe15c1a4, type: 3}
+      propertyPath: m_SortingOrder
+      value: -10
+      objectReference: {fileID: 0}
+    - target: {fileID: 5680038746347349597, guid: ee5d834f682a94541ba5418dbe15c1a4, type: 3}
+      propertyPath: m_SortingOrder
+      value: -10
+      objectReference: {fileID: 0}
+    - target: {fileID: 6955397460527555570, guid: ee5d834f682a94541ba5418dbe15c1a4, type: 3}
+      propertyPath: m_SortingOrder
+      value: -10
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
