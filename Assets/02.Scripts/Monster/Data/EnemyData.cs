@@ -38,5 +38,6 @@ public class EnemyData : ScriptableObject
     public float DetectRange { get { return detectRange; } }
     public float AttackRange { get { return attackRange; } }
     public List<int> EnemyBulletId { get { return enemyBulletId; } }
+    public Sprite MonsterSprite { get { return monsterSprite; } }
 
 }
