@@ -16,7 +16,7 @@ MonoBehaviour:
   bulletName: "\uBCF4\uD1B5\uD22C\uC0AC\uCCB4"
   imageId: 502
   attackType: 0
-  bulletType: 1
+  bulletType: 0
   damage: 10
   speed: 40
   pierceNum: 0

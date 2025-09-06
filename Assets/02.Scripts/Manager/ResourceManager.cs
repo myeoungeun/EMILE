@@ -110,9 +110,11 @@ public class ResourceManager : SingleTon<ResourceManager>//ALL : (250707)�̱�
                 }
                 else
                 {
+                    Debug.Log($"{key}프리로드 성공");
+
                     preloaded.Add(key, result);
                 }
-            },true);
+            },false);
         }
     }
     #region Json

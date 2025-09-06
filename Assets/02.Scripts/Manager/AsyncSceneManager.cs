@@ -1,7 +1,6 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.AddressableAssets.Build;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 using UnityEngine.ResourceManagement.AsyncOperations;
@@ -28,13 +27,8 @@ public class AsyncSceneManager : MonoBehaviour
     // Start is called before the first frame update
     public void AsyncSceneLoad(string sceneName)
     {
-        Scene lastScene = SceneManager.GetActiveScene();
 
-        var sceneOper = Addressables.LoadSceneAsync(sceneName, LoadSceneMode.Additive);
         gameObject.SetActive(true);
-
-        if (currScene.IsValid()) sceneOper.Completed += h => { Addressables.UnloadSceneAsync(currScene); };
-        else sceneOper.Completed += h => { SceneManager.UnloadSceneAsync(lastScene); };
 
         ResourceManager.GetInstance.PreLoadAsyncAll("PreLoad", (max, curr) =>
             {
@@ -43,6 +37,11 @@ public class AsyncSceneManager : MonoBehaviour
                 slider.value = curr;
                 if (max == curr)
                 {
+                    Scene lastScene = SceneManager.GetActiveScene();
+
+                    var sceneOper = Addressables.LoadSceneAsync(sceneName, LoadSceneMode.Additive);
+                    if (currScene.IsValid()) sceneOper.Completed += h => { Addressables.UnloadSceneAsync(currScene); };
+                    else sceneOper.Completed += h => { SceneManager.UnloadSceneAsync(lastScene); };
                     if (sceneOper.IsDone)
                     {
                         OnSceneChange?.Invoke();
