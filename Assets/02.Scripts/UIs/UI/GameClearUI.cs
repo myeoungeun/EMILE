@@ -24,6 +24,7 @@ public class GameClaerUI : UIBase
         // 비동기 씬로드로 2번째 맵으로 이동
         // nextButton에 Scene button 스크립트 붙이고 이동할 씬 이름 작성하면 끝
         // 임시로 게임 종료 넣어놓겠음
+        Close();
     }
 
     public void OnExitButton()
