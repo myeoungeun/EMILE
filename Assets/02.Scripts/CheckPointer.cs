@@ -9,6 +9,7 @@ public class CheckPointer : MonoBehaviour
         if (collision.gameObject.layer == 9)
         {
             GameManager.GetInstance.RegistCheckPoint(transform.position);
+            
             Destroy(this);
         }
     }
