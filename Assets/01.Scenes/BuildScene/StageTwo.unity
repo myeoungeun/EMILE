@@ -5529,6 +5529,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1388026385}
   - component: {fileID: 1388026386}
+  - component: {fileID: 1388026387}
   m_Layer: 0
   m_Name: DeadZone (1)
   m_TagString: DeadZone
@@ -5596,6 +5597,18 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &1388026387
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1388026384}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 12cac75b3660ec2498fb669015c8883f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1564761157
 GameObject:
   m_ObjectHideFlags: 0
@@ -5606,6 +5619,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1564761158}
   - component: {fileID: 1564761159}
+  - component: {fileID: 1564761160}
   m_Layer: 0
   m_Name: DeadZone
   m_TagString: DeadZone
@@ -5673,6 +5687,18 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &1564761160
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1564761157}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 12cac75b3660ec2498fb669015c8883f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1720109427
 GameObject:
   m_ObjectHideFlags: 0
