@@ -17,6 +17,11 @@ public class OptionPopup : PopupBase
         exitButton.onClick.AddListener(OnExitButton);
     }
 
+    protected override void OnDisable()
+    {
+        UIManager.Instance.InGameUI.PauseButton.TooglePause();
+    }
+
     public void SetSlider()
     {
         //TODO 슬라이더 초기값 설정
@@ -24,6 +29,7 @@ public class OptionPopup : PopupBase
 
     public void OnKeyMappingButton() // 키매핑 팝업 열기
     {
+
         UIManager.Instance.ClosePopup(PopupType.Option); // 옵션 팝업UI 닫고
         UIManager.Instance.ShowPopup(PopupType.KeyMapping); // 키설정 팝업UI 열기
     }

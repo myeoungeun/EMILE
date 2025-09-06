@@ -10,9 +10,14 @@ public class InGameUI : UIBase
     [SerializeField] private BossHUD bossHUD; // 보스에너미 HUD
     [SerializeField] private UITextHUD uiTextHUD; // 튜토리얼 텍스트 HUD
 
+    [Header("PauseButton")]
+    [SerializeField] private PauseButton pauseButton;
+ 
+
     public PlayerHUD PlayerHUD => playerHUD;
     public BossHUD BossHUD => bossHUD;
     public UITextHUD UITextHUD => uiTextHUD;
+    public PauseButton PauseButton => pauseButton;
 
 
     public override void Initialize()
@@ -20,9 +25,12 @@ public class InGameUI : UIBase
         playerHUD.Initialize();
         bossHUD.Initialize();
         uiTextHUD.Initialize();
+        pauseButton.Initialize();
 
         playerHUD.Open(); // 항상 켜짐
         bossHUD.Close(); // 보스전 전까지 비활성
         uiTextHUD.Open(); // 켜두고 안에 내용만 비워둠
+        pauseButton.Open(); // 항상 켜둠
     }
+
 }
