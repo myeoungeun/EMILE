@@ -18,6 +18,9 @@ public class Player : MonoBehaviour
     private SpriteRenderer sr;
     private Rigidbody2D rb;
 
+    [SerializeField] ParticleSystem runDustLeft;
+    [SerializeField] ParticleSystem runDustRight;
+
     [SerializeField]PlayerStat stat;
 
     // PlayerStat, PlayerAttack 정보에 접근할 수 있도록 읽기 전용 프로퍼티 추가
@@ -96,13 +99,27 @@ public class Player : MonoBehaviour
                     stateMachine.Change(StateType.run);
                     transform.localScale = new Vector3(inputHandle.moveDir.x > 0 ? 1 : -1, 1, 1);
                 }
+                ParticleSystem dust = dir == Vector2.left ? runDustRight : runDustLeft;
+
+                if (!dust.isPlaying || dust.isStopped) dust.Play();
+
                 moveHandle.OnMove((dir) * stat.MoveSpeed);
 
-
+                return;
             }
             else
             {
                 Debug.DrawRay(transform.position, dir * (coll.bounds.extents.x + 0.1f));
+
+                if (!runDustLeft.isStopped)
+                {
+                    runDustLeft.Stop(true);
+                }
+
+                if (!runDustRight.isStopped)
+                {
+                    runDustRight.Stop(true);
+                }
 
                 if (Physics2D.Raycast(transform.position, dir, coll.bounds.extents.x + 0.1f, 1 << 7))
                 {
@@ -131,12 +148,21 @@ public class Player : MonoBehaviour
                     if(jumpHandle.type == JumpTypes.wall&& stateMachine.GetCurrType == StateType.grab) jumpHandle = IJumpHandler.Factory(JumpTypes.linear, rb);
                     moveHandle.OnMove((dir) * stat.MoveSpeed);
                 }
-
             }
 
             return;
         }
-
+        else
+        {
+            if (!runDustLeft.isStopped)
+            {
+                runDustLeft.Stop(true);
+            }
+            if (!runDustRight.isStopped)
+            {
+                runDustRight.Stop(true);
+            }
+        }
 
     }
     private void OnJump()
@@ -289,13 +315,20 @@ public class Player : MonoBehaviour
 
         if (inputHandle.moveDir.x != 0) dir = new Vector2(inputHandle.moveDir.x, 0);
         else dir = transform.localScale.x == -1 ? Vector2.left : Vector2.right;
-        
+        float trailGoal = 0.05f;
+        float trailCurr = 0f;
         while (currDashTime < goalDashTime)
         {
             RaycastHit2D ray = Physics2D.CircleCast(transform.position, 0.3f, Vector2.down, coll.bounds.extents.y, groundLayers);
             currDashTime += Time.deltaTime;
+            trailCurr += Time.deltaTime;
             yield return null;
             rb.velocity = dir * (stat.MoveSpeed * 2.5f);
+            if (trailGoal <= trailCurr)
+            {
+                trailCurr = 0f;
+                PlayerTrail.CreateTrail(sr.sprite, transform.position,transform.localScale);
+            }
             if (inputHandle.isPressingJump)
             {
                 DashCancel(StateType.jump);
@@ -391,6 +424,7 @@ public class Player : MonoBehaviour
 
             if (playerAttack != null)
             {
+                PlayerTrail.CreateTrail(sr.sprite, transform.position,transform.localScale);
                 float angle = Mathf.Atan2(fireDir.y, fireDir.x) * Mathf.Rad2Deg;
                 Vector3 spawnPos = transform.position + (Vector3)fireDir;
                 Quaternion spawnRot = Quaternion.Euler(0, 0, angle);

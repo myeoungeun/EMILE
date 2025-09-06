@@ -9,6 +9,7 @@ public class EnemyData : ScriptableObject
     [SerializeField] private int id;
     [SerializeField] private string enemyName;
     [SerializeField] private int monsterImageId;
+    [SerializeField] private Sprite monsterSprite;
     // 상태
     [SerializeField] private int maxHp;
     // 현재 체력
@@ -37,5 +38,6 @@ public class EnemyData : ScriptableObject
     public float DetectRange { get { return detectRange; } }
     public float AttackRange { get { return attackRange; } }
     public List<int> EnemyBulletId { get { return enemyBulletId; } }
+    public Sprite MonsterSprite { get { return monsterSprite; } }
 
 }

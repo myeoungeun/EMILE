@@ -44,10 +44,7 @@ public class PlayerHUD : UIBase
         playerAttack.OnBulletSlotChanged += ChangeBulletSlot;
         playerAttack.OnBulletCountChanged += UpdateBulletCount;
 
-        for (int i = 0; i < bulletSlots.Length; i++)
-            UpdateBulletCount(i, player.Attack.GetRemainCount(i));
-
-        ChangeBulletSlot(player.Attack.CurrentBulletIndex);
+        playerAttack.RaiseCurrentBulletState();
     }
 
     public void InitSlots() // 슬롯 초기화

@@ -6,6 +6,7 @@ public enum UIType
     GameStart,
     InGame,
     GameOver,
+    GameClear
 }
 
 public enum PopupType
@@ -19,10 +20,12 @@ public class UIManager : MonoSingleton<UIManager>
     [Header("UI")]
     [SerializeField] private GameStartUI gameStartUI;
     [SerializeField] private InGameUI inGameUI;
+    [SerializeField] private GameClaerUI gameClaerUI;
     [SerializeField] private GameOverUI gameOverUI;
 
     public GameStartUI GameStartUI => gameStartUI;
     public InGameUI InGameUI => inGameUI;
+    public GameClaerUI GameClaerUI => gameClaerUI;
     public GameOverUI GameOverUI => gameOverUI;
 
     [Header("Popup")]
@@ -53,7 +56,8 @@ public class UIManager : MonoSingleton<UIManager>
         {
             { UIType.GameStart, gameStartUI },
             { UIType.InGame, inGameUI },
-            { UIType.GameOver, gameOverUI }
+            { UIType.GameOver, gameOverUI },
+            { UIType.GameClear,  gameClaerUI}
         };
 
         //팝업 UI 딕셔너리 초기화

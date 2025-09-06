@@ -24,7 +24,7 @@ public class BossHUD : UIBase
     {
         bossEnemy = boss;
         bossName.text = boss.EnemyData.Name;
-        //bossPortrait.sprite = null; // 보스 이미지 추가안되어있음
+        bossPortrait.sprite = boss.EnemyData.MonsterSprite;
         bossHpBar.fillAmount = 1f; // 시작때는 체력 100%
 
         boss.onHpChanged -= UpdateBossHp;
