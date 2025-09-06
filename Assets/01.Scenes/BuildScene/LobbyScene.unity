@@ -693,6 +693,38 @@ PrefabInstance:
       propertyPath: pauseButton
       value: 
       objectReference: {fileID: 916851814}
+    - target: {fileID: 4896027865107599965, guid: ce8e247abded5d14780dc2a5295fd9af, type: 3}
+      propertyPath: sceneName
+      value: StageTwo
+      objectReference: {fileID: 0}
+    - target: {fileID: 6612456233394378658, guid: ce8e247abded5d14780dc2a5295fd9af, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6612456233394378658, guid: ce8e247abded5d14780dc2a5295fd9af, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6612456233394378658, guid: ce8e247abded5d14780dc2a5295fd9af, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 3519384234088149099}
+    - target: {fileID: 6612456233394378658, guid: ce8e247abded5d14780dc2a5295fd9af, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6612456233394378658, guid: ce8e247abded5d14780dc2a5295fd9af, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: OnButtonClick
+      objectReference: {fileID: 0}
+    - target: {fileID: 6612456233394378658, guid: ce8e247abded5d14780dc2a5295fd9af, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: SceneButton, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 6612456233394378658, guid: ce8e247abded5d14780dc2a5295fd9af, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 7959350171162921739, guid: ce8e247abded5d14780dc2a5295fd9af, type: 3}
       propertyPath: m_LocalPosition.x
       value: 960
@@ -745,6 +777,17 @@ PrefabInstance:
       addedObject: {fileID: 916851813}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ce8e247abded5d14780dc2a5295fd9af, type: 3}
+--- !u!114 &3519384234088149099 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4896027865107599965, guid: ce8e247abded5d14780dc2a5295fd9af, type: 3}
+  m_PrefabInstance: {fileID: 3519384234088149098}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cdd4c22a7d892f94399f4e7afa0f2740, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
