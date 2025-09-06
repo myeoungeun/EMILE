@@ -15,6 +15,7 @@ MonoBehaviour:
   id: 401
   enemyName: "\uAC70\uB300 \uBCF4\uC2A4"
   monsterImageId: 401
+  monsterSprite: {fileID: 21300000, guid: 08d22e3695afd964f988adde96abbd31, type: 3}
   maxHp: 250
   attackPower: 50
   defence: 0

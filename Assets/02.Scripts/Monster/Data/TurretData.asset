@@ -15,6 +15,7 @@ MonoBehaviour:
   id: 301
   enemyName: "\uD130\uB81B"
   monsterImageId: 301
+  monsterSprite: {fileID: -797465723, guid: 0008e6bd624d44b40a811faafdda4dea, type: 3}
   maxHp: 10
   attackPower: 10
   defence: 0
