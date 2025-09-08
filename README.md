@@ -117,6 +117,13 @@
 
 # 사용된 기술 소개
 <br>
+- 디자인 패턴 : 상태 패턴 - 애니메이션/행동 전환 관리, 싱글톤 - 플레이어, 게임 매니저 등
+- Addressables : Key/Label 분류, 사전 로딩 -> 빠른 불러오기
+- 비동기 씬 로드 : 로딩 끊김 방지, 필수 오브젝트 사전 로드
+- SO(ScriptableObject) : 공용 데이터 분리 가능, 메모리 효율 높아짐
+- 오브젝트 풀링 : 빈번한 생성/파괴 최소화 가능, 성능 최적화
+- PreLoad : 게임 시작 시 미리 로드되고, 캐시(Dictionary) 저장 후 사용됨
+
   
 📜 **[목차로 돌아가기](#목차)**
 <br><br><br>
@@ -147,6 +154,13 @@
 - 원인 : 움직임,벽잡기,착지의 중복된 값이 동시에 일어나게 되어 `StateMachine`값에 의도치 않은 값이 들어가게 됨
 - 조치 : 추론한 원인을 토대로 벽잡기를 바닥에 닿지 않은 시점으로 한정함
 - 결과 : 벽잡기를 바닥에 닿지 않은 시점으로 한정하여 구현,정상 작동을 확인함
+
+
+
+4. HUD 초기 탄약 표시 오류(초기 탄약 0 0 0 표시)
+- 원인 : 비동기 로딩 시 초기화 타이밍 어긋남, 초기화 시점 불일치, HUD 이벤트 누락
+- 조치 : HUD 연결 시점 조정, 현재 슬롯·탄약 정보 재전송
+- 결과 : 씬 로드 후 HUD가 즉시 최대 탄약으로 갱신
 <br>
 
 
@@ -159,12 +173,12 @@
 
 | 직책 | 이름 | 담당 업무 | 개인 블로그 | 개인 깃허브 |
 | --- | --- | --- | --- | --- |
-| 개발 팀장 | 이명은 | 공격 구현 |  |  |
-| 개발 팀원 | 허윤 | 플레이어 담당 |  |  |
-| 개발 팀원 | 김남진 | 몬스터 담당 |  |  |
-| 개발 팀원 | 오승엽 | 맵/UI 담당 |  |  |
-| 기획 팀원 | 박용규 | 기획 담당 |  |  |
-| 기획 팀원 | 박진우 | 기획 담당 |  |  |
+| 개발 팀장 | 이명은 | 공격 구현 | https://blog.naver.com/ralralra1dlq | https://github.com/myeoungeun |
+| 개발 팀원 | 허윤 | 플레이어 담당 | https://velog.io/@dev_heoyoon/posts | https://github.com/parechae123?tab=repositories |
+| 개발 팀원 | 김남진 | 몬스터 담당 | https://velog.io/@jinnam/posts | https://github.com/UserJin |
+| 개발 팀원 | 오승엽 | 맵/UI 담당 |  | https://github.com/Cae1umBlue |
+| 기획 팀원 | 박용규 | 기획 담당 | https://unity-11-til.tistory.com/ | https://github.com/dragonk1631/ |
+| 기획 팀원 | 박진우 | 기획 담당 | https://zjaxjrhkd.tistory.com/ | https://github.com/zjaxjrhkd |
 <br>
 
 📜 **[목차로 돌아가기](#목차)**
